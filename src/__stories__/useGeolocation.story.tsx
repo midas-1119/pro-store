@@ -13,7 +13,7 @@ const Demo = () => {
   );
 };
 
-storiesOf('Sensors/useGeolocation', module)
+storiesOf('useGeolocation', module)
   .add('Docs', () => <ShowDocs md={require('../../docs/useGeolocation.md')} />)
   .add('Demo', () =>
     <Demo/>

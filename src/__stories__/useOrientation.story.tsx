@@ -13,7 +13,7 @@ const Demo = () => {
   );
 };
 
-storiesOf('Sensors/useOrientation', module)
+storiesOf('useOrientation', module)
   .add('Docs', () => <ShowDocs md={require('../../docs/useOrientation.md')} />)
   .add('Demo', () =>
     <Demo/>

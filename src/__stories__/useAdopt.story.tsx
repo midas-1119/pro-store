@@ -92,7 +92,7 @@ const Animation = () => {
   );
 };
 
-storiesOf('State/useAdopt', module)
+storiesOf('useAdopt', module)
   .add('Docs', () => <ShowDocs md={require('../../docs/useAdopt.md')} />)
   .add('Demo', () =>
     <Demo/>

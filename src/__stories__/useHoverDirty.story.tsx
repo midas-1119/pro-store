@@ -15,7 +15,7 @@ const Demo = () => {
   );
 };
 
-storiesOf('Sensors/useHoverDirty', module)
+storiesOf('useHoverDirty', module)
   .add('Docs', () => <ShowDocs md={require('../../docs/useHover.md')} />)
   .add('Demo', () =>
     <Demo/>
