@@ -14,7 +14,6 @@ import useGetSetState from './useGetSetState';
 import useHover from './useHover';
 import useHoverDirty from './useHoverDirty';
 import useIdle from './useIdle';
-import useKeyPress from './useKeyPress';
 import useLifecycles from './useLifecycles';
 import useList from './useList';
 import useLocalStorage from './useLocalStorage';
@@ -64,7 +63,6 @@ export {
   useHover,
   useHoverDirty,
   useIdle,
-  useKeyPress,
   useLifecycles,
   useList,
   useLocalStorage,
