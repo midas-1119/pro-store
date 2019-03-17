@@ -1,89 +1,58 @@
-import { useState, useEffect, useCallback, useRef } from "react";
+import {useState, useEffect, useCallback} from 'react';
 
 export type AsyncState<T> =
-  | {
-      loading: true;
-      error?: undefined;
-      value?: undefined;
-    }
-  | {
-      loading: false;
-      error: Error;
-      value?: undefined;
-    }
-  | {
-      loading: false;
-      error?: undefined;
-      value: T;
-    };
-
-interface AsyncStateObject<T> {
-  loading: boolean;
-  error?: Error;
-  value?: T;
+| {
+  loading: true;
+  error?: undefined;
+  value?: undefined;
 }
-
-interface AsyncRef {
-  mounted: boolean;
-  busy: boolean;
-  attempt: number;
+| {
+  loading: false;
+  error: Error;
+  value?: undefined;
 }
+| {
+  loading: false;
+  error?: undefined;
+  value: T;
+};
 
 const useAsync = <T>(fn: () => Promise<T>, args?) => {
-  const ref = useRef<AsyncRef>({ mounted: false, attempt: 0, busy: false });
-  const [state, set] = useState<AsyncStateObject<T>>({
-    loading: false
+  const [state, set] = useState<AsyncState<T>>({
+    loading: true,
   });
-
   const memoized = useCallback(fn, args);
 
-  const attemptAsync = useCallback(() => {
-    // Abort new attempt if already busy
-    if (ref.current.busy) {
-      console.log("useAsync is currently busy, please wait!");
-      return;
-    }
-
-    ref.current.busy = true;
-    ref.current.attempt = ref.current.attempt + 1;
-
-    set({
-      loading: true
-    });
-
-    memoized().then(
-      value => {
-        if (ref.current.mounted) {
-          ref.current.busy = false;
-          set({
-            loading: false,
-            value
-          });
-        }
-      },
-      error => {
-        if (ref.current.mounted) {
-          ref.current.busy = false;
-          set({
-            loading: false,
-            error
-          });
-        }
-      }
-    );
-  }, [memoized]);
-
   useEffect(() => {
-    ref.current.mounted = true;
+    let mounted = true;
+    set({
+      loading: true,
+    });
+    const promise = memoized();
 
-    attemptAsync();
+    promise
+      .then(value => {
+        if (mounted) {
+          set({
+            loading: false,
+            value,
+          });
+        }
+      }, error => {
+        if (mounted) {
+          set({
+            loading: false,
+            error,
+          });
+        }
+      });
 
     return () => {
-      ref.current.mounted = false;
+      mounted = false;
     };
   }, [memoized]);
 
-  return { ...state, retry: attemptAsync };
+  return state;
 };
 
 export default useAsync;
