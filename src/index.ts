@@ -15,6 +15,7 @@ import useHover from './useHover';
 import useHoverDirty from './useHoverDirty';
 import useIdle from './useIdle';
 import useKeyPress from './useKeyPress';
+import useKeyPressEvent from './useKeyPressEvent';
 import useLifecycles from './useLifecycles';
 import useList from './useList';
 import useLocalStorage from './useLocalStorage';
@@ -30,7 +31,6 @@ import useNumber from './useNumber';
 import useObservable from './useObservable';
 import useOrientation from './useOrientation';
 import useOutsideClick from './useOutsideClick';
-import usePromise from './usePromise';
 import useRaf from './useRaf';
 import useRefMounted from './useRefMounted';
 import useSessionStorage from './useSessionStorage';
@@ -66,6 +66,7 @@ export {
   useHoverDirty,
   useIdle,
   useKeyPress,
+  useKeyPressEvent,
   useLifecycles,
   useList,
   useLocalStorage,
@@ -81,7 +82,6 @@ export {
   useObservable,
   useOrientation,
   useOutsideClick,
-  usePromise,
   useRaf,
   useRefMounted,
   useSessionStorage,
