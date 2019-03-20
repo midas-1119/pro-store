@@ -1,6 +1,5 @@
 import createMemo from './createMemo';
 import useAsync from './useAsync';
-import useAsyncRetry from './useAsyncRetry';
 import useAudio from './useAudio';
 import useBattery from './useBattery';
 import useBoolean from './useBoolean';
@@ -16,6 +15,7 @@ import useHover from './useHover';
 import useHoverDirty from './useHoverDirty';
 import useIdle from './useIdle';
 import useKeyPress from './useKeyPress';
+import useKeyPressEvent from './useKeyPressEvent';
 import useLifecycles from './useLifecycles';
 import useList from './useList';
 import useLocalStorage from './useLocalStorage';
@@ -52,7 +52,6 @@ import useWait from './useWait';
 export {
   createMemo,
   useAsync,
-  useAsyncRetry,
   useAudio,
   useBattery,
   useBoolean,
@@ -68,6 +67,7 @@ export {
   useHoverDirty,
   useIdle,
   useKeyPress,
+  useKeyPressEvent,
   useLifecycles,
   useList,
   useLocalStorage,
