@@ -1,4 +1,4 @@
-import {useState, useLayoutEffect} from 'react';
+import {useState, useEffect} from 'react';
 const {create} = require('nano-css');
 const {addon: addonCssom} = require('nano-css/addon/cssom');
 const {addon: addonPipe} = require('nano-css/addon/pipe');
@@ -37,7 +37,7 @@ addonPipe(nano);
 const useCss = (css: object): string => {
   const [pipe] = useState<CssPipe>(nano.pipe());
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     pipe.css(flattenSelectors(css));
     return () => pipe.remove();
   });
