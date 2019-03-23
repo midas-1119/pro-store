@@ -1,6 +1,6 @@
-# `useWindowScroll`
+# `useWindowSize`
 
-React sensor hook that re-renders on window scroll.
+React sensor hook that re-renders on window scroll
 
 ## Usage
 

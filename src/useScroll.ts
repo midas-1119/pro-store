@@ -6,7 +6,7 @@ export interface State {
   y: number;
 }
 
-const useWindowScroll = (): State => {
+const useScroll = (ref): State => {
   const frame = useRef(0);
   const [state, setState] = useState<State>({
     x: isClient ? window.scrollX : 0,
@@ -19,21 +19,27 @@ const useWindowScroll = (): State => {
 
       frame.current = requestAnimationFrame(() => {
         setState({
-          x: window.scrollX,
-          y: window.scrollY
+          x: ref.current.scrollLeft,
+          y: ref.current.scrollTop
         })
       })
     }
 
-    window.addEventListener('scroll', handler, {
-      capture: false,
-      passive: true
-    })
+    if (ref && ref.current) {
+      ref.current.addEventListener('scroll', handler, {
+        capture: false,
+        passive: true
+      })
+    }
 
-    return () => window.removeEventListener('scroll', handler)
-  }, [])
+    return () => {
+      if (ref && ref.current) {
+        ref.current.removeEventListener('scroll', handler)
+      }
+    };
+  }, [ref])
 
   return state
 }
 
-export default useWindowScroll
+export default useScroll
