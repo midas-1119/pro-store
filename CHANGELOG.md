@@ -1,3 +1,24 @@
+# [5.13.0](https://github.com/streamich/react-use/compare/v5.12.1...v5.13.0) (2019-03-23)
+
+
+### Features
+
+* add useScroll hook ([a92e9b2](https://github.com/streamich/react-use/commit/a92e9b2))
+
+## [5.12.1](https://github.com/streamich/react-use/compare/v5.12.0...v5.12.1) (2019-03-23)
+
+
+### Bug Fixes
+
+* 🐛 cancel animation frame on un-mount in useWindowScroll() ([bc021ce](https://github.com/streamich/react-use/commit/bc021ce))
+
+# [5.12.0](https://github.com/streamich/react-use/compare/v5.11.0...v5.12.0) (2019-03-23)
+
+
+### Features
+
+* add useWindowScroll hook ([076d0de](https://github.com/streamich/react-use/commit/076d0de))
+
 # [5.11.0](https://github.com/streamich/react-use/compare/v5.10.0...v5.11.0) (2019-03-22)
 
 
