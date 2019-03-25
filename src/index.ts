@@ -21,14 +21,12 @@ import useLifecycles from './useLifecycles';
 import useList from './useList';
 import useLocalStorage from './useLocalStorage';
 import useLocation from './useLocation';
-import useLockBodyScroll from './useLockBodyScroll';
 import useLogger from './useLogger';
 import useMap from './useMap';
 import useMedia from './useMedia';
 import useMediaDevices from './useMediaDevices';
 import useMotion from './useMotion';
 import useMount from './useMount';
-import useMouse from './useMouse';
 import useNetwork from './useNetwork';
 import useNumber from './useNumber';
 import useObservable from './useObservable';
@@ -79,14 +77,12 @@ export {
   useList,
   useLocalStorage,
   useLocation,
-  useLockBodyScroll,
   useLogger,
   useMap,
   useMedia,
   useMediaDevices,
   useMotion,
   useMount,
-  useMouse,
   useNetwork,
   useNumber,
   useObservable,

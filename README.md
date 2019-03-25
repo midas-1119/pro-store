@@ -42,10 +42,9 @@
   - [`useMedia`](./docs/useMedia.md) &mdash; tracks state of a CSS media query. [![][img-demo]](https://streamich.github.io/react-use/?path=/story/sensors-usemedia--demo)
   - [`useMediaDevices`](./docs/useMediaDevices.md) &mdash; tracks state of connected hardware devices.
   - [`useMotion`](./docs/useMotion.md) &mdash; tracks state of device's motion sensor.
-  - [`useMouse`](./docs/useMouse.md) &mdash; tracks state of mouse position. [![][img-demo]](https://streamich.github.io/react-use/?path=/story/sensors-usemouse--docs)
   - [`useNetwork`](./docs/useNetwork.md) &mdash; tracks state of user's internet connection.
   - [`useOrientation`](./docs/useOrientation.md) &mdash; tracks state of device's screen orientation.
-  - [`useScroll`](./docs/useScroll.md) &mdash; tracks some HTML element's scroll position. [![][img-demo]](https://streamich.github.io/react-use/?path=/story/sensors-usescroll--docs)
+  - [`useScroll`](./docs/useScroll.md) &mdash; some HTML element's scroll position. [![][img-demo]](https://streamich.github.io/react-use/?path=/story/sensors-usescroll--docs)
   - [`useSize`](./docs/useSize.md) &mdash; tracks some HTML element's dimensions.
   - [`useWindowScroll`](./docs/useWindowScroll.md) &mdash; tracks `Window` scroll position. [![][img-demo]](https://streamich.github.io/react-use/?path=/story/sensors-usewindowscroll--docs)
   - [`useWindowSize`](./docs/useWindowSize.md) &mdash; tracks `Window` dimensions. [![][img-demo]](https://codesandbox.io/s/m7ln22668)
@@ -73,7 +72,6 @@
   - [`useCss`](./docs/useCss.md) &mdash; dynamically adjusts CSS.
   - [`useFavicon`](./docs/useFavicon.md) &mdash; sets favicon of the page.
   - [`useLocalStorage`](./docs/useLocalStorage.md) &mdash; manages a value in `localStorage`.
-  - [`useLockBodyScroll`](./docs/useLockBodyScroll.md) &mdash; lock scrolling of the body element.
   - [`useSessionStorage`](./docs/useSessionStorage.md) &mdash; manages a value in `sessionStorage`.
   - [`useTitle`](./docs/useTitle.md) &mdash; sets title of the page.
   - [`useDebounce`](./docs/useDebounce.md) &mdash; debounces a function.

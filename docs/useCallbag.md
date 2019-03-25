@@ -2,6 +2,12 @@
 
 React state hook that tracks the latest value of a callbag.
 
+Requires `use-callbag`:
+```bash
+npm add use-callbag
+# or
+yarn add use-callbag
+```
 
 ## Usage
 
