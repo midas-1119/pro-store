@@ -4,6 +4,7 @@ import useAsyncRetry from './useAsyncRetry';
 import useAudio from './useAudio';
 import useBattery from './useBattery';
 import useBoolean from './useBoolean';
+import useCallbag from './useCallbag';
 import useCounter from './useCounter';
 import useCss from './useCss';
 import useDebounce from './useDebounce';
@@ -20,17 +21,19 @@ import useLifecycles from './useLifecycles';
 import useList from './useList';
 import useLocalStorage from './useLocalStorage';
 import useLocation from './useLocation';
+import useLockBodyScroll from './useLockBodyScroll';
 import useLogger from './useLogger';
 import useMap from './useMap';
 import useMedia from './useMedia';
 import useMediaDevices from './useMediaDevices';
 import useMotion from './useMotion';
 import useMount from './useMount';
+import useMouse from './useMouse';
 import useNetwork from './useNetwork';
 import useNumber from './useNumber';
 import useObservable from './useObservable';
 import useOrientation from './useOrientation';
-import useClickAway from './useClickAway';
+import useOutsideClick from './useOutsideClick';
 import usePromise from './usePromise';
 import useRaf from './useRaf';
 import useRefMounted from './useRefMounted';
@@ -59,7 +62,7 @@ export {
   useAudio,
   useBattery,
   useBoolean,
-  useClickAway,
+  useCallbag,
   useCounter,
   useCss,
   useDebounce,
@@ -76,16 +79,19 @@ export {
   useList,
   useLocalStorage,
   useLocation,
+  useLockBodyScroll,
   useLogger,
   useMap,
   useMedia,
   useMediaDevices,
   useMotion,
   useMount,
+  useMouse,
   useNetwork,
   useNumber,
   useObservable,
   useOrientation,
+  useOutsideClick,
   usePromise,
   useRaf,
   useRefMounted,
