@@ -1,32 +1,3 @@
-## [5.16.1](https://github.com/streamich/react-use/compare/v5.16.0...v5.16.1) (2019-03-26)
-
-
-### Bug Fixes
-
-* types for useGeolocation ([b72c098](https://github.com/streamich/react-use/commit/b72c098))
-
-# [5.16.0](https://github.com/streamich/react-use/compare/v5.15.0...v5.16.0) (2019-03-25)
-
-
-### Features
-
-* more precise size for useMouse ([1761031](https://github.com/streamich/react-use/commit/1761031))
-
-# [5.15.0](https://github.com/streamich/react-use/compare/v5.14.0...v5.15.0) (2019-03-25)
-
-
-### Features
-
-* add useMouse hook ([17dfa8e](https://github.com/streamich/react-use/commit/17dfa8e))
-
-# [5.14.0](https://github.com/streamich/react-use/compare/v5.13.0...v5.14.0) (2019-03-24)
-
-
-### Features
-
-* 🎸 keep global state of all useLockBodyScroll hooks ([9bb7047](https://github.com/streamich/react-use/commit/9bb7047))
-* add useLockBodyScroll hook ([d990db4](https://github.com/streamich/react-use/commit/d990db4))
-
 # [5.13.0](https://github.com/streamich/react-use/compare/v5.12.1...v5.13.0) (2019-03-23)
 
 

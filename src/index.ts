@@ -4,7 +4,6 @@ import useAsyncRetry from './useAsyncRetry';
 import useAudio from './useAudio';
 import useBattery from './useBattery';
 import useBoolean from './useBoolean';
-import useCallbag from './useCallbag';
 import useCounter from './useCounter';
 import useCss from './useCss';
 import useDebounce from './useDebounce';
@@ -21,19 +20,17 @@ import useLifecycles from './useLifecycles';
 import useList from './useList';
 import useLocalStorage from './useLocalStorage';
 import useLocation from './useLocation';
-import useLockBodyScroll from './useLockBodyScroll';
 import useLogger from './useLogger';
 import useMap from './useMap';
 import useMedia from './useMedia';
 import useMediaDevices from './useMediaDevices';
 import useMotion from './useMotion';
 import useMount from './useMount';
-import useMouse from './useMouse';
 import useNetwork from './useNetwork';
 import useNumber from './useNumber';
 import useObservable from './useObservable';
 import useOrientation from './useOrientation';
-import useOutsideClick from './useOutsideClick';
+import useClickAway from './useClickAway';
 import usePromise from './usePromise';
 import useRaf from './useRaf';
 import useRefMounted from './useRefMounted';
@@ -43,7 +40,6 @@ import useSetState from './useSetState';
 import useSize from './useSize';
 import useSpeech from './useSpeech';
 import useSpring from './useSpring';
-import useThrottle from './useThrottle';
 import useTimeout from './useTimeout';
 import useTitle from './useTitle';
 import useToggle from './useToggle';
@@ -63,7 +59,7 @@ export {
   useAudio,
   useBattery,
   useBoolean,
-  useCallbag,
+  useClickAway,
   useCounter,
   useCss,
   useDebounce,
@@ -80,19 +76,16 @@ export {
   useList,
   useLocalStorage,
   useLocation,
-  useLockBodyScroll,
   useLogger,
   useMap,
   useMedia,
   useMediaDevices,
   useMotion,
   useMount,
-  useMouse,
   useNetwork,
   useNumber,
   useObservable,
   useOrientation,
-  useOutsideClick,
   usePromise,
   useRaf,
   useRefMounted,
@@ -102,7 +95,6 @@ export {
   useSize,
   useSpeech,
   useSpring,
-  useThrottle,
   useTimeout,
   useTitle,
   useToggle,
