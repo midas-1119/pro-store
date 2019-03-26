@@ -1,10 +1,10 @@
 import {useEffect, useState} from 'react';
 
 // kudos: https://usehooks.com/
-const useHoverDirty = (ref, enabled: boolean = true) => {
-  if (process.env.NODE_ENV === 'development') {
+const useHoverDirty = (ref) => {
+  if (process.env.NODE_ENV !== 'production') {
     if ((typeof ref !== 'object') || (typeof ref.current === 'undefined')) {
-      console.error('useHoverDirty expects a single ref argument.');
+      throw new TypeError('useHoverDirty expects a single ref argument.');
     }
   }
 
@@ -14,18 +14,18 @@ const useHoverDirty = (ref, enabled: boolean = true) => {
     const onMouseOver = () => setValue(true);
     const onMouseOut = () => setValue(false);
 
-    if (enabled && ref && ref.current) {
+    if (ref && ref.current) {
       ref.current.addEventListener('mouseover', onMouseOver);
       ref.current.addEventListener('mouseout', onMouseOut);
     }
 
     return () => {
-      if (enabled && ref && ref.current) {
+      if (ref && ref.current) {
         ref.current.removeEventListener('mouseover', onMouseOver);
         ref.current.removeEventListener('mouseout', onMouseOut);
       }
     };
-  }, [enabled, ref]);
+  }, []);
 
   return value;
 }

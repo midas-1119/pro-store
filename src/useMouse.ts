@@ -12,12 +12,6 @@ export interface State {
 }
 
 const useMouse = (ref: RefObject<HTMLElement>): State => {
-  if (process.env.NODE_ENV === 'development') {
-    if ((typeof ref !== 'object') || (typeof ref.current === 'undefined')) {
-      console.error('useMouse expects a single ref argument.');
-    }
-  }
-
   const frame = useRef(0);
   const [state, setState] = useState<State>({
     docX: 0,
@@ -31,38 +25,35 @@ const useMouse = (ref: RefObject<HTMLElement>): State => {
   });
 
   useEffect(() => {
-    const moveHandler = (event: MouseEvent) => {
-      cancelAnimationFrame(frame.current);
-
+    const handler = (event: MouseEvent) => {
+      cancelAnimationFrame(frame.current)
       frame.current = requestAnimationFrame(() => {
         if (ref && ref.current) {
-          const {left, top, width: elW, height: elH} = ref.current.getBoundingClientRect();
+          const {left, top, width, height} = ref.current.getBoundingClientRect()
           const posX = left + window.scrollX;
           const posY = top + window.scrollY;
-          const elX = event.pageX - posX;
-          const elY = event.pageY - posY;
 
           setState({
             docX: event.pageX,
             docY: event.pageY,
             posX,
             posY,
-            elX,
-            elY,
-            elH,
-            elW,
+            elX: event.pageX - posX,
+            elY: event.pageY - posY,
+            elH: height,
+            elW: width,
           });
         }
       });
     }
 
-    document.addEventListener('mousemove', moveHandler);
+    document.addEventListener('mousemove', handler);
 
     return () => {
       cancelAnimationFrame(frame.current);
-      document.removeEventListener('mousemove', moveHandler);
+      document.removeEventListener('mousemove', handler);
     };
-  }, [ref.current])
+  }, []);
 
   return state;
 }

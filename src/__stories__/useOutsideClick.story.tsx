@@ -1,13 +1,13 @@
 import * as React from 'react';
 import {storiesOf} from '@storybook/react';
-import {useClickAway} from '..';
+import {useOutsideClick} from '..';
 import {useRef} from 'react';
 import ShowDocs from '../util/ShowDocs';
 
 const Demo = () => {
   const ref = useRef(null);
-  useClickAway(ref, () => {
-    alert('OUTSIDE CLICKED');
+  useOutsideClick(ref, () => {
+    console.log('OUTSIDE CLICKED');
   });
 
   return (
@@ -19,8 +19,8 @@ const Demo = () => {
   );
 };
 
-storiesOf('UI|useClickAway', module)
-  .add('Docs', () => <ShowDocs md={require('../../docs/useClickAway.md')} />)
+storiesOf('UI|useOutsideClick', module)
+  .add('Docs', () => <ShowDocs md={require('../../docs/useOutsideClick.md')} />)
   .add('Demo', () =>
     <Demo/>
   )

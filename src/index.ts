@@ -4,6 +4,7 @@ import useAsyncRetry from './useAsyncRetry';
 import useAudio from './useAudio';
 import useBattery from './useBattery';
 import useBoolean from './useBoolean';
+import useCallbag from './useCallbag';
 import useCounter from './useCounter';
 import useCss from './useCss';
 import useDebounce from './useDebounce';
@@ -28,12 +29,11 @@ import useMediaDevices from './useMediaDevices';
 import useMotion from './useMotion';
 import useMount from './useMount';
 import useMouse from './useMouse';
-import useMouseHovered from './useMouseHovered';
 import useNetwork from './useNetwork';
 import useNumber from './useNumber';
 import useObservable from './useObservable';
 import useOrientation from './useOrientation';
-import useClickAway from './useClickAway';
+import useOutsideClick from './useOutsideClick';
 import usePromise from './usePromise';
 import useRaf from './useRaf';
 import useRefMounted from './useRefMounted';
@@ -43,6 +43,7 @@ import useSetState from './useSetState';
 import useSize from './useSize';
 import useSpeech from './useSpeech';
 import useSpring from './useSpring';
+import useThrottle from './useThrottle';
 import useTimeout from './useTimeout';
 import useTitle from './useTitle';
 import useToggle from './useToggle';
@@ -62,7 +63,7 @@ export {
   useAudio,
   useBattery,
   useBoolean,
-  useClickAway,
+  useCallbag,
   useCounter,
   useCss,
   useDebounce,
@@ -87,11 +88,11 @@ export {
   useMotion,
   useMount,
   useMouse,
-  useMouseHovered,
   useNetwork,
   useNumber,
   useObservable,
   useOrientation,
+  useOutsideClick,
   usePromise,
   useRaf,
   useRefMounted,
@@ -101,6 +102,7 @@ export {
   useSize,
   useSpeech,
   useSpring,
+  useThrottle,
   useTimeout,
   useTitle,
   useToggle,
