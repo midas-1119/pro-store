@@ -4,6 +4,8 @@ import useAsyncRetry from './useAsyncRetry';
 import useAudio from './useAudio';
 import useBattery from './useBattery';
 import useBoolean from './useBoolean';
+import useDrop from './useDrop';
+import useDropArea from './useDropArea';
 import useCounter from './useCounter';
 import useCss from './useCss';
 import useDebounce from './useDebounce';
@@ -34,6 +36,7 @@ import useNumber from './useNumber';
 import useObservable from './useObservable';
 import useOrientation from './useOrientation';
 import useClickAway from './useClickAway';
+import usePageLeave from './usePageLeave';
 import usePromise from './usePromise';
 import useRaf from './useRaf';
 import useRefMounted from './useRefMounted';
@@ -44,6 +47,7 @@ import useSize from './useSize';
 import useSpeech from './useSpeech';
 import useSpring from './useSpring';
 import useThrottle from './useThrottle';
+import useThrottleFn from './useThrottleFn';
 import useTimeout from './useTimeout';
 import useTitle from './useTitle';
 import useToggle from './useToggle';
@@ -63,6 +67,8 @@ export {
   useAudio,
   useBattery,
   useBoolean,
+  useDrop,
+  useDropArea,
   useClickAway,
   useCounter,
   useCss,
@@ -93,6 +99,7 @@ export {
   useNumber,
   useObservable,
   useOrientation,
+  usePageLeave,
   usePromise,
   useRaf,
   useRefMounted,
@@ -103,6 +110,7 @@ export {
   useSpeech,
   useSpring,
   useThrottle,
+  useThrottleFn,
   useTimeout,
   useTitle,
   useToggle,
