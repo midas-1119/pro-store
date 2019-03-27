@@ -1,36 +1,28 @@
-import {useState, useRef, useEffect} from 'react';
-import useUnmount from './useUnmount'
+import { useRef, useEffect, useCallback } from 'react';
 
-const useThrottle = <T>(value: T, ms: number = 200) => {
-  const [state, setState] = useState<T>(value);
-  let timeout = useRef<any>(null);
-  const nextValue = useRef(null) as any;
-  const hasNextValue = useRef(0) as any;
+const useThrottle = (fn: () => any, ms: number = 0, args?) => {
+  const lastRan = useRef(0);
+  const timeout = useRef(0);
+
+  const run = useCallback(() => {
+    fn.apply(null, args);
+    lastRan.current = Date.now();
+  }, [fn, args]);
 
   useEffect(() => {
-    if (!timeout.current) {
-      setState(value);
-      const timeoutCallback = () => {
-        if (hasNextValue.current) {
-          hasNextValue.current = false;
-          setState(nextValue.current);
-          timeout.current = setTimeout(timeoutCallback, ms);
-        } else {
-          timeout.current = null;
-        }
-      };
-      timeout.current = setTimeout(timeoutCallback, ms);
-    } else {
-      nextValue.current = value;
-      hasNextValue.current = true;
-    }
-  }, [value]);
-
-  useUnmount(() => {
     clearTimeout(timeout.current);
-  });
+    const diff = Date.now() - lastRan.current;
 
-  return state;
+    if (diff >= ms) {
+      run();
+    } else {
+      timeout.current = window.setTimeout(run, ms - diff);
+    }
+
+    return () => {
+      clearTimeout(timeout.current);
+    }
+  }, args);
 };
 
 export default useThrottle;
