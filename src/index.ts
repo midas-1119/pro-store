@@ -4,7 +4,6 @@ import useAsyncRetry from './useAsyncRetry';
 import useAudio from './useAudio';
 import useBattery from './useBattery';
 import useBoolean from './useBoolean';
-import useDrop from './useDrop';
 import useCounter from './useCounter';
 import useCss from './useCss';
 import useDebounce from './useDebounce';
@@ -35,7 +34,6 @@ import useNumber from './useNumber';
 import useObservable from './useObservable';
 import useOrientation from './useOrientation';
 import useClickAway from './useClickAway';
-import usePageLeave from './usePageLeave';
 import usePromise from './usePromise';
 import useRaf from './useRaf';
 import useRefMounted from './useRefMounted';
@@ -65,7 +63,6 @@ export {
   useAudio,
   useBattery,
   useBoolean,
-  useDrop,
   useClickAway,
   useCounter,
   useCss,
@@ -96,7 +93,6 @@ export {
   useNumber,
   useObservable,
   useOrientation,
-  usePageLeave,
   usePromise,
   useRaf,
   useRefMounted,
