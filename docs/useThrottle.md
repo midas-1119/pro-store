@@ -1,22 +1,43 @@
-# `useThrottle` and `useThrottleFn`
+# `useThrottle`
 
-React hooks that throttle.
+React hook that invokes a function and then delays subsequent function calls until after wait milliseconds have elapsed since the last time the throttled function was invoked.
+
+The third argument is the array of values that the throttle depends on, in the same manner as useEffect. The throttle timeout will start when one of the values changes.
 
 ## Usage
 
 ```jsx
 import React, { useState } from 'react';
-import { useThrottle, useThrottleFn } from 'react-use';
+import { useThrottle } from 'react-use';
 
-const Demo = ({value}) => {
-  const throttledValue = useThrottle(value);
-  // const throttledValue = useThrottleFn(value => value, 200, [value]);
+const Demo = () => {
+  const [status, setStatus] = React.useState('Updating stopped');
+  const [value, setValue] = React.useState('');
+  const [throttledValue, setThrottledValue] = React.useState('');
+
+  useThrottle(
+    () => {
+      setStatus('Waiting for input...');
+      setThrottledValue(value);
+    },
+    2000,
+    [value]
+  );
 
   return (
-    <>
-      <div>Value: {value}</div>
+    <div>
+      <input
+        type="text"
+        value={value}
+        placeholder="Throttled input"
+        onChange={({ currentTarget }) => {
+          setStatus('Updating stopped');
+          setValue(currentTarget.value);
+        }}
+      />
+      <div>{status}</div>
       <div>Throttled value: {throttledValue}</div>
-    </>
+    </div>
   );
 };
 ```
@@ -24,6 +45,5 @@ const Demo = ({value}) => {
 ## Reference
 
 ```ts
-useThrottle(value, ms?: number);
-useThrottleFn(fn, ms, args);
+useThrottle(fn, ms: number, args: any[]);
 ```
