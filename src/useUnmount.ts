@@ -1,7 +1,9 @@
-import useEffectOnce from './useEffectOnce'
+import {useEffect} from 'react';
 
-const useUnmount = (fn: () => void | undefined) => {
-  useEffectOnce(() => fn);
+const useUnmount = (unmount) => {
+  useEffect(() => () => {
+    if (unmount) unmount();
+  }, []);
 };
 
 export default useUnmount;

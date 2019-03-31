@@ -1,9 +1,5 @@
-import useEffectOnce from './useEffectOnce'
+import {useEffect} from 'react';
 
-const useMount = (fn: () => void) => {
-  useEffectOnce(() => {
-    fn();
-  });
-}
+const useMount = (mount) => useEffect(mount, []);
 
 export default useMount;
