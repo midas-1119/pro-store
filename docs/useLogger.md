@@ -1,6 +1,6 @@
 # `useLogger`
 
-React lifecycle hook that console logs parameters as component transitions through lifecycles.
+React lifecycle hook that logs in console as component transitions through life-cycles.
 
 ## Usage
 
@@ -13,19 +13,21 @@ const Demo = (props) => {
 };
 ```
 
+
 ## Example Output
 
 ```
-Demo mounted {}
-Demo updated {}
-Demo unmounted
+Demo mounted
+Demo props updated {}
+Demo un-mounted
 ```
+
 
 ## Reference
 
 ```js
-useLogger(componentName: string, ...rest);
+useLogger(name, props);
 ```
 
-- `componentName` &mdash; component name.
-- `...rest` &mdash; parameters to log.
+- `name` &mdash; component name.
+- `props` &mdash; latest props.
