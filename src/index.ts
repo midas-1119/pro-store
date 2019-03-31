@@ -9,7 +9,6 @@ import useDropArea from './useDropArea';
 import useCounter from './useCounter';
 import useCss from './useCss';
 import useDebounce from './useDebounce';
-import useEffectOnce from './useEffectOnce';
 import useEvent from './useEvent';
 import useFavicon from './useFavicon';
 import useFullscreen from './useFullscreen';
@@ -78,7 +77,6 @@ export {
   useCounter,
   useCss,
   useDebounce,
-  useEffectOnce,
   useEvent,
   useFavicon,
   useFullscreen,
