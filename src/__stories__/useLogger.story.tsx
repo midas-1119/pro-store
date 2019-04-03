@@ -22,7 +22,7 @@ const Demo = (props) => {
   );
 };
 
-storiesOf('Lifecycle|useLogger', module)
+storiesOf('Lifecycles|useLogger', module)
   .addDecorator(withKnobs)
   .add('Docs', () => <ShowDocs md={require('../../docs/useLogger.md')} />)
   .add('Demo', () => {

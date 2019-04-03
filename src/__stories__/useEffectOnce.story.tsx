@@ -16,6 +16,6 @@ const Demo = () => {
   return <ConsoleStory />;
 };
 
-storiesOf('Lifecycle|useEffectOnce', module)
+storiesOf('Lifecycles|useEffectOnce', module)
   .add('Docs', () => <ShowDocs md={require('../../docs/useEffectOnce.md')} />)
   .add('Demo', () => <Demo/>)

@@ -1,6 +1,6 @@
 # `useRaf`
 
-React animation hook that forces component to re-render on each `requestAnimationFrame`,
+React animation hook that forces component to re-render on each `reaquestAnimationFrame`,
 returns percentage of time elapsed.
 
 

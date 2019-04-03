@@ -10,6 +10,6 @@ const Demo = () => {
   return <ConsoleStory />;
 };
 
-storiesOf('Lifecycle|useMount', module)
+storiesOf('Lifecycles|useMount', module)
   .add('Docs', () => <ShowDocs md={require('../../docs/useMount.md')} />)
   .add('Demo', () => <Demo/>)
