@@ -4,15 +4,15 @@ import {useScroll} from '..';
 import ShowDocs from './util/ShowDocs';
 
 const Demo = () => {
-  const scrollRef = React.useRef(null);
-  const {x, y} = useScroll(scrollRef);
+  const element = React.useRef(null);
+  const {x, y} = useScroll(element);
 
   return (
     <>
       <div>x: {x}</div>
       <div>y: {y}</div>
       <div
-        ref={scrollRef}
+        ref={element}
         style={{
           width: '400px',
           height: '400px',
@@ -30,4 +30,6 @@ const Demo = () => {
 
 storiesOf('Sensors/useScroll', module)
   .add('Docs', () => <ShowDocs md={require('../../docs/useScroll.md')} />)
-  .add('Demo', () => <Demo/>)
+  .add('Demo', () =>
+    <Demo/>
+  )

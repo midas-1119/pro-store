@@ -73,6 +73,7 @@
 - [**Side-effects**](./docs/Side-effects.md)
   - [`useAsync`](./docs/useAsync.md) &mdash; resolves an `async` function.
   - [`useAsyncRetry`](./docs/useAsyncRetry.md) &mdash; `useAsync` with `retry()` method.
+  - [`useCopyToClipboard`](./docs/useCopyToClipboard.md) &mdash; copies text to clipboard.
   - [`useDebounce`](./docs/useDebounce.md) &mdash; debounces a function. [![][img-demo]](https://streamich.github.io/react-use/?path=/story/side-effects-usedebounce--demo)
   - [`useFavicon`](./docs/useFavicon.md) &mdash; sets favicon of the page.
   - [`useLocalStorage`](./docs/useLocalStorage.md) &mdash; manages a value in `localStorage`.
@@ -92,7 +93,6 @@
   - [`useMount`](./docs/useMount.md) &mdash; calls `mount` callbacks.
   - [`useUnmount`](./docs/useUnmount.md) &mdash; calls `unmount` callbacks.
   - [`useUpdateEffect`](./docs/useUpdateEffect.md) &mdash; run an `effect` only on updates.
-  - [`useDeepCompareEffect`](./docs/useUpdateEffect.md) &mdash; run an `effect` depending on deep comparison of its dependencies
     <br/>
     <br/>
 - [**State**](./docs/State.md)
