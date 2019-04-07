@@ -9,6 +9,7 @@ import useDropArea from './useDropArea';
 import useCounter from './useCounter';
 import useCss from './useCss';
 import useDebounce from './useDebounce';
+import useDeepCompareEffect from './useDeepCompareEffect';
 import useEffectOnce from './useEffectOnce';
 import useEvent from './useEvent';
 import useFavicon from './useFavicon';
@@ -51,7 +52,6 @@ import useSetState from './useSetState';
 import useSize from './useSize';
 import useSpeech from './useSpeech';
 import useSpring from './useSpring';
-import useStartTyping from './useStartTyping';
 import useThrottle from './useThrottle';
 import useThrottleFn from './useThrottleFn';
 import useTimeout from './useTimeout';
@@ -79,6 +79,7 @@ export {
   useCounter,
   useCss,
   useDebounce,
+  useDeepCompareEffect,
   useEffectOnce,
   useEvent,
   useFavicon,
@@ -120,7 +121,6 @@ export {
   useSize,
   useSpeech,
   useSpring,
-  useStartTyping,
   useThrottle,
   useThrottleFn,
   useTimeout,

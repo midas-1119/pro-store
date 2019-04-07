@@ -47,7 +47,6 @@
   - [`usePageLeave`](./docs/usePageLeave.md) &mdash; triggers when mouse leaves page boundaries.
   - [`useScroll`](./docs/useScroll.md) &mdash; tracks an HTML element's scroll position. [![][img-demo]](https://streamich.github.io/react-use/?path=/story/sensors-usescroll--docs)
   - [`useSize`](./docs/useSize.md) &mdash; tracks an HTML element's dimensions.
-  - [`useStartTyping`](./docs/useStartTyping.md) &mdash; detects when user starts typing.
   - [`useWindowScroll`](./docs/useWindowScroll.md) &mdash; tracks `Window` scroll position. [![][img-demo]](https://streamich.github.io/react-use/?path=/story/sensors-usewindowscroll--docs)
   - [`useWindowSize`](./docs/useWindowSize.md) &mdash; tracks `Window` dimensions. [![][img-demo]](https://codesandbox.io/s/m7ln22668)
     <br/>
@@ -93,6 +92,7 @@
   - [`useMount`](./docs/useMount.md) &mdash; calls `mount` callbacks.
   - [`useUnmount`](./docs/useUnmount.md) &mdash; calls `unmount` callbacks.
   - [`useUpdateEffect`](./docs/useUpdateEffect.md) &mdash; run an `effect` only on updates.
+  - [`useDeepCompareEffect`](./docs/useUpdateEffect.md) &mdash; run an `effect` depending on deep comparison of its dependencies
     <br/>
     <br/>
 - [**State**](./docs/State.md)
