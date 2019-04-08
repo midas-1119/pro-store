@@ -1,3 +1,22 @@
+# [8.1.0](https://github.com/streamich/react-use/compare/v8.0.0...v8.1.0) (2019-04-08)
+
+
+### Features
+
+* add useAsyncCallback hook ([c6ecb36](https://github.com/streamich/react-use/commit/c6ecb36))
+
+# [8.0.0](https://github.com/streamich/react-use/compare/v7.6.0...v8.0.0) (2019-04-08)
+
+
+### Features
+
+* change useCopyToClipboard implementation ([c391038](https://github.com/streamich/react-use/commit/c391038))
+
+
+### BREAKING CHANGES
+
+* useCopyToClipboard interface changed
+
 # [7.6.0](https://github.com/streamich/react-use/compare/v7.5.0...v7.6.0) (2019-04-07)
 
 
