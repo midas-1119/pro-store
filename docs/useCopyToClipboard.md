@@ -2,23 +2,13 @@
 
 Copy text to a user's clipboard.
 
+
 ## Usage
+
+Basic usage
 
 ```jsx
 const Demo = () => {
-  const [text, setText] = React.useState('');
-  const [state, copyToClipboard] = useCopyToClipboard();
-
-  return (
-    <div>
-      <input value={text} onChange={e => setText(e.target.value)} />
-      <button type="button" onClick={() => copyToClipboard(text)}>copy text</button>
-      {state.error
-        ? <p>Unable to copy value: {state.error.message}</p>
-        : state.value && <p>Copied {state.value}</p>}
-    </div>
-  )
-
   const [text, setText] = React.useState('');
   const [copied, copyToClipboard] = useCopyToClipboard(text);
 
@@ -35,5 +25,11 @@ const Demo = () => {
 ## Reference
 
 ```js
-const [state, copyToClipboard] = useCopyToClipboard();
+const [copied, copyToClipboard] = useCopyToClipboard(text);
+const [copied, copyToClipboard] = useCopyToClipboard(text, writeText);
 ```
+
+, where
+
+- `writeText` &mdash; function that receives a single string argument, which
+  it copies to user's clipboard.
