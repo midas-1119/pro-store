@@ -4,12 +4,10 @@ import {useIdle} from '..';
 import ShowDocs from './util/ShowDocs';
 
 const Demo = () => {
-  const [idleDelay, setIdleDelay] = React.useState(3e3);
-  const isIdle = useIdle(idleDelay);
+  const isIdle = useIdle(3e3);
 
   return (
     <div>
-      Idle delay ms: <input type="number" value={idleDelay} onChange={({ target }) => setIdleDelay(+target.value)} />
       <div>User is idle: {isIdle ? 'Yes' : 'No'}</div>
     </div>
   );
@@ -18,5 +16,5 @@ const Demo = () => {
 storiesOf('Sensors|useIdle', module)
   .add('Docs', () => <ShowDocs md={require('../../docs/useIdle.md')} />)
   .add('Demo', () =>
-    <Demo />
+    <Demo/>
   )
