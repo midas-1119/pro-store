@@ -13,7 +13,7 @@ export interface GeoLocationSensorState {
   error?: Error | PositionError;
 }
 
-const useGeolocation = (options: PositionOptions): GeoLocationSensorState => {
+const useGeolocation = (): GeoLocationSensorState => {
   const [state, setState] = useState<GeoLocationSensorState>({
     loading: true,
     accuracy: null,
@@ -47,8 +47,8 @@ const useGeolocation = (options: PositionOptions): GeoLocationSensorState => {
     mounted && setState(oldState => ({ ...oldState, loading: false, error }));
 
   useEffect(() => {
-    navigator.geolocation.getCurrentPosition(onEvent, onEventError, options);
-    watchId = navigator.geolocation.watchPosition(onEvent, onEventError, options);
+    navigator.geolocation.getCurrentPosition(onEvent, onEventError);
+    watchId = navigator.geolocation.watchPosition(onEvent, onEventError);
 
     return () => {
       mounted = false;
