@@ -1,4 +1,5 @@
 import createMemo from './createMemo';
+import createReducer from './createReducer';
 import useAsync from './useAsync';
 import useAsyncFn from './useAsyncFn';
 import useAsyncRetry from './useAsyncRetry';
@@ -46,7 +47,6 @@ import useNumber from './useNumber';
 import useObservable from './useObservable';
 import useOrientation from './useOrientation';
 import usePageLeave from './usePageLeave';
-import usePrevious from './usePrevious';
 import usePromise from './usePromise';
 import useRaf from './useRaf';
 import useRefMounted from './useRefMounted';
@@ -73,6 +73,7 @@ import useWindowSize from './useWindowSize';
 
 export {
   createMemo,
+  createReducer,
   useAsync,
   useAsyncFn,
   useAsyncRetry,
@@ -120,7 +121,6 @@ export {
   useObservable,
   useOrientation,
   usePageLeave,
-  usePrevious,
   usePromise,
   useRaf,
   useRefMounted,
