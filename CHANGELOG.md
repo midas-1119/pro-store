@@ -1,3 +1,62 @@
+# [9.0.0](https://github.com/streamich/react-use/compare/v8.4.0...v9.0.0) (2019-05-09)
+
+
+### Features
+
+* improve useToggle interface ([81b1cac](https://github.com/streamich/react-use/commit/81b1cac))
+
+
+### BREAKING CHANGES
+
+* useToggle interface changed
+
+# [8.4.0](https://github.com/streamich/react-use/compare/v8.3.1...v8.4.0) (2019-05-07)
+
+
+### Features
+
+* add usePrevious hook ([4861a39](https://github.com/streamich/react-use/commit/4861a39))
+
+## [8.3.1](https://github.com/streamich/react-use/compare/v8.3.0...v8.3.1) (2019-04-29)
+
+
+### Bug Fixes
+
+* **useRefMounted:** only run and cleanup once ([6a651be](https://github.com/streamich/react-use/commit/6a651be))
+
+# [8.3.0](https://github.com/streamich/react-use/compare/v8.2.0...v8.3.0) (2019-04-29)
+
+
+### Features
+
+* add type define for createMemo ([6638c1a](https://github.com/streamich/react-use/commit/6638c1a))
+
+# [8.2.0](https://github.com/streamich/react-use/compare/v8.1.4...v8.2.0) (2019-04-23)
+
+
+### Bug Fixes
+
+* make options useGeolocation optional ([01959a1](https://github.com/streamich/react-use/commit/01959a1))
+
+
+### Features
+
+* support options for useGeolocation ([7d4c59e](https://github.com/streamich/react-use/commit/7d4c59e))
+
+## [8.1.4](https://github.com/streamich/react-use/compare/v8.1.3...v8.1.4) (2019-04-23)
+
+
+### Bug Fixes
+
+* 🐛 support click away on iOS, allow user to chose events ([f14e1d7](https://github.com/streamich/react-use/commit/f14e1d7))
+
+## [8.1.3](https://github.com/streamich/react-use/compare/v8.1.2...v8.1.3) (2019-04-18)
+
+
+### Bug Fixes
+
+* 🐛 don't fire typing event on modifier keys pressed ([ce76edf](https://github.com/streamich/react-use/commit/ce76edf))
+
 ## [8.1.2](https://github.com/streamich/react-use/compare/v8.1.1...v8.1.2) (2019-04-12)
 
 
