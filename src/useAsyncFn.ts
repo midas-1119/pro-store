@@ -18,17 +18,17 @@ export type AsyncState<T> =
       value: T;
     };
 
-const useAsyncFn = <T>(fn: (...args: any[]) => Promise<T>, deps: DependencyList = []): [AsyncState<T>, () => void] => {
+const useAsyncFn = <T>(fn: () => Promise<T>, deps: DependencyList = []): [AsyncState<T>, () => void] => {
   const [state, set] = useState<AsyncState<T>>({
     loading: false,
   });
 
   const mounted = useRefMounted();
 
-  const callback = useCallback((...args) => {
+  const callback = useCallback(() => {
     set({ loading: true });
 
-    fn(...args).then(
+    fn().then(
       value => {
         if (mounted.current) {
           set({ value, loading: false });
