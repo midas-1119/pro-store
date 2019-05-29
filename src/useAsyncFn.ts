@@ -18,23 +18,17 @@ export type AsyncState<T> =
       value: T;
     };
 
-export default function useAsyncFn<
-  Result = any,
-  Args extends any[] = any[],
-  Fn extends Function = (...args: Args | []) => Promise<Result>
->(
-  fn: Fn,
-  deps: DependencyList = [],
-  initialState: AsyncState<Result> = { loading: false }
-): [AsyncState<Result>, (...args: Args | []) => Promise<Result>] {
-  const [state, set] = useState<AsyncState<Result>>(initialState);
+const useAsyncFn = <T>(fn: (...args: any[]) => Promise<T>, deps: DependencyList = []): [AsyncState<T>, () => void] => {
+  const [state, set] = useState<AsyncState<T>>({
+    loading: false,
+  });
 
   const mounted = useRefMounted();
 
-  const callback = useCallback((...args: Args | []) => {
+  const callback = useCallback((...args) => {
     set({ loading: true });
 
-    return fn(...args).then(
+    fn(...args).then(
       value => {
         if (mounted.current) {
           set({ value, loading: false });
@@ -49,4 +43,6 @@ export default function useAsyncFn<
   }, deps);
 
   return [state, callback];
-}
+};
+
+export default useAsyncFn;
