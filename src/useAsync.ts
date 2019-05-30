@@ -18,17 +18,14 @@ export type AsyncState<T> =
       value: T;
     };
 
-export default function useAsync<Result = any, Args extends any[] = any[]>(
-  fn: (...args: Args | []) => Promise<Result>,
-  deps: DependencyList = []
-) {
-  const [state, callback] = useAsyncFn<Result, Args>(fn, deps, {
-    loading: true,
-  });
+const useAsync = <T>(fn: () => Promise<T>, deps: DependencyList = []) => {
+  const [state, callback] = useAsyncFn(fn, deps);
 
   useEffect(() => {
     callback();
   }, [callback]);
 
   return state;
-}
+};
+
+export default useAsync;
