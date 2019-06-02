@@ -1,16 +1,6 @@
 import { useEffect, useState } from 'react';
 
-export interface Observable<T> {
-  subscribe: (
-    listener: (value: T) => void
-  ) => {
-    unsubscribe: () => void;
-  };
-}
-
-function useObservable<T>(observable$: Observable<T>): T | undefined;
-function useObservable<T>(observable$: Observable<T>, initialValue: T): T;
-function useObservable<T>(observable$: Observable<T>, initialValue?: T): T | undefined {
+const useObservable = <T>(observable$, initialValue?: T): T | undefined => {
   const [value, update] = useState<T | undefined>(initialValue);
 
   useEffect(() => {
@@ -19,6 +9,6 @@ function useObservable<T>(observable$: Observable<T>, initialValue?: T): T | und
   }, [observable$]);
 
   return value;
-}
+};
 
 export default useObservable;

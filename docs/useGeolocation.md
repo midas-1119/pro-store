@@ -1,6 +1,7 @@
 # `useGeolocation`
 
-React sensor hook that tracks user's geographic location. This hook accepts [position options](https://developer.mozilla.org/docs/Web/API/PositionOptions).
+React sensor hook that tracks user's geographic location.
+
 
 ## Usage
 
@@ -16,10 +17,4 @@ const Demo = () => {
     </pre>
   );
 };
-```
-
-## Reference
-
-```ts
-useGeolocation(options: PositionOptions)
 ```

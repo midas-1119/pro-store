@@ -1,17 +1,18 @@
 {
-  "defaultSeverity": "error",
-  "extends": [
-    "tslint:recommended",
-    "tslint-react",
-    "tslint-eslint-rules",
-    "tslint-config-prettier"
-  ],
-  "linterOptions": {
-    "exclude": ["node_modules/**"]
-  },
-  "jsRules": {},
-  "rules": {
-    "ban-types": false,
+    "defaultSeverity": "error",
+    "extends": [
+      "tslint:recommended",
+      "tslint-react",
+      "tslint-eslint-rules",
+      "tslint-config-prettier"
+    ],
+    "linterOptions": {
+      "exclude": [
+          "node_modules/**"
+      ]
+    },
+    "jsRules": {},
+    "rules": {
     "interface-name": [true, "never-prefix"],
     "no-console": false,
     "max-classes-per-file": false,
@@ -31,6 +32,7 @@
         "tabWidth": 2
       }
     ]
-  },
-  "rulesDirectory": ["tslint-plugin-prettier"]
-}
+    },
+    "rulesDirectory": ["tslint-plugin-prettier"]
+  }
+  

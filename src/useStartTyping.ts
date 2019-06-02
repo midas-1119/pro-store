@@ -23,10 +23,7 @@ const isFocusedElementEditable = () => {
   return activeElement.hasAttribute('contenteditable');
 };
 
-const isTypedCharGood = ({ keyCode, metaKey, ctrlKey, altKey }: KeyboardEvent) => {
-  if (metaKey || ctrlKey || altKey) {
-    return false;
-  }
+const isTypedCharGood = ({ keyCode }: KeyboardEvent) => {
   // 0...9
   if (keyCode >= 48 && keyCode <= 57) {
     return true;
