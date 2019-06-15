@@ -1,4 +1,3 @@
-import { action } from '@storybook/addon-actions';
 import { storiesOf } from '@storybook/react';
 import * as React from 'react';
 import { useRef } from 'react';
@@ -7,7 +6,9 @@ import ShowDocs from './util/ShowDocs';
 
 const Demo = () => {
   const ref = useRef(null);
-  useClickAway(ref, action('outside clicked'));
+  useClickAway(ref, () => {
+    alert('OUTSIDE CLICKED');
+  });
 
   return (
     <div

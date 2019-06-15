@@ -12,7 +12,7 @@ import {useClickAway} from 'react-use';
 const Demo = () => {
   const ref = useRef(null);
   useClickAway(ref, () => {
-    console.log('OUTSIDE CLICKED');
+    alert('OUTSIDE CLICKED');
   });
 
   return (
