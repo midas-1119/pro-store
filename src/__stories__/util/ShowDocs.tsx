@@ -11,7 +11,7 @@ const ShowDocs = props => {
         padding: '0 20px',
       },
       dangerouslySetInnerHTML: {
-        __html: props.md.default,
+        __html: props.md,
       },
     }),
     h('style', {

@@ -4,7 +4,6 @@ import logger from 'redux-logger';
 import thunk from 'redux-thunk';
 
 import { createReducer } from '..';
-import ShowDocs from './util/ShowDocs';
 
 const useThunkReducer = createReducer(thunk, logger);
 
@@ -47,11 +46,10 @@ const Demo = ({ initialCount = 1 }) => {
       <button onClick={() => dispatch({ type: 'reset', payload: initialCount })}>Reset</button>
       <button onClick={() => dispatch({ type: 'increment' })}>+</button>
       <button onClick={() => dispatch({ type: 'decrement' })}>-</button>
-      <p>Open your developer console to see actions logged by middleware</p>
     </div>
   );
 };
 
 storiesOf('State|createReducer', module)
-  .add('Docs', () => <ShowDocs md={require('../../docs/createReducer.md')} />)
+  // .add('Docs', () => <ShowDocs md={require('../../docs/createMemo.md')} />)
   .add('Demo', () => <Demo />);
