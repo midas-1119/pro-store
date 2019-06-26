@@ -4,30 +4,22 @@ import useSetState from './useSetState';
 
 export interface SpeechState {
   isPlaying: boolean;
-  lang: string;
-  voice: SpeechSynthesisVoice;
   rate: number;
-  pitch: number;
   volume: number;
 }
 
 export interface SpeechOptions {
-  lang?: string;
-  voice?: SpeechSynthesisVoice;
-  rate?: number;
+  lang?: any;
   pitch?: number;
+  rate?: number;
+  voice?: any;
   volume?: number;
 }
-
-const voices = window.speechSynthesis.getVoices();
 
 const useSpeech = (text: string, opts: SpeechOptions = {}): SpeechState => {
   const [state, setState] = useSetState<SpeechState>({
     isPlaying: false,
-    lang: opts.lang || 'default',
-    voice: opts.voice || voices[0],
     rate: opts.rate || 1,
-    pitch: opts.pitch || 1,
     volume: opts.volume || 1,
   });
 
@@ -35,10 +27,7 @@ const useSpeech = (text: string, opts: SpeechOptions = {}): SpeechState => {
 
   useMount(() => {
     const utterance = new SpeechSynthesisUtterance(text);
-    opts.lang && (utterance.lang = opts.lang);
-    opts.voice && (utterance.voice = opts.voice);
     utterance.rate = opts.rate || 1;
-    utterance.pitch = opts.pitch || 1;
     utterance.volume = opts.volume || 1;
     utterance.onstart = () => setState({ isPlaying: true });
     utterance.onresume = () => setState({ isPlaying: true });
