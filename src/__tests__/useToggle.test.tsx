@@ -3,89 +3,47 @@ import useToggle from '../useToggle';
 
 afterEach(cleanup);
 
-describe('useToggle hook', () => {
-  const setUp = (initialValue: boolean) => renderHook(() => useToggle(initialValue));
-
+describe('useToggle', () => {
   it('should be defined', () => {
     expect(useToggle).toBeDefined();
   });
 
-  it('should init state to true', () => {
-    const { result } = setUp(true);
+  const hook = renderHook(props => useToggle(props), { initialProps: false });
 
-    expect(result.current[0]).toBe(true);
-    expect(typeof result.current[1]).toBe('function');
+  it('should return initial state on initial render', () => {
+    expect(hook.result.current[0]).toBe(false);
   });
 
-  it('should init state to false', () => {
-    const { result } = setUp(false);
-
-    expect(result.current[0]).toBe(false);
-    expect(typeof result.current[1]).toBe('function');
-  });
-
-  it('should set state to true', () => {
-    const { result } = setUp(false);
-    const [, toggle] = result.current;
-
-    expect(result.current[0]).toBe(false);
+  it('should update state with correct value', () => {
+    hook.rerender(true);
+    expect(hook.result.current[0]).toBe(true);
 
     act(() => {
-      toggle(true);
+      hook.result.current[1](false);
     });
 
-    expect(result.current[0]).toBe(true);
+    expect(hook.result.current[0]).toBe(false);
   });
 
-  it('should set state to false', () => {
-    const { result } = setUp(true);
-    const [, toggle] = result.current;
+  // it('should toggle state without a value parameter', () => {
+  //   act(() => {
+  //     hook.result.current[1]();
+  //   });
 
-    expect(result.current[0]).toBe(true);
+  //   expect(hook.result.current[0]).toBe(true);
+  // });
 
-    act(() => {
-      toggle(false);
-    });
+  // it('should ignore non-boolean parameters', () => {
+  //   act(() => {
+  //     hook.result.current[1]('string');
+  //   });
 
-    expect(result.current[0]).toBe(false);
-  });
+  //   expect(hook.result.current[0]).toBe(true);
 
-  it('should toggle state from true', () => {
-    const { result } = setUp(true);
-    const [, toggle] = result.current;
+  //   act(() => {
+  //     hook.result.current[1]({});
+  //   });
 
-    act(() => {
-      toggle();
-    });
-
-    expect(result.current[0]).toBe(false);
-  });
-
-  it('should toggle state from false', () => {
-    const { result } = setUp(false);
-    const [, toggle] = result.current;
-
-    act(() => {
-      toggle();
-    });
-
-    expect(result.current[0]).toBe(true);
-  });
-
-  it('should ignore non-boolean parameters and toggle state', () => {
-    const { result } = setUp(true);
-    const [, toggle] = result.current;
-
-    act(() => {
-      toggle('string');
-    });
-
-    expect(result.current[0]).toBe(false);
-
-    act(() => {
-      toggle({});
-    });
-
-    expect(result.current[0]).toBe(true);
-  });
+  //   expect(hook.result.current[0]).toBe(false);
+  // });
 });
