@@ -15,16 +15,14 @@ const useMap = <T extends object = any>(initialMap: T = {} as T): [T, Actions<T>
     {
       get: (key: keyof T) => map[key as string],
       set: <K extends keyof T>(key: K, entry: T[K]) => {
-        set(prevMap => ({
-          ...prevMap,
+        set({
+          ...map,
           [key]: entry,
-        }));
+        });
       },
       remove: (key: keyof T) => {
-        set(prevMap => {
-          const { [key]: omit, ...rest } = prevMap;
-          return rest as T;
-        });
+        const { [key]: omit, ...rest } = map;
+        set(rest as T);
       },
       reset: () => set(initialMap),
     },
