@@ -1,3 +1,33 @@
+## [9.8.1](https://github.com/streamich/react-use/compare/v9.8.0...v9.8.1) (2019-06-30)
+
+
+### Bug Fixes
+
+* lint fixes via lint:fix ([7ce8e4f](https://github.com/streamich/react-use/commit/7ce8e4f))
+* useMap uses prevMap state which is safer ([3554f79](https://github.com/streamich/react-use/commit/3554f79))
+* **useMap:** remove now also uses prevMap state to not overwrite or lose state ([0a59869](https://github.com/streamich/react-use/commit/0a59869))
+
+# [9.8.0](https://github.com/streamich/react-use/compare/v9.7.2...v9.8.0) (2019-06-30)
+
+
+### Bug Fixes
+
+* 🐛 fix test and add pre-push hook ([1353b6c](https://github.com/streamich/react-use/commit/1353b6c))
+
+
+### Features
+
+* add voice option in use speech ([6dc2dd5](https://github.com/streamich/react-use/commit/6dc2dd5))
+* add voice option in useSpeech ([#422](https://github.com/streamich/react-use/issues/422)) ([c32d02b](https://github.com/streamich/react-use/commit/c32d02b))
+
+## [9.7.2](https://github.com/streamich/react-use/compare/v9.7.1...v9.7.2) (2019-06-27)
+
+
+### Bug Fixes
+
+* save to localStorage only when state changes ([ba6d375](https://github.com/streamich/react-use/commit/ba6d375))
+* use correct list variable in useList ([#412](https://github.com/streamich/react-use/issues/412)) ([b937296](https://github.com/streamich/react-use/commit/b937296))
+
 ## [9.7.1](https://github.com/streamich/react-use/compare/v9.7.0...v9.7.1) (2019-06-23)
 
 
