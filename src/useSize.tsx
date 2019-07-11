@@ -45,13 +45,7 @@ const useSize = (
   };
 
   useEffect(() => {
-    const iframe: HTMLIFrameElement | null = ref.current;
-
-    if (!iframe) {
-      // iframe will be undefined if component is already unmounted
-      return;
-    }
-
+    const iframe: HTMLIFrameElement = ref.current!;
     if (iframe.contentWindow) {
       window = iframe.contentWindow!;
       onWindow(window);
