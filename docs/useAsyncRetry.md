@@ -2,31 +2,43 @@
 
 Uses `useAsync` with an additional `retry` method to easily retry/refresh the async function;
 
+
 ## Usage
 
 ```jsx
 import {useAsyncRetry} from 'react-use';
 
-const Demo = ({url}) => {
-  const state = useAsyncRetry(async () => {
-    const response = await fetch(url);
-    const result = await response.text();
-    return result;
-  }, [url]);
+// Returns a Promise that resolves after one second.
+const fn = () => new Promise((resolve, reject) => {
+  setTimeout(() => {
+    if (Math.random() > 0.5) {
+      reject(new Error('Random error!'));
+    } else {
+      resolve('RESOLVED');
+    }
+  }, 1000);
+});
+
+const Demo = () => {
+  const state = useAsyncRetry(fn);
 
   return (
     <div>
-      {state.loading
-        ? <div>Loading...</div>
-        : state.error
-          ? <div>Error: {state.error.message}</div>
-          : <div>Value: {state.value}</div>
+      {state.loading?
+        <div>Loading...</div>
+        : state.error?
+        <div>Error...</div>
+        : <div>Value: {state.value}</div>
       }
-      {!loading && <button onClick={() => state.retry()}>Start loading</button>}
+      {!state.loading?
+        <a href='javascript:void 0' onClick={() => state.retry()}>Retry</a>
+        : null
+      }
     </div>
   );
 };
 ```
+
 
 ## Reference
 
