@@ -1,17 +1,3 @@
-## [9.11.2](https://github.com/streamich/react-use/compare/v9.11.1...v9.11.2) (2019-07-16)
-
-
-### Bug Fixes
-
-* support useMedia usage server-side ([50a5160](https://github.com/streamich/react-use/commit/50a5160))
-
-## [9.11.1](https://github.com/streamich/react-use/compare/v9.11.0...v9.11.1) (2019-07-16)
-
-
-### Bug Fixes
-
-* createReducer stable dispatch function identity ([9780545](https://github.com/streamich/react-use/commit/9780545))
-
 # [9.11.0](https://github.com/streamich/react-use/compare/v9.10.0...v9.11.0) (2019-07-11)
 
 
