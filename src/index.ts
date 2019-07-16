@@ -25,7 +25,6 @@ import useGetSetState from './useGetSetState';
 import useHover from './useHover';
 import useHoverDirty from './useHoverDirty';
 import useIdle from './useIdle';
-import useInterval from './useInterval';
 import useIsomorphicLayoutEffect from './useIsomorphicLayoutEffect';
 import useKey from './useKey';
 import useKeyboardJs from './useKeyboardJs';
@@ -104,7 +103,6 @@ export {
   useHover,
   useHoverDirty,
   useIdle,
-  useInterval,
   useIsomorphicLayoutEffect,
   useKey,
   useKeyboardJs,
