@@ -25,11 +25,9 @@ import useGetSetState from './useGetSetState';
 import useHover from './useHover';
 import useHoverDirty from './useHoverDirty';
 import useIdle from './useIdle';
-import useInterval from './useInterval';
 import useIsomorphicLayoutEffect from './useIsomorphicLayoutEffect';
 import useKey from './useKey';
-// not exported because of peer dependency
-// import useKeyboardJs from './useKeyboardJs';
+import useKeyboardJs from './useKeyboardJs';
 import useKeyPress from './useKeyPress';
 import useKeyPressEvent from './useKeyPressEvent';
 import useLifecycles from './useLifecycles';
@@ -61,8 +59,7 @@ import useSessionStorage from './useSessionStorage';
 import useSetState from './useSetState';
 import useSize from './useSize';
 import useSpeech from './useSpeech';
-// not exported because of peer dependency
-// import useSpring from './useSpring';
+import useSpring from './useSpring';
 import useStartTyping from './useStartTyping';
 import useThrottle from './useThrottle';
 import useThrottleFn from './useThrottleFn';
@@ -74,7 +71,7 @@ import useUnmount from './useUnmount';
 import useUpdate from './useUpdate';
 import useUpdateEffect from './useUpdateEffect';
 import useVideo from './useVideo';
-import { useWait, Waiter } from './useWait';
+import useWait from './useWait';
 import useWindowScroll from './useWindowScroll';
 import useWindowSize from './useWindowSize';
 
@@ -106,9 +103,9 @@ export {
   useHover,
   useHoverDirty,
   useIdle,
-  useInterval,
   useIsomorphicLayoutEffect,
   useKey,
+  useKeyboardJs,
   useKeyPress,
   useKeyPressEvent,
   useLifecycles,
@@ -140,6 +137,7 @@ export {
   useSetState,
   useSize,
   useSpeech,
+  useSpring,
   useStartTyping,
   useThrottle,
   useThrottleFn,
@@ -154,5 +152,4 @@ export {
   useWait,
   useWindowScroll,
   useWindowSize,
-  Waiter,
 };
