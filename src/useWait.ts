@@ -1,3 +1,5 @@
 import { useWait, Waiter } from 'react-wait';
 
-export { useWait, Waiter };
+useWait.Waiter = Waiter;
+
+export default useWait;
