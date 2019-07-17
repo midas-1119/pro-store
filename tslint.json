@@ -30,8 +30,7 @@
         "printWidth": 120,
         "tabWidth": 2
       }
-    ],
-    "ordered-imports": false
+    ]
   },
   "rulesDirectory": ["tslint-plugin-prettier"]
 }

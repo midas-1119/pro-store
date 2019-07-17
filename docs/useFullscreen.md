@@ -5,7 +5,8 @@ Display an element full-screen, optional fallback for fullscreen video on iOS.
 ## Usage
 
 ```jsx
-import {useFullscreen, useToggle} from 'react-use';
+import useFullscreen from 'react-use/lib/useFullscreen';
+import useToggle from 'react-use/lib/useToggle';
 
 const Demo = () => {
   const ref = useRef(null)

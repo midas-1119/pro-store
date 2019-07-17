@@ -1,7 +1,7 @@
-import useUpdateEffect from './useUpdateEffect';
+import { useEffect } from 'react';
 
 const useDebounce = (fn: () => any, ms: number = 0, args: any[] = []) => {
-  useUpdateEffect(() => {
+  useEffect(() => {
     const handle = setTimeout(fn.bind(null, args), ms);
 
     return () => {

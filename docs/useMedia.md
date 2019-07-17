@@ -2,6 +2,7 @@
 
 React sensor hook that tracks state of a CSS media query.
 
+
 ## Usage
 
 ```jsx
@@ -17,11 +18,3 @@ const Demo = () => {
   );
 };
 ```
-
-## Reference
-
-```ts
-useMedia(query: string, defaultState: boolean = false): boolean;
-```
-
-The `defaultState` parameter is only used as a fallback for server side rendering.
