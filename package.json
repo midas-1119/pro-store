@@ -1,6 +1,6 @@
 {
   "name": "react-use",
-  "version": "10.1.2",
+  "version": "10.1.0",
   "description": "Collection of React Hooks",
   "main": "lib/index.js",
   "module": "esm/index.js",
@@ -26,7 +26,8 @@
     "storybook:build": "build-storybook",
     "storybook:upload": "gh-pages -d storybook-static",
     "storybook:clean": "rimraf storybook-static",
-    "release": "semantic-release"
+    "release": "semantic-release",
+    "postinstall": "opencollective-postinstall || true"
   },
   "husky": {
     "hooks": {
@@ -59,9 +60,9 @@
     "react-dom": "^16.8.0"
   },
   "devDependencies": {
-    "@babel/core": "7.5.5",
+    "@babel/core": "7.5.4",
     "@babel/plugin-syntax-dynamic-import": "7.2.0",
-    "@babel/preset-env": "7.5.5",
+    "@babel/preset-env": "7.5.4",
     "@babel/preset-react": "7.0.0",
     "@babel/preset-typescript": "7.3.3",
     "@semantic-release/changelog": "3.0.4",
@@ -72,6 +73,7 @@
     "@storybook/addon-notes": "5.1.9",
     "@storybook/addon-options": "5.1.9",
     "@storybook/react": "5.1.9",
+    "@testing-library/react-hooks": "^1.1.0",
     "@types/jest": "24.0.15",
     "@types/react": "16.8.23",
     "babel-core": "6.26.3",
@@ -79,16 +81,17 @@
     "babel-plugin-dynamic-import-node": "2.3.0",
     "fork-ts-checker-webpack-plugin": "1.4.3",
     "gh-pages": "2.0.1",
-    "husky": "3.0.1",
+    "husky": "3.0.0",
     "jest": "24.8.0",
     "keyboardjs": "2.5.1",
     "lint-staged": "9.2.0",
     "markdown-loader": "5.0.0",
+    "opencollective-postinstall": "2.0.2",
     "prettier": "1.17.1",
     "react": "16.8.6",
     "react-dom": "16.8.6",
-    "react-hooks-testing-library": "0.4.1",
     "react-spring": "8.0.27",
+    "react-test-renderer": "^16.8.6",
     "rebound": "0.1.0",
     "redux-logger": "3.0.6",
     "redux-thunk": "2.3.0",
