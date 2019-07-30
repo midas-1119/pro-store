@@ -55,7 +55,6 @@ import usePermission from './usePermission';
 import usePrevious from './usePrevious';
 import usePromise from './usePromise';
 import useRaf from './useRaf';
-import useRafLoop from './useRafLoop';
 import useRefMounted from './useRefMounted';
 import useScroll from './useScroll';
 import useScrolling from './useScrolling';
@@ -136,7 +135,6 @@ export {
   usePrevious,
   usePromise,
   useRaf,
-  useRafLoop,
   useRefMounted,
   useScroll,
   useScrolling,
