@@ -44,7 +44,6 @@ import useMedia from './useMedia';
 import useMediaDevices from './useMediaDevices';
 import useMotion from './useMotion';
 import useMount from './useMount';
-import useMountedState from './useMountedState';
 import useMouse from './useMouse';
 import useMouseHovered from './useMouseHovered';
 import useNetwork from './useNetwork';
@@ -56,6 +55,7 @@ import usePermission from './usePermission';
 import usePrevious from './usePrevious';
 import usePromise from './usePromise';
 import useRaf from './useRaf';
+import useRafLoop from './useRafLoop';
 import useRefMounted from './useRefMounted';
 import useScroll from './useScroll';
 import useScrolling from './useScrolling';
@@ -125,7 +125,6 @@ export {
   useMediaDevices,
   useMotion,
   useMount,
-  useMountedState,
   useMouse,
   useMouseHovered,
   useNetwork,
@@ -137,6 +136,7 @@ export {
   usePrevious,
   usePromise,
   useRaf,
+  useRafLoop,
   useRefMounted,
   useScroll,
   useScrolling,
