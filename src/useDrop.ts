@@ -1,5 +1,5 @@
 import * as React from 'react';
-import useMountedState from './useMountedState';
+import useRefMounted from './useRefMounted';
 
 const { useState, useMemo, useCallback, useEffect } = React;
 
@@ -22,13 +22,16 @@ export interface DropAreaOptions {
 }
 
 const noop = () => {};
-/*
+/* 
 const defaultState: DropAreaState = {
   over: false,
-};
+}; 
 */
 
-const createProcess = (options: DropAreaOptions, mounted: boolean) => (dataTransfer: DataTransfer, event) => {
+const createProcess = (options: DropAreaOptions, mounted: React.RefObject<boolean>) => (
+  dataTransfer: DataTransfer,
+  event
+) => {
   const uri = dataTransfer.getData('text/uri-list');
 
   if (uri) {
@@ -43,7 +46,7 @@ const createProcess = (options: DropAreaOptions, mounted: boolean) => (dataTrans
 
   if (dataTransfer.items && dataTransfer.items.length) {
     dataTransfer.items[0].getAsString(text => {
-      if (mounted) {
+      if (mounted.current) {
         (options.onText || noop)(text, event);
       }
     });
@@ -52,10 +55,10 @@ const createProcess = (options: DropAreaOptions, mounted: boolean) => (dataTrans
 
 const useDrop = (options: DropAreaOptions = {}, args = []): DropAreaState => {
   const { onFiles, onText, onUri } = options;
-  const isMounted = useMountedState();
+  const mounted = useRefMounted();
   const [over, setOverRaw] = useState<boolean>(false);
   const setOver = useCallback(setOverRaw, []);
-  const process = useMemo(() => createProcess(options, isMounted()), [onFiles, onText, onUri]);
+  const process = useMemo(() => createProcess(options, mounted), [onFiles, onText, onUri]);
 
   useEffect(() => {
     const onDragOver = event => {
