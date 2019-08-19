@@ -45,5 +45,5 @@ const Demo = () => {
 ## Reference
 
 ```ts
-const { cancel } = useDebounce(fn, ms: number, args: any[]);
+useDebounce(fn, ms: number, args: any[]);
 ```
