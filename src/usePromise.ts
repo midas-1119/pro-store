@@ -1,18 +1,22 @@
 import { useCallback } from 'react';
-import useMountedState from './useMountedState';
+import useRefMounted from './useRefMounted';
 
 export type UsePromise = () => <T>(promise: Promise<T>) => Promise<T>;
 
 const usePromise: UsePromise = () => {
-  const isMounted = useMountedState();
+  const refMounted = useRefMounted();
   return useCallback(
     (promise: Promise<any>) =>
       new Promise<any>((resolve, reject) => {
         const onValue = value => {
-          isMounted() && resolve(value);
+          if (refMounted.current) {
+            resolve(value);
+          }
         };
         const onError = error => {
-          isMounted() && reject(error);
+          if (refMounted.current) {
+            reject(error);
+          }
         };
         promise.then(onValue, onError);
       }),

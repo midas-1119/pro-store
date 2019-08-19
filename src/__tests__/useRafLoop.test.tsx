@@ -1,4 +1,4 @@
-import { act, renderHook } from '@testing-library/react-hooks';
+import { renderHook, act } from '@testing-library/react-hooks';
 import useRafLoop from '../useRafLoop';
 
 describe('useRafLoop', () => {
@@ -14,10 +14,11 @@ describe('useRafLoop', () => {
     expect(calls).toEqual(0);
 
     setTimeout(() => {
-      expect(calls).toBeGreaterThanOrEqual(2);
+      expect(calls).toBeGreaterThanOrEqual(5);
+      expect(calls).toBeLessThan(10);
 
       done();
-    }, 120);
+    }, 100);
   });
 
   it('should return stop function, start function and loop state', () => {
@@ -42,7 +43,7 @@ describe('useRafLoop', () => {
       expect(calls).toEqual(0);
 
       done();
-    }, 50);
+    }, 100);
   });
 
   it('second element should represent loop state', done => {
@@ -62,7 +63,7 @@ describe('useRafLoop', () => {
       expect(calls).toEqual(0);
 
       done();
-    }, 120);
+    }, 100);
   });
 
   it('third element call should restart loop', done => {
@@ -88,11 +89,12 @@ describe('useRafLoop', () => {
 
       setTimeout(() => {
         expect(hook.result.current[1]).toBe(true);
-        expect(calls).toBeGreaterThanOrEqual(2);
+        expect(calls).toBeGreaterThanOrEqual(5);
+        expect(calls).toBeLessThan(10);
 
         done();
-      }, 120);
-    }, 50);
+      }, 100);
+    }, 100);
   });
 
   it('loop should stop itself on unmount', done => {
@@ -106,6 +108,6 @@ describe('useRafLoop', () => {
       expect(calls).toEqual(0);
 
       done();
-    }, 50);
+    }, 100);
   });
 });
