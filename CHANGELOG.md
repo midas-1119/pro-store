@@ -1,24 +1,3 @@
-## [10.6.2](https://github.com/streamich/react-use/compare/v10.6.1...v10.6.2) (2019-08-18)
-
-
-### Bug Fixes
-
-* 🐛 fix master ([d1df7a5](https://github.com/streamich/react-use/commit/d1df7a5))
-
-## [10.6.1](https://github.com/streamich/react-use/compare/v10.6.0...v10.6.1) (2019-08-17)
-
-
-### Bug Fixes
-
-* useUpdateEffect run on the wrong time ([1d5cd10](https://github.com/streamich/react-use/commit/1d5cd10))
-
-# [10.6.0](https://github.com/streamich/react-use/compare/v10.5.0...v10.6.0) (2019-08-17)
-
-
-### Features
-
-* add min/max to useNumber ([586faab](https://github.com/streamich/react-use/commit/586faab))
-
 # [10.5.0](https://github.com/streamich/react-use/compare/v10.4.0...v10.5.0) (2019-08-03)
 
 
