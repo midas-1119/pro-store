@@ -1,6 +1,6 @@
 import { storiesOf } from '@storybook/react';
 import * as React from 'react';
-import useSpring from '../useSpring';
+import { useSpring } from '..';
 import ShowDocs from './util/ShowDocs';
 
 const Demo = () => {
