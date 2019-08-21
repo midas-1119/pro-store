@@ -5,7 +5,7 @@
 // does not automatically invoke the function
 // and it can take arguments.
 
-import { act, renderHook } from '@testing-library/react-hooks';
+import { renderHook } from '@testing-library/react-hooks';
 import useAsyncFn, { AsyncState } from '../useAsyncFn';
 
 type AdderFn = (a: number, b: number) => Promise<number>;
@@ -17,26 +17,27 @@ describe('useAsyncFn', () => {
 
   describe('the callback can be awaited and return the value', () => {
     let hook;
+    let callCount = 0;
     const adder = async (a: number, b: number): Promise<number> => {
+      callCount++;
       return a + b;
     };
 
     beforeEach(() => {
       // NOTE: renderHook isn't good at inferring array types
       hook = renderHook<{ fn: AdderFn }, [AsyncState<number>, AdderFn]>(({ fn }) => useAsyncFn(fn), {
-        initialProps: { fn: adder },
+        initialProps: {
+          fn: adder,
+        },
       });
     });
 
     it('awaits the result', async () => {
       expect.assertions(3);
 
-      const [, callback] = hook.result.current;
-      let result;
+      const [s, callback] = hook.result.current;
 
-      await act(async () => {
-        result = await callback(5, 7);
-      });
+      const result = await callback(5, 7);
 
       expect(result).toEqual(12);
 
@@ -77,15 +78,13 @@ describe('useAsyncFn', () => {
       it('resolves a value derived from args', async () => {
         expect.assertions(4);
 
-        const [, callback] = hook.result.current;
+        const [s, callback] = hook.result.current;
 
-        act(() => {
-          callback(2, 7);
-        });
+        callback(2, 7);
         hook.rerender({ fn: adder });
         await hook.waitForNextUpdate();
 
-        const [state] = hook.result.current;
+        const [state, c] = hook.result.current;
 
         expect(callCount).toEqual(1);
         expect(state.loading).toEqual(false);

@@ -1,6 +1,6 @@
-import writeText from 'copy-to-clipboard';
+import * as writeText from 'copy-to-clipboard';
 import { useCallback } from 'react';
-import useMountedState from './useMountedState';
+import useRefMounted from './useRefMounted';
 import useSetState from './useSetState';
 
 export interface CopyToClipboardState {
@@ -10,7 +10,7 @@ export interface CopyToClipboardState {
 }
 
 const useCopyToClipboard = (): [CopyToClipboardState, (value: string) => void] => {
-  const isMounted = useMountedState();
+  const mounted = useRefMounted();
   const [state, setState] = useSetState<CopyToClipboardState>({
     value: undefined,
     error: undefined,
@@ -27,7 +27,7 @@ const useCopyToClipboard = (): [CopyToClipboardState, (value: string) => void] =
 
       const noUserInteraction = writeText(value);
 
-      if (!isMounted()) {
+      if (!mounted.current) {
         return;
       }
       setState({
@@ -36,7 +36,7 @@ const useCopyToClipboard = (): [CopyToClipboardState, (value: string) => void] =
         noUserInteraction,
       });
     } catch (error) {
-      if (!isMounted()) {
+      if (!mounted.current) {
         return;
       }
       setState({

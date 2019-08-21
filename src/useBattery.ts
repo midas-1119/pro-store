@@ -1,85 +1,56 @@
-import * as React from 'react';
-import isEqual from 'react-fast-compare';
+import { useEffect, useState } from 'react';
 import { off, on } from './util';
 
-const { useState, useEffect } = React;
-
-export interface BatteryState {
+export interface BatterySensorState {
   charging: boolean;
+  level: number;
   chargingTime: number;
   dischargingTime: number;
-  level: number;
 }
 
-interface BatteryManager extends Readonly<BatteryState>, EventTarget {
-  onchargingchange: () => void;
-  onchargingtimechange: () => void;
-  ondischargingtimechange: () => void;
-  onlevelchange: () => void;
-}
+const useBattery = () => {
+  const [state, setState] = useState({});
+  let mounted = true;
+  let battery: any = null;
 
-interface NavigatorWithPossibleBattery extends Navigator {
-  getBattery?: () => Promise<BatteryManager>;
-}
+  const onChange = () => {
+    const { charging, level, chargingTime, dischargingTime } = battery;
+    setState({
+      charging,
+      level,
+      chargingTime,
+      dischargingTime,
+    });
+  };
 
-type UseBatteryState =
-  | { isSupported: false } // Battery API is not supported
-  | { isSupported: true; fetched: false } // battery API supported but not fetched yet
-  | BatteryState & { isSupported: true; fetched: true }; // battery API supported and fetched
-
-const nav: NavigatorWithPossibleBattery | undefined = typeof navigator === 'object' ? navigator : undefined;
-const isBatteryApiSupported = nav && typeof nav.getBattery === 'function';
-
-function useBatteryMock(): UseBatteryState {
-  return { isSupported: false };
-}
-
-function useBattery(): UseBatteryState {
-  const [state, setState] = useState<UseBatteryState>({ isSupported: true, fetched: false });
+  const onBattery = () => {
+    onChange();
+    on(battery, 'chargingchange', onChange);
+    on(battery, 'levelchange', onChange);
+    on(battery, 'chargingtimechange', onChange);
+    on(battery, 'dischargingtimechange', onChange);
+  };
 
   useEffect(() => {
-    let isMounted = true;
-    let battery: BatteryManager | null = null;
-
-    const handleChange = () => {
-      if (!isMounted || !battery) {
-        return;
+    (navigator as any).getBattery().then((bat: any) => {
+      if (mounted) {
+        battery = bat;
+        onBattery();
       }
-      const newState: UseBatteryState = {
-        isSupported: true,
-        fetched: true,
-        level: battery.level,
-        charging: battery.charging,
-        dischargingTime: battery.dischargingTime,
-        chargingTime: battery.chargingTime,
-      };
-      !isEqual(state, newState) && setState(newState);
-    };
-
-    nav!.getBattery!().then((bat: BatteryManager) => {
-      if (!isMounted) {
-        return;
-      }
-      battery = bat;
-      on(battery, 'chargingchange', handleChange);
-      on(battery, 'chargingtimechange', handleChange);
-      on(battery, 'dischargingtimechange', handleChange);
-      on(battery, 'levelchange', handleChange);
-      handleChange();
     });
 
     return () => {
-      isMounted = false;
+      mounted = false;
       if (battery) {
-        off(battery, 'chargingchange', handleChange);
-        off(battery, 'chargingtimechange', handleChange);
-        off(battery, 'dischargingtimechange', handleChange);
-        off(battery, 'levelchange', handleChange);
+        off(battery, 'chargingchange', onChange);
+        off(battery, 'levelchange', onChange);
+        off(battery, 'chargingtimechange', onChange);
+        off(battery, 'dischargingtimechange', onChange);
       }
     };
   }, []);
 
   return state;
-}
+};
 
-export default isBatteryApiSupported ? useBattery : useBatteryMock;
+export default useBattery;
