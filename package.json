@@ -1,6 +1,6 @@
 {
   "name": "react-use",
-  "version": "11.1.1",
+  "version": "11.0.0",
   "description": "Collection of React Hooks",
   "main": "lib/index.js",
   "module": "esm/index.js",
@@ -51,7 +51,6 @@
     "react-fast-compare": "^2.0.4",
     "react-wait": "^0.3.0",
     "screenfull": "^4.1.0",
-    "set-harmonic-interval": "^1.0.0",
     "throttle-debounce": "^2.0.1",
     "ts-easing": "^0.2.0"
   },
@@ -90,7 +89,6 @@
     "raf-stub": "3.0.0",
     "react": "16.9.0",
     "react-dom": "16.9.0",
-    "react-frame-component": "^4.1.1",
     "react-spring": "8.0.27",
     "react-test-renderer": "16.9.0",
     "rebound": "0.1.0",

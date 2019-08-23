@@ -1,7 +1,8 @@
 import { boolean, text, withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
 import * as React from 'react';
-import { useCounter, useLogger } from '..';
+import { useCounter } from '..';
+import { useLogger } from '..';
 import ShowDocs from './util/ShowDocs';
 
 const Demo = props => {
