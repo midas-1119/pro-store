@@ -23,6 +23,7 @@ export { default as useFullscreen } from './useFullscreen';
 export { default as useGeolocation } from './useGeolocation';
 export { default as useGetSet } from './useGetSet';
 export { default as useGetSetState } from './useGetSetState';
+export { default as useHarmonicIntervalFn } from './useHarmonicIntervalFn';
 export { default as useHover } from './useHover';
 export { default as useHoverDirty } from './useHoverDirty';
 export { default as useIdle } from './useIdle';
@@ -70,7 +71,6 @@ export { default as useSpeech } from './useSpeech';
 // not exported because of peer dependency
 // export { default as useSpring } from './useSpring';
 export { default as useStartTyping } from './useStartTyping';
-export { default as useStateList } from './useStateList';
 export { default as useThrottle } from './useThrottle';
 export { default as useThrottleFn } from './useThrottleFn';
 export { default as useTimeout } from './useTimeout';

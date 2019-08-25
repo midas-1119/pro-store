@@ -79,7 +79,7 @@
     <br/>
 - [**Animations**](./docs/Animations.md)
   - [`useRaf`](./docs/useRaf.md) &mdash; re-renders component on each `requestAnimationFrame`.
-  - [`useInterval`](./docs/useInterval.md) &mdash; re-renders component on a set interval using `setInterval`.
+  - [`useInterval`](./docs/useInterval.md) and [`useHarmonicIntervalFn`](./docs/useHarmonicIntervalFn.md) &mdash; re-renders component on a set interval using `setInterval`.
   - [`useSpring`](./docs/useSpring.md) &mdash; interpolates number over time according to spring dynamics.
   - [`useTimeout`](./docs/useTimeout.md) &mdash; re-renders component after a timeout.
   - [`useTimeoutFn`](./docs/useTimeoutFn.md) &mdash; calls given function after a timeout. [![][img-demo]](https://streamich.github.io/react-use/?path=/story/animation-usetimeoutfn--demo)
@@ -127,7 +127,6 @@
   - [`usePrevious`](./docs/usePrevious.md) &mdash; returns the previous state or props.
   - [`useObservable`](./docs/useObservable.md) &mdash; tracks latest value of an `Observable`.
   - [`useSetState`](./docs/useSetState.md) &mdash; creates `setState` method which works like `this.setState`. [![][img-demo]](https://codesandbox.io/s/n75zqn1xp0)
-  - [`useStateList`](./docs/useStateList.md) &mdash; circularly iterates over an array.
   - [`useToggle` and `useBoolean`](./docs/useToggle.md) &mdash; tracks state of a boolean.
   - [`useCounter` and `useNumber`](./docs/useCounter.md) &mdash; tracks state of a number. [![][img-demo]](https://streamich.github.io/react-use/?path=/story/state-usecounter--demo)
   - [`useList`](./docs/useList.md) &mdash; tracks state of an array.
