@@ -1,13 +1,10 @@
 # `useTimeoutFn`
 
-Calls given function after specified amount of milliseconds.
+Calls given function after specified amount of milliseconds.  
+**Note:** this hook does not re-render component by itself.
 
-Several thing about it's work:
-- does not re-render component;
-- automatically cancel timeout on cancel;
-- automatically reset timeout on delay change;
-- reset function call will cancel previous timeout;
-- timeout will NOT be reset on function change. It will be called within the timeout, you have to reset it on your own when needed. 
+Automatically cancels timeout on component unmount.
+Automatically resets timeout on delay change.
 
 ## Usage
 
