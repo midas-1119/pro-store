@@ -1,3 +1,17 @@
+## [11.3.2](https://github.com/streamich/react-use/compare/v11.3.1...v11.3.2) (2019-08-25)
+
+
+### Bug Fixes
+
+* useThrottle & useThrottleFn proper timeout type; ([e2cdb94](https://github.com/streamich/react-use/commit/e2cdb94))
+
+## [11.3.1](https://github.com/streamich/react-use/compare/v11.3.0...v11.3.1) (2019-08-25)
+
+
+### Bug Fixes
+
+* update createReducer to fix initial state ([fd083f2](https://github.com/streamich/react-use/commit/fd083f2))
+
 # [11.3.0](https://github.com/streamich/react-use/compare/v11.2.0...v11.3.0) (2019-08-25)
 
 
