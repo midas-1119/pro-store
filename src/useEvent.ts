@@ -3,13 +3,11 @@ import { isClient } from './util';
 
 export interface ListenerType1 {
   addEventListener(name: string, handler: (event?: any) => void, ...args: any[]);
-
   removeEventListener(name: string, handler: (event?: any) => void);
 }
 
 export interface ListenerType2 {
   on(name: string, handler: (event?: any) => void, ...args: any[]);
-
   off(name: string, handler: (event?: any) => void);
 }
 

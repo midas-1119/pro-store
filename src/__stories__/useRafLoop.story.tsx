@@ -1,7 +1,7 @@
 import { storiesOf } from '@storybook/react';
 import * as React from 'react';
-import { useRafLoop } from '..';
 import ShowDocs from './util/ShowDocs';
+import { useRafLoop } from '..';
 
 const Demo = () => {
   const [ticks, setTicks] = React.useState(0);

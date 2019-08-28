@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useRef, useEffect } from 'react';
 
 const useInterval = (callback: Function, delay?: number | null) => {
   const latestCallback = useRef<Function>(() => {});
