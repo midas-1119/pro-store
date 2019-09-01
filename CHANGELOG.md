@@ -1,3 +1,23 @@
+# [12.1.0](https://github.com/streamich/react-use/compare/v12.0.0...v12.1.0) (2019-09-01)
+
+
+### Features
+
+* 🎸 add useSearchParam() hook ([b22f32f](https://github.com/streamich/react-use/commit/b22f32f))
+* 🎸 support server-side rendering in useSearchParam() hook ([64ac924](https://github.com/streamich/react-use/commit/64ac924))
+
+# [12.0.0](https://github.com/streamich/react-use/compare/v11.3.2...v12.0.0) (2019-09-01)
+
+
+### Features
+
+* store "paused" instead of "isPlaying" in media state ([ff900d5](https://github.com/streamich/react-use/commit/ff900d5))
+
+
+### BREAKING CHANGES
+
+* now media players return "paused" instead of "isPlaying" in their state.
+
 ## [11.3.2](https://github.com/streamich/react-use/compare/v11.3.1...v11.3.2) (2019-08-25)
 
 
