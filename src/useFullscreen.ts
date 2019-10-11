@@ -26,7 +26,7 @@ const useFullscreen = (ref: RefObject<Element>, on: boolean, options: FullScreen
     };
 
     const onChange = () => {
-      if (screenfull.isEnabled) {
+      if (screenfull) {
         const isScreenfullFullscreen = screenfull.isFullscreen;
         setIsFullscreen(isScreenfullFullscreen);
         if (!isScreenfullFullscreen) {
@@ -35,7 +35,7 @@ const useFullscreen = (ref: RefObject<Element>, on: boolean, options: FullScreen
       }
     };
 
-    if (screenfull.isEnabled) {
+    if (screenfull && screenfull.enabled) {
       try {
         screenfull.request(ref.current);
         setIsFullscreen(true);
@@ -55,7 +55,7 @@ const useFullscreen = (ref: RefObject<Element>, on: boolean, options: FullScreen
 
     return () => {
       setIsFullscreen(false);
-      if (screenfull.isEnabled) {
+      if (screenfull && screenfull.enabled) {
         try {
           screenfull.off('change', onChange);
           screenfull.exit();

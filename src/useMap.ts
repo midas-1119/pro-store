@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState } from 'react';
 
 export interface Actions<T extends object> {
   get: <K extends keyof T>(key: K) => T[K];
@@ -10,27 +10,25 @@ export interface Actions<T extends object> {
 const useMap = <T extends object = any>(initialMap: T = {} as T): [T, Actions<T>] => {
   const [map, set] = useState<T>(initialMap);
 
-  const utils = useMemo<Actions<T>>(
-    () => ({
-      get: key => map[key],
-      set: (key, entry) => {
+  return [
+    map,
+    {
+      get: (key: keyof T) => map[key as string],
+      set: <K extends keyof T>(key: K, entry: T[K]) => {
         set(prevMap => ({
           ...prevMap,
           [key]: entry,
         }));
       },
-      remove: key => {
+      remove: (key: keyof T) => {
         set(prevMap => {
           const { [key]: omit, ...rest } = prevMap;
           return rest as T;
         });
       },
       reset: () => set(initialMap),
-    }),
-    [set]
-  );
-
-  return [map, utils];
+    },
+  ];
 };
 
 export default useMap;
