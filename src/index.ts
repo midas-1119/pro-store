@@ -86,7 +86,6 @@ export { default as useUnmount } from './useUnmount';
 export { default as useUpdate } from './useUpdate';
 export { default as useUpdateEffect } from './useUpdateEffect';
 export { default as useUpsert } from './useUpsert';
-export { default as useVibrate } from './useVibrate';
 export { default as useVideo } from './useVideo';
 export { default as useStateValidator } from './useStateValidator';
 export { useWait, Waiter } from './useWait';
