@@ -25,7 +25,7 @@ const useScrolling = (ref: RefObject<HTMLElement>): boolean => {
       };
     }
     return () => {};
-  }, [ref]);
+  }, [ref.current]);
 
   return scrolling;
 };

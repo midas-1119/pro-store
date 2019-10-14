@@ -2,6 +2,7 @@
 
 React sensor hook that tracks browser's location search param.
 
+
 ## Usage
 
 ```jsx
@@ -26,7 +27,3 @@ const Demo = () => {
   );
 };
 ```
-
-## Caveats/Gotchas
-
-When using a hash router, like `react-router`'s [`<HashRouter>`](https://github.com/ReactTraining/react-router/blob/master/packages/react-router-dom/docs/api/HashRouter.md), this hook won't be able to read the search parameters as they are considered part of the hash of the URL by browsers.

@@ -13,11 +13,7 @@ const Demo = () => {
 
   return (
     <p>
-      <button onClick={() => setCount(count + 1)}>+</button>
-      <button onClick={() => setCount(count - 1)}>-</button>
-      <p>
-        Now: {count}, before: {prevCount}
-      </p>
+      Now: {count}, before: {prevCount}
     </p>
   );
 };
