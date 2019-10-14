@@ -44,6 +44,7 @@ export { default as useLogger } from './useLogger';
 export { default as useMap } from './useMap';
 export { default as useMedia } from './useMedia';
 export { default as useMediaDevices } from './useMediaDevices';
+export { useMediatedState } from './useMediatedState';
 export { default as useMotion } from './useMotion';
 export { default as useMount } from './useMount';
 export { default as useMountedState } from './useMountedState';
@@ -70,7 +71,6 @@ export { default as useScrolling } from './useScrolling';
 export { default as useSessionStorage } from './useSessionStorage';
 export { default as useSetState } from './useSetState';
 export { default as useSize } from './useSize';
-export { default as useSlider } from './useSlider';
 export { default as useSpeech } from './useSpeech';
 // not exported because of peer dependency
 // export { default as useSpring } from './useSpring';
