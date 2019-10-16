@@ -60,8 +60,6 @@ export { default as usePreviousDistinct } from './usePreviousDistinct';
 export { default as usePromise } from './usePromise';
 export { default as useRaf } from './useRaf';
 export { default as useRafLoop } from './useRafLoop';
-export { default as useRafState } from './useRafState';
-
 /**
  * @deprecated This hook is obsolete, use `useMountedState` instead
  */
@@ -72,6 +70,7 @@ export { default as useScrolling } from './useScrolling';
 export { default as useSessionStorage } from './useSessionStorage';
 export { default as useSetState } from './useSetState';
 export { default as useSize } from './useSize';
+export { default as useSlider } from './useSlider';
 export { default as useSpeech } from './useSpeech';
 // not exported because of peer dependency
 // export { default as useSpring } from './useSpring';
