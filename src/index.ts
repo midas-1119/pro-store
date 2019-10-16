@@ -44,6 +44,7 @@ export { default as useLogger } from './useLogger';
 export { default as useMap } from './useMap';
 export { default as useMedia } from './useMedia';
 export { default as useMediaDevices } from './useMediaDevices';
+export { useMediatedState } from './useMediatedState';
 export { default as useMotion } from './useMotion';
 export { default as useMount } from './useMount';
 export { default as useMountedState } from './useMountedState';
@@ -60,8 +61,6 @@ export { default as usePreviousDistinct } from './usePreviousDistinct';
 export { default as usePromise } from './usePromise';
 export { default as useRaf } from './useRaf';
 export { default as useRafLoop } from './useRafLoop';
-export { default as useRafState } from './useRafState';
-
 /**
  * @deprecated This hook is obsolete, use `useMountedState` instead
  */

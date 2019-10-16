@@ -1,6 +1,4 @@
-import { RefObject, useEffect } from 'react';
-
-import useRafState from './useRafState';
+import { RefObject, useEffect, useRef, useState } from 'react';
 
 export interface State {
   docX: number;
@@ -20,7 +18,8 @@ const useMouse = (ref: RefObject<Element>): State => {
     }
   }
 
-  const [state, setState] = useRafState<State>({
+  const frame = useRef(0);
+  const [state, setState] = useState<State>({
     docX: 0,
     docY: 0,
     posX: 0,
@@ -33,29 +32,34 @@ const useMouse = (ref: RefObject<Element>): State => {
 
   useEffect(() => {
     const moveHandler = (event: MouseEvent) => {
-      if (ref && ref.current) {
-        const { left, top, width: elW, height: elH } = ref.current.getBoundingClientRect();
-        const posX = left + window.pageXOffset;
-        const posY = top + window.pageYOffset;
-        const elX = event.pageX - posX;
-        const elY = event.pageY - posY;
+      cancelAnimationFrame(frame.current);
 
-        setState({
-          docX: event.pageX,
-          docY: event.pageY,
-          posX,
-          posY,
-          elX,
-          elY,
-          elH,
-          elW,
-        });
-      }
+      frame.current = requestAnimationFrame(() => {
+        if (ref && ref.current) {
+          const { left, top, width: elW, height: elH } = ref.current.getBoundingClientRect();
+          const posX = left + window.pageXOffset;
+          const posY = top + window.pageYOffset;
+          const elX = event.pageX - posX;
+          const elY = event.pageY - posY;
+
+          setState({
+            docX: event.pageX,
+            docY: event.pageY,
+            posX,
+            posY,
+            elX,
+            elY,
+            elH,
+            elW,
+          });
+        }
+      });
     };
 
     document.addEventListener('mousemove', moveHandler);
 
     return () => {
+      cancelAnimationFrame(frame.current);
       document.removeEventListener('mousemove', moveHandler);
     };
   }, [ref]);
