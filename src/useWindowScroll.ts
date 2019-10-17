@@ -1,7 +1,5 @@
-import { useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { isClient } from './util';
-
-import useRafState from './useRafState';
 
 export interface State {
   x: number;
@@ -9,16 +7,20 @@ export interface State {
 }
 
 const useWindowScroll = (): State => {
-  const [state, setState] = useRafState<State>({
+  const frame = useRef(0);
+  const [state, setState] = useState<State>({
     x: isClient ? window.pageXOffset : 0,
     y: isClient ? window.pageYOffset : 0,
   });
 
   useEffect(() => {
     const handler = () => {
-      setState({
-        x: window.pageXOffset,
-        y: window.pageYOffset,
+      cancelAnimationFrame(frame.current);
+      frame.current = requestAnimationFrame(() => {
+        setState({
+          x: window.pageXOffset,
+          y: window.pageYOffset,
+        });
       });
     };
 
@@ -28,6 +30,7 @@ const useWindowScroll = (): State => {
     });
 
     return () => {
+      cancelAnimationFrame(frame.current);
       window.removeEventListener('scroll', handler);
     };
   }, []);
