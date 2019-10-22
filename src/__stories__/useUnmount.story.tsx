@@ -1,14 +1,13 @@
 import { storiesOf } from '@storybook/react';
-import { action } from '@storybook/addon-actions';
 import * as React from 'react';
 import { useUnmount } from '..';
-import ActionsTabStory from './util/ActionsTabStory';
+import ConsoleStory from './util/ConsoleStory';
 import ShowDocs from './util/ShowDocs';
 
 const Demo = () => {
-  useUnmount(action('UNMOUNTED'));
+  useUnmount(() => console.log('UNMOUNTED'));
 
-  return <ActionsTabStory />;
+  return <ConsoleStory />;
 };
 
 storiesOf('Lifecycle|useUnmount', module)
