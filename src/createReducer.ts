@@ -1,31 +1,18 @@
-import { MutableRefObject, useCallback, useRef, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import useUpdateEffect from './useUpdateEffect';
 
-type Dispatch<Action> = (action: Action) => void;
-
-interface Store<Action, State> {
-  getState: () => State;
-  dispatch: Dispatch<Action>;
-}
-
-type Middleware<Action, State> = (store: Store<Action, State>) => (next: Dispatch<Action>) => (action: Action) => void;
-
-function composeMiddleware<Action, State>(chain: Array<Middleware<Action, State>>) {
-  return (context: Store<Action, State>, dispatch: Dispatch<Action>) => {
+function composeMiddleware(chain) {
+  return (context, dispatch) => {
     return chain.reduceRight((res, middleware) => {
       return middleware(context)(res);
     }, dispatch);
   };
 }
 
-const createReducer = <Action, State>(...middlewares: Array<Middleware<Action, State>>) => {
-  const composedMiddleware = composeMiddleware<Action, State>(middlewares);
+const createReducer = (...middlewares) => {
+  const composedMiddleware = composeMiddleware(middlewares);
 
-  return (
-    reducer: (state: State, action: Action) => State,
-    initialState: State,
-    initializer = (value: State) => value
-  ): [State, Dispatch<Action>] => {
+  return (reducer, initialState, initializer = value => value) => {
     const ref = useRef(initializer(initialState));
     const [, setState] = useState(ref.current);
 
@@ -38,11 +25,11 @@ const createReducer = <Action, State>(...middlewares: Array<Middleware<Action, S
       [reducer]
     );
 
-    const dispatchRef: MutableRefObject<Dispatch<Action>> = useRef(
+    const dispatchRef = useRef(
       composedMiddleware(
         {
           getState: () => ref.current,
-          dispatch: (...args: [Action]) => dispatchRef.current(...args),
+          dispatch: (...args) => dispatchRef.current(...args),
         },
         dispatch
       )
@@ -52,7 +39,7 @@ const createReducer = <Action, State>(...middlewares: Array<Middleware<Action, S
       dispatchRef.current = composedMiddleware(
         {
           getState: () => ref.current,
-          dispatch: (...args: [Action]) => dispatchRef.current(...args),
+          dispatch: (...args) => dispatchRef.current(...args),
         },
         dispatch
       );
