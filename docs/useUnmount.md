@@ -8,7 +8,7 @@ React lifecycle hook that calls a function when the component will unmount. Use 
 import {useUnmount} from 'react-use';
 
 const Demo = () => {
-  useUnmount(() => alert('UNMOUNTED'));
+  useUnmount(() => console.log('UNMOUNTED'));
   return null;
 };
 ```

@@ -1,16 +1,13 @@
 import { storiesOf } from '@storybook/react';
 import * as React from 'react';
 import { useMount } from '..';
+import ConsoleStory from './util/ConsoleStory';
 import ShowDocs from './util/ShowDocs';
 
 const Demo = () => {
-  useMount(() => alert('MOUNTED'));
+  useMount(() => console.log('MOUNTED'));
 
-  return (
-    <div>
-      <code>useMount()</code> hook can be used to perform a side-effect when component is mounted.
-    </div>
-  );
+  return <ConsoleStory />;
 };
 
 storiesOf('Lifecycle|useMount', module)
