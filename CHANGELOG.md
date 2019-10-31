@@ -1,3 +1,17 @@
+# [12.11.0](https://github.com/streamich/react-use/compare/v12.10.0...v12.11.0) (2019-10-31)
+
+
+### Features
+
+* **useWait:** add deprecation messages to readme and export; ([d338245](https://github.com/streamich/react-use/commit/d338245))
+
+# [12.10.0](https://github.com/streamich/react-use/compare/v12.9.1...v12.10.0) (2019-10-30)
+
+
+### Features
+
+* **useUpdate:** improve memory usage - now single function instance to increment all counters; ([0f02fd0](https://github.com/streamich/react-use/commit/0f02fd0))
+
 ## [12.9.1](https://github.com/streamich/react-use/compare/v12.9.0...v12.9.1) (2019-10-28)
 
 
