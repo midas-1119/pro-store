@@ -9,7 +9,7 @@ const useWindowSize = (initialWidth = Infinity, initialHeight = Infinity) => {
     height: isClient ? window.innerHeight : initialHeight,
   });
 
-  useEffect((): (() => void) | void => {
+  useEffect(() => {
     if (isClient) {
       const handler = () => {
         setState({
@@ -23,6 +23,8 @@ const useWindowSize = (initialWidth = Infinity, initialHeight = Infinity) => {
       return () => {
         window.removeEventListener('resize', handler);
       };
+    } else {
+      return undefined;
     }
   }, []);
 
