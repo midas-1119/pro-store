@@ -1,17 +1,16 @@
 import { useRef } from 'react';
 
-export type Predicate<T> = (prev: T | undefined, next: T) => boolean;
+function strictEquals<T>(prev: T | undefined, next: T) {
+  return prev === next;
+}
 
-const strictEquals = <T>(prev: T | undefined, next: T) => prev === next;
-
-export default function usePreviousDistinct<T>(value: T, compare: Predicate<T> = strictEquals): T | undefined {
+export default function usePreviousDistinct<T>(
+  value: T,
+  compare: (prev: T | undefined, next: T) => boolean = strictEquals
+) {
   const prevRef = useRef<T>();
-  const curRef = useRef<T>(value);
-  const firstRender = useRef(true);
-
-  if (firstRender.current) {
-    firstRender.current = false;
-  } else if (!compare(curRef.current, value)) {
+  const curRef = useRef<T>();
+  if (!compare(curRef.current, value)) {
     prevRef.current = curRef.current;
     curRef.current = value;
   }
