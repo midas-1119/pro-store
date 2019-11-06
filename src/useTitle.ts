@@ -1,11 +1,11 @@
 import { useRef } from 'react';
 
-function useTitle(title: string) {
+const useTitle = (title: string) => {
   const t = useRef<string>();
 
   if (t.current !== title) {
     document.title = t.current = title;
   }
-}
+};
 
-export default document ? useTitle : (_title: string) => {};
+export default useTitle;
