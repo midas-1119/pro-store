@@ -1,6 +1,6 @@
 {
   "name": "react-use",
-  "version": "13.2.1",
+  "version": "13.2.0",
   "description": "Collection of React Hooks",
   "main": "lib/index.js",
   "module": "esm/index.js",
@@ -61,13 +61,13 @@
     "react-dom": "^16.8.0"
   },
   "devDependencies": {
-    "@babel/core": "7.7.0",
+    "@babel/core": "7.6.4",
     "@babel/plugin-syntax-dynamic-import": "7.2.0",
-    "@babel/preset-env": "7.7.1",
-    "@babel/preset-react": "7.7.0",
-    "@babel/preset-typescript": "7.7.0",
+    "@babel/preset-env": "7.6.3",
+    "@babel/preset-react": "7.6.3",
+    "@babel/preset-typescript": "7.6.0",
     "@semantic-release/changelog": "3.0.5",
-    "@semantic-release/git": "7.0.18",
+    "@semantic-release/git": "7.0.17",
     "@semantic-release/npm": "5.3.4",
     "@shopify/jest-dom-mocks": "2.8.5",
     "@storybook/addon-actions": "5.2.5",
@@ -75,8 +75,8 @@
     "@storybook/addon-notes": "5.2.5",
     "@storybook/addon-options": "5.2.5",
     "@storybook/react": "5.2.5",
-    "@testing-library/react-hooks": "3.2.1",
-    "@types/jest": "24.0.22",
+    "@testing-library/react-hooks": "3.1.1",
+    "@types/jest": "24.0.21",
     "@types/react": "16.9.11",
     "babel-core": "6.26.3",
     "babel-loader": "8.0.6",
@@ -103,12 +103,12 @@
     "semantic-release": "15.13.30",
     "ts-loader": "6.2.1",
     "ts-node": "8.4.1",
-    "tslint": "6.0.0-beta1",
+    "tslint": "6.0.0-beta0",
     "tslint-config-prettier": "1.18.0",
     "tslint-eslint-rules": "5.4.0",
     "tslint-plugin-prettier": "2.0.1",
     "tslint-react": "4.1.0",
-    "typescript": "3.7.2"
+    "typescript": "3.6.4"
   },
   "config": {
     "commitizen": {
