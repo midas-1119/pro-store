@@ -84,6 +84,4 @@ const useLocationBrowser = (): LocationSensorState => {
   return state;
 };
 
-const hasEventConstructor = typeof Event === 'function';
-
-export default isClient && hasEventConstructor ? useLocationBrowser : useLocationServer;
+export default isClient ? useLocationBrowser : useLocationServer;
