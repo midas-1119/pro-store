@@ -1,37 +1,41 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { StateValidator, UseStateValidatorReturn, ValidityState } from './useStateValidator';
+import { DispatchValidity, UseValidatorReturn, ValidityState } from './useStateValidator';
 
 export type MultiStateValidatorStates = any[] | { [p: string]: any } | { [p: number]: any };
-export type MultiStateValidator<V extends ValidityState, S extends MultiStateValidatorStates> = StateValidator<V, S>;
 
-export function useMultiStateValidator<V extends ValidityState, S extends MultiStateValidatorStates, I extends V>(
-  states: S,
-  validator: MultiStateValidator<V, S>,
-  initialValidity: I = [undefined] as I
-): UseStateValidatorReturn<V> {
+export interface MultiStateValidator<
+  V extends ValidityState = ValidityState,
+  S extends MultiStateValidatorStates = MultiStateValidatorStates
+> {
+  (states: S): V;
+
+  (states: S, done: DispatchValidity<V>): void;
+}
+
+export function useMultiStateValidator<
+  V extends ValidityState = ValidityState,
+  S extends MultiStateValidatorStates = MultiStateValidatorStates
+>(states: S, validator: MultiStateValidator<V, S>, initialValidity: V = [undefined] as V): UseValidatorReturn<V> {
   if (typeof states !== 'object') {
     throw new Error('states expected to be an object or array, got ' + typeof states);
   }
 
-  const validatorInner = useRef(validator);
-  const statesInner = useRef(states);
+  const validatorFn = useRef(validator);
 
-  validatorInner.current = validator;
-  statesInner.current = states;
+  const [validity, setValidity] = useState(initialValidity);
 
-  const [validity, setValidity] = useState(initialValidity as V);
-
+  const deps = Array.isArray(states) ? states : Object.values(states);
   const validate = useCallback(() => {
-    if (validatorInner.current.length >= 2) {
-      validatorInner.current(statesInner.current, setValidity);
+    if (validatorFn.current.length === 2) {
+      validatorFn.current(states, setValidity);
     } else {
-      setValidity(validatorInner.current(statesInner.current));
+      setValidity(validatorFn.current(states));
     }
-  }, [setValidity]);
+  }, deps);
 
   useEffect(() => {
     validate();
-  }, Object.values(states));
+  }, deps);
 
   return [validity, validate];
 }
