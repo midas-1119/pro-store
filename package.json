@@ -1,6 +1,6 @@
 {
   "name": "react-use",
-  "version": "13.8.0",
+  "version": "13.8.1",
   "description": "Collection of React Hooks",
   "main": "lib/index.js",
   "module": "esm/index.js",
@@ -154,7 +154,7 @@
     "clearMocks": true,
     "coverageDirectory": "coverage",
     "testMatch": [
-      "<rootDir>/tests/**/*.test.ts"
+      "<rootDir>/tests/**/*.test.(ts|tsx)"
     ]
   }
 }
