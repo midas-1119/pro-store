@@ -1,51 +1,32 @@
 import { renderHook } from '@testing-library/react-hooks';
 import { useUnmount } from '../src';
 
-describe('useUnmount', () => {
-  it('should be defined', () => {
-    expect(useUnmount).toBeDefined();
-  });
+const mockCallback = jest.fn();
 
-  it('should not call provided callback on mount', () => {
-    const spy = jest.fn();
-    renderHook(() => useUnmount(spy));
+afterEach(() => {
+  jest.resetAllMocks();
+});
 
-    expect(spy).not.toHaveBeenCalled();
-  });
+it('should not call provided callback on mount', () => {
+  renderHook(() => useUnmount(mockCallback));
 
-  it('should not call provided callback on re-renders', () => {
-    const spy = jest.fn();
-    const hook = renderHook(() => useUnmount(spy));
+  expect(mockCallback).not.toHaveBeenCalled();
+});
 
-    hook.rerender();
-    hook.rerender();
-    hook.rerender();
-    hook.rerender();
+it('should call provided callback on unmount', () => {
+  const { unmount } = renderHook(() => useUnmount(mockCallback));
+  expect(mockCallback).not.toHaveBeenCalled();
 
-    expect(spy).not.toHaveBeenCalled();
-  });
+  unmount();
 
-  it('should call provided callback on unmount', () => {
-    const spy = jest.fn();
-    const hook = renderHook(() => useUnmount(spy));
+  expect(mockCallback).toHaveBeenCalledTimes(1);
+});
 
-    hook.unmount();
+it('should not call provided callback on rerender', () => {
+  const { rerender } = renderHook(() => useUnmount(mockCallback));
+  expect(mockCallback).not.toHaveBeenCalled();
 
-    expect(spy).toHaveBeenCalledTimes(1);
-  });
+  rerender();
 
-  it('should call provided callback if is has been changed', () => {
-    const spy = jest.fn();
-    const spy2 = jest.fn();
-    const spy3 = jest.fn();
-    const hook = renderHook(cb => useUnmount(cb), { initialProps: spy });
-
-    hook.rerender(spy2);
-    hook.rerender(spy3);
-    hook.unmount();
-
-    expect(spy).not.toHaveBeenCalled();
-    expect(spy2).not.toHaveBeenCalled();
-    expect(spy3).toHaveBeenCalledTimes(1);
-  });
+  expect(mockCallback).not.toHaveBeenCalled();
 });
