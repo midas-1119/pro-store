@@ -10,17 +10,16 @@ const useMediaDevices = () => {
     let mounted = true;
 
     const onChange = () => {
-      navigator.mediaDevices &&
-        navigator.mediaDevices
-          .enumerateDevices()
-          .then(devices => {
-            if (mounted) {
-              setState({
-                devices: devices.map(({ deviceId, groupId, kind, label }) => ({ deviceId, groupId, kind, label })),
-              });
-            }
-          })
-          .catch(noop);
+      navigator.mediaDevices
+        .enumerateDevices()
+        .then(devices => {
+          if (mounted) {
+            setState({
+              devices: devices.map(({ deviceId, groupId, kind, label }) => ({ deviceId, groupId, kind, label })),
+            });
+          }
+        })
+        .catch(noop);
     };
 
     on(navigator.mediaDevices, 'devicechange', onChange);
