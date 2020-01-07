@@ -1,32 +1,23 @@
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState } from 'react';
 import { isClient } from './util';
 
 type Dispatch<A> = (value: A) => void;
 type SetStateAction<S> = S | ((prevState: S) => S);
 
-const noop = () => {};
-const isUndefined = (value?: any): boolean => typeof value === 'undefined';
-
-const useLocalStorage = <T>(
-  key: string,
-  initialValue?: T,
-  raw?: boolean
-): [T | undefined, Dispatch<SetStateAction<T | undefined>>, () => void] => {
+const useLocalStorage = <T>(key: string, initialValue?: T, raw?: boolean): [T, Dispatch<SetStateAction<T>>] => {
   if (!isClient) {
-    return [initialValue as T, noop, noop];
+    return [initialValue as T, () => {}];
   }
 
-  const [state, setState] = useState<T | undefined>(() => {
+  const [state, setState] = useState<T>(() => {
     try {
       const localStorageValue = localStorage.getItem(key);
-      if (isUndefined(initialValue)) {
-        return undefined;
-      }
       if (typeof localStorageValue !== 'string') {
         localStorage.setItem(key, raw ? String(initialValue) : JSON.stringify(initialValue));
         return initialValue;
+      } else {
+        return raw ? localStorageValue : JSON.parse(localStorageValue || 'null');
       }
-      return raw ? localStorageValue : JSON.parse(localStorageValue || 'null');
     } catch {
       // If user is in private mode or has storage restriction
       // localStorage can throw. JSON.parse and JSON.stringify
@@ -35,18 +26,7 @@ const useLocalStorage = <T>(
     }
   });
 
-  const remove = useCallback(() => {
-    try {
-      localStorage.removeItem(key);
-      setState(undefined);
-    } catch {
-      // If user is in private mode or has storage restriction
-      // localStorage can throw.
-    }
-  }, [key, setState]);
-
   useEffect(() => {
-    if (isUndefined(state)) return;
     try {
       const serializedState = raw ? String(state) : JSON.stringify(state);
       localStorage.setItem(key, serializedState);
@@ -55,7 +35,8 @@ const useLocalStorage = <T>(
       // localStorage can throw. Also JSON.stringify can throw.
     }
   }, [state]);
-  return [state, setState, remove];
+
+  return [state, setState];
 };
 
 export default useLocalStorage;
