@@ -13,8 +13,7 @@ it('should run effect on update', () => {
 
 it('should run cleanup on unmount', () => {
   const cleanup = jest.fn();
-  const effect = jest.fn().mockReturnValue(cleanup);
-  const hook = renderHook(() => useUpdateEffect(effect));
+  const hook = renderHook(() => useUpdateEffect(cleanup));
 
   hook.rerender();
   hook.unmount();
