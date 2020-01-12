@@ -67,7 +67,6 @@ export { default as useRaf } from './useRaf';
 export { default as useRafLoop } from './useRafLoop';
 export { default as useRafState } from './useRafState';
 export { default as useSearchParam } from './useSearchParam';
-export { default as useScratch } from './useScratch';
 export { default as useScroll } from './useScroll';
 export { default as useScrolling } from './useScrolling';
 export { default as useSessionStorage } from './useSessionStorage';
