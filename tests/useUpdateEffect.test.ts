@@ -1,23 +1,13 @@
 import { renderHook } from '@testing-library/react-hooks';
 import { useUpdateEffect } from '../src';
 
-it('should run effect on update', () => {
-  const effect = jest.fn();
+const mockEffectCleanup = jest.fn();
+const mockEffectCallback = jest.fn().mockReturnValue(mockEffectCleanup);
 
-  const { rerender } = renderHook(() => useUpdateEffect(effect));
-  expect(effect).not.toHaveBeenCalled();
+it('should run effect on update', () => {
+  const { rerender } = renderHook(() => useUpdateEffect(mockEffectCallback));
+  expect(mockEffectCallback).not.toHaveBeenCalled();
 
   rerender();
-  expect(effect).toHaveBeenCalledTimes(1);
-});
-
-it('should run cleanup on unmount', () => {
-  const cleanup = jest.fn();
-  const effect = jest.fn().mockReturnValue(cleanup);
-  const hook = renderHook(() => useUpdateEffect(effect));
-
-  hook.rerender();
-  hook.unmount();
-
-  expect(cleanup).toHaveBeenCalledTimes(1);
+  expect(mockEffectCallback).toHaveBeenCalledTimes(1);
 });
