@@ -1,5 +1,6 @@
 export { default as createMemo } from './createMemo';
 export { default as createReducer } from './createReducer';
+export { default as createStateContext } from './createStateContext';
 export { default as useAsync } from './useAsync';
 export { default as useAsyncFn } from './useAsyncFn';
 export { default as useAsyncRetry } from './useAsyncRetry';
@@ -8,7 +9,6 @@ export { default as useBattery } from './useBattery';
 export { default as useBeforeUnload } from './useBeforeUnload';
 export { default as useBoolean } from './useBoolean';
 export { default as useClickAway } from './useClickAway';
-export { default as useCookie } from './useCookie';
 export { default as useCopyToClipboard } from './useCopyToClipboard';
 export { default as useCounter } from './useCounter';
 export { default as useCss } from './useCss';
