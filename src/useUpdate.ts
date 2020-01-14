@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react';
 
-const incrementParameter = (num: number): number => ++num % 1_000_000;
+const incrementParameter = (num: number): number => ++num;
 
 const useUpdate = () => {
   const [, setState] = useState(0);

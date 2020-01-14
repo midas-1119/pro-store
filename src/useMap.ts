@@ -1,20 +1,18 @@
-import { useState, useMemo, useCallback } from 'react';
+import { useState, useMemo } from 'react';
 
-export interface StableActions<T extends object> {
+export interface Actions<T extends object> {
+  get: <K extends keyof T>(key: K) => T[K];
   set: <K extends keyof T>(key: K, value: T[K]) => void;
   remove: <K extends keyof T>(key: K) => void;
   reset: () => void;
 }
 
-export interface Actions<T extends object> extends StableActions<T> {
-  get: <K extends keyof T>(key: K) => T[K];
-}
-
 const useMap = <T extends object = any>(initialMap: T = {} as T): [T, Actions<T>] => {
   const [map, set] = useState<T>(initialMap);
 
-  const stableActions = useMemo<StableActions<T>>(
+  const utils = useMemo<Actions<T>>(
     () => ({
+      get: key => map[key],
       set: (key, entry) => {
         set(prevMap => ({
           ...prevMap,
@@ -31,11 +29,6 @@ const useMap = <T extends object = any>(initialMap: T = {} as T): [T, Actions<T>
     }),
     [set]
   );
-
-  const utils = {
-    get: useCallback(key => map[key], [map]),
-    ...stableActions,
-  } as Actions<T>;
 
   return [map, utils];
 };

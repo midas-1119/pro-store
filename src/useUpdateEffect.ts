@@ -1,11 +1,14 @@
-import { useEffect } from 'react';
-import { useFirstMountState } from './useFirstMountState';
+import { useEffect, useRef } from 'react';
 
 const useUpdateEffect: typeof useEffect = (effect, deps) => {
-  const isFirstMount = useFirstMountState();
+  const isInitialMount = useRef(true);
 
   useEffect(() => {
-    !isFirstMount && effect();
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+    } else {
+      return effect();
+    }
   }, deps);
 };
 
