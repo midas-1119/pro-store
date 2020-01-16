@@ -1,37 +1,22 @@
 import { useEffect, useState } from 'react';
 import { isClient } from './util';
 
-type parserOptions<T> =
-  | {
-      raw: true;
-    }
-  | {
-      raw: false;
-      serializer: (value: T) => string;
-      deserializer: (value: string) => T;
-    };
+type Dispatch<A> = (value: A) => void;
+type SetStateAction<S> = S | ((prevState: S) => S);
 
-const useLocalStorage = <T>(
-  key: string,
-  initialValue?: T,
-  options?: parserOptions<T>
-): [T, React.Dispatch<React.SetStateAction<T>>] => {
+const useLocalStorage = <T>(key: string, initialValue?: T, raw?: boolean): [T, Dispatch<SetStateAction<T>>] => {
   if (!isClient) {
     return [initialValue as T, () => {}];
   }
 
-  // Use provided serializer/deserializer or the default ones
-  const serializer = options ? (options.raw ? String : options.serializer) : JSON.stringify;
-  const deserializer = options ? (options.raw ? String : options.deserializer) : JSON.parse;
-
   const [state, setState] = useState<T>(() => {
     try {
       const localStorageValue = localStorage.getItem(key);
-      if (localStorageValue) {
-        return deserializer(localStorageValue);
-      } else {
-        initialValue && localStorage.setItem(key, serializer(initialValue));
+      if (typeof localStorageValue !== 'string') {
+        localStorage.setItem(key, raw ? String(initialValue) : JSON.stringify(initialValue));
         return initialValue;
+      } else {
+        return raw ? localStorageValue : JSON.parse(localStorageValue || 'null');
       }
     } catch {
       // If user is in private mode or has storage restriction
@@ -43,7 +28,8 @@ const useLocalStorage = <T>(
 
   useEffect(() => {
     try {
-      localStorage.setItem(key, serializer(state));
+      const serializedState = raw ? String(state) : JSON.stringify(state);
+      localStorage.setItem(key, serializedState);
     } catch {
       // If user is in private mode or has storage restriction
       // localStorage can throw. Also JSON.stringify can throw.
