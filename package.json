@@ -1,6 +1,6 @@
 {
   "name": "react-use",
-  "version": "13.19.0",
+  "version": "13.17.0",
   "description": "Collection of React Hooks",
   "main": "lib/index.js",
   "module": "esm/index.js",
@@ -74,11 +74,11 @@
     "@semantic-release/git": "7.0.18",
     "@semantic-release/npm": "5.3.5",
     "@shopify/jest-dom-mocks": "2.8.8",
-    "@storybook/addon-actions": "5.3.5",
-    "@storybook/addon-knobs": "5.3.5",
-    "@storybook/addon-notes": "5.3.5",
-    "@storybook/addon-options": "5.3.5",
-    "@storybook/react": "5.3.5",
+    "@storybook/addon-actions": "5.3.3",
+    "@storybook/addon-knobs": "5.3.3",
+    "@storybook/addon-notes": "5.3.3",
+    "@storybook/addon-options": "5.3.3",
+    "@storybook/react": "5.3.3",
     "@testing-library/react-hooks": "3.2.1",
     "@types/jest": "24.9.0",
     "@types/react": "16.9.11",
@@ -89,7 +89,6 @@
     "gh-pages": "2.2.0",
     "husky": "3.1.0",
     "jest": "24.9.0",
-    "jest-localstorage-mock": "2.4.0",
     "keyboardjs": "2.5.1",
     "lint-staged": "9.5.0",
     "markdown-loader": "5.1.0",
@@ -114,7 +113,7 @@
     "tslint-eslint-rules": "5.4.0",
     "tslint-plugin-prettier": "2.1.0",
     "tslint-react": "4.1.0",
-    "typescript": "3.7.5"
+    "typescript": "3.7.4"
   },
   "config": {
     "commitizen": {
@@ -160,9 +159,6 @@
     "coverageDirectory": "coverage",
     "testMatch": [
       "<rootDir>/tests/**/*.test.(ts|tsx)"
-    ],
-    "setupFiles": [
-      "./tests/setupTests.ts"
     ]
   }
 }
