@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState } from 'react';
 import { isClient } from './util';
 
 type parserOptions<T> =
@@ -11,23 +11,20 @@ type parserOptions<T> =
       deserializer: (value: string) => T;
     };
 
-const noop = () => {};
-const isUndefined = (value?: any): boolean => typeof value === 'undefined';
-
 const useLocalStorage = <T>(
   key: string,
   initialValue?: T,
   options?: parserOptions<T>
-): [T | undefined, React.Dispatch<React.SetStateAction<T | undefined>>, () => void] => {
+): [T, React.Dispatch<React.SetStateAction<T>>] => {
   if (!isClient) {
-    return [initialValue as T, noop, noop];
+    return [initialValue as T, () => {}];
   }
 
   // Use provided serializer/deserializer or the default ones
   const serializer = options ? (options.raw ? String : options.serializer) : JSON.stringify;
   const deserializer = options ? (options.raw ? String : options.deserializer) : JSON.parse;
 
-  const [state, setState] = useState<T | undefined>(() => {
+  const [state, setState] = useState<T>(() => {
     try {
       const localStorageValue = localStorage.getItem(key);
       if (localStorageValue !== null) {
@@ -44,18 +41,7 @@ const useLocalStorage = <T>(
     }
   });
 
-  const remove = useCallback(() => {
-    try {
-      localStorage.removeItem(key);
-      setState(undefined);
-    } catch {
-      // If user is in private mode or has storage restriction
-      // localStorage can throw.
-    }
-  }, [key, setState]);
-
   useEffect(() => {
-    if (isUndefined(state)) return;
     try {
       localStorage.setItem(key, serializer(state));
     } catch {
@@ -63,7 +49,8 @@ const useLocalStorage = <T>(
       // localStorage can throw. Also JSON.stringify can throw.
     }
   }, [state]);
-  return [state, setState, remove];
+
+  return [state, setState];
 };
 
 export default useLocalStorage;
