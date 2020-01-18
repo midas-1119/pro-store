@@ -1,6 +1,7 @@
 /* eslint-disable */
 import * as React from 'react';
-import { off, on, isDeepEqual } from './util';
+import isEqual from 'react-fast-compare';
+import { off, on } from './util';
 
 const { useState, useEffect } = React;
 
@@ -53,7 +54,7 @@ function useBattery(): UseBatteryState {
         dischargingTime: battery.dischargingTime,
         chargingTime: battery.chargingTime,
       };
-      !isDeepEqual(state, newState) && setState(newState);
+      !isEqual(state, newState) && setState(newState);
     };
 
     nav!.getBattery!().then((bat: BatteryManager) => {

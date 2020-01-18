@@ -7,7 +7,7 @@ import ShowDocs from './util/ShowDocs';
 
 const Demo = () => {
   const ref = useRef(null);
-  useClickAway<MouseEvent>(ref, action('outside clicked'));
+  useClickAway(ref, action('outside clicked'));
 
   return (
     <div

@@ -1,10 +1,11 @@
-import { useReducer } from 'react';
+import { useCallback, useState } from 'react';
 
-const updateReducer = (num: number): number => (num + 1) % 1_000_000;
+const incrementParameter = (num: number): number => ++num % 1_000_000;
 
 const useUpdate = () => {
-  const [, update] = useReducer(updateReducer, 0);
-  return update as () => void;
+  const [, setState] = useState(0);
+  // useCallback with empty deps as we only want to define updateCb once
+  return useCallback(() => setState(incrementParameter), []);
 };
 
 export default useUpdate;
