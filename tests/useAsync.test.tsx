@@ -147,7 +147,7 @@ describe('useAsync', () => {
         hook = renderHook(
           ({ fn, counter }) => {
             const callback = useCallback(() => fn(counter), [counter]);
-            return useAsync<any>(callback, [callback]);
+            return useAsync<string>(callback, [callback]);
           },
           {
             initialProps: {

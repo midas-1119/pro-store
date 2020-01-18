@@ -1,17 +1,11 @@
 import { DependencyList, useCallback, useState, useRef } from 'react';
 import useMountedState from './useMountedState';
-import { FnReturningPromise, PromiseType } from './util';
 
 export type AsyncState<T> =
   | {
       loading: boolean;
       error?: undefined;
       value?: undefined;
-    }
-  | {
-      loading: true;
-      error?: Error | undefined;
-      value?: T;
     }
   | {
       loading: false;
@@ -24,22 +18,24 @@ export type AsyncState<T> =
       value: T;
     };
 
-type StateFromFnReturningPromise<T extends FnReturningPromise> = AsyncState<PromiseType<ReturnType<T>>>;
+export type AsyncFn<Result = any, Args extends any[] = any[]> = [
+  AsyncState<Result>,
+  (...args: Args | []) => Promise<Result>
+];
 
-export type AsyncFnReturn<T extends FnReturningPromise = FnReturningPromise> = [StateFromFnReturningPromise<T>, T];
-
-export default function useAsyncFn<T extends FnReturningPromise>(
-  fn: T,
+export default function useAsyncFn<Result = any, Args extends any[] = any[]>(
+  fn: (...args: Args | []) => Promise<Result>,
   deps: DependencyList = [],
-  initialState: StateFromFnReturningPromise<T> = { loading: false }
-): AsyncFnReturn<T> {
+  initialState: AsyncState<Result> = { loading: false }
+): AsyncFn<Result, Args> {
   const lastCallId = useRef(0);
-  const isMounted = useMountedState();
-  const [state, set] = useState<StateFromFnReturningPromise<T>>(initialState);
+  const [state, set] = useState<AsyncState<Result>>(initialState);
 
-  const callback = useCallback((...args: Parameters<T>): ReturnType<T> => {
+  const isMounted = useMountedState();
+
+  const callback = useCallback((...args: Args | []) => {
     const callId = ++lastCallId.current;
-    set(prevState => ({ ...prevState, loading: true }));
+    set({ loading: true });
 
     return fn(...args).then(
       value => {
@@ -52,8 +48,8 @@ export default function useAsyncFn<T extends FnReturningPromise>(
 
         return error;
       }
-    ) as ReturnType<T>;
+    );
   }, deps);
 
-  return [state, (callback as unknown) as T];
+  return [state, callback];
 }
