@@ -7,7 +7,7 @@ const useIntersection = (
   const [intersectionObserverEntry, setIntersectionObserverEntry] = useState<IntersectionObserverEntry | null>(null);
 
   useEffect(() => {
-    if (ref.current && typeof IntersectionObserver === 'function') {
+    if (ref.current) {
       const handler = (entries: IntersectionObserverEntry[]) => {
         setIntersectionObserverEntry(entries[0]);
       };
@@ -16,12 +16,13 @@ const useIntersection = (
       observer.observe(ref.current);
 
       return () => {
-        setIntersectionObserverEntry(null);
-        observer.disconnect();
+        if (ref.current) {
+          observer.disconnect();
+        }
       };
     }
     return () => {};
-  }, [ref.current, options.threshold, options.root, options.rootMargin]);
+  }, [ref, options.threshold, options.root, options.rootMargin]);
 
   return intersectionObserverEntry;
 };
