@@ -160,9 +160,6 @@
     "coverageDirectory": "coverage",
     "testMatch": [
       "<rootDir>/tests/**/*.test.(ts|tsx)"
-    ],
-    "setupFiles": [
-      "./tests/setupTests.ts"
     ]
   }
 }
