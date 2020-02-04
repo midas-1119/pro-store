@@ -1,4 +1,3 @@
-/* eslint-disable */
 import { useState, useEffect } from 'react';
 
 const getValue = (search: string, param: string) => new URLSearchParams(search).get(param);

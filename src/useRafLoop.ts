@@ -1,4 +1,3 @@
-/* eslint-disable */
 import { useEffect, useRef, useState } from 'react';
 
 export type RafLoopReturns = [() => void, boolean, () => void];

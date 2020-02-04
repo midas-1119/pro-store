@@ -1,4 +1,3 @@
-/* eslint-disable */
 import writeText from 'copy-to-clipboard';
 import { useCallback } from 'react';
 import useMountedState from './useMountedState';

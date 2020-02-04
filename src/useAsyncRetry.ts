@@ -1,4 +1,3 @@
-/* eslint-disable */
 import { DependencyList, useCallback, useState } from 'react';
 import useAsync, { AsyncState } from './useAsync';
 

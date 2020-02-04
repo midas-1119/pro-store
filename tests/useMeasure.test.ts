@@ -1,4 +1,3 @@
-/* eslint-disable */
 import { act, renderHook } from '@testing-library/react-hooks';
 import useMeasure, { ContentRect } from '../src/useMeasure';
 

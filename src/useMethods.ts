@@ -1,4 +1,3 @@
-/* eslint-disable */
 import { useMemo, useReducer } from 'react';
 
 const useMethods = (createMethods, initialState) => {

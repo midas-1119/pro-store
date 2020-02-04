@@ -1,4 +1,3 @@
-/* eslint-disable */
 import { useLayoutEffect } from 'react';
 
 const isFocusedElementEditable = () => {

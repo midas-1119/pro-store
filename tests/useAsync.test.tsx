@@ -1,4 +1,3 @@
-/* eslint-disable */
 import { renderHook } from '@testing-library/react-hooks';
 import { useCallback } from 'react';
 import useAsync from '../src/useAsync';

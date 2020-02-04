@@ -1,4 +1,3 @@
-/* eslint-disable */
 import { RefObject, useLayoutEffect, useState } from 'react';
 import screenfull from 'screenfull';
 

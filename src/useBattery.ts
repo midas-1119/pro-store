@@ -1,4 +1,3 @@
-/* eslint-disable */
 import * as React from 'react';
 import isEqual from 'react-fast-compare';
 import { off, on } from './util';

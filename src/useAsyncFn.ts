@@ -1,4 +1,3 @@
-/* eslint-disable */
 import { DependencyList, useCallback, useState, useRef } from 'react';
 import useMountedState from './useMountedState';
 
