@@ -1,13 +1,13 @@
 import { useState } from 'react';
 
-const useDefault = <TStateType>(defaultValue: TStateType, initialValue: TStateType | (() => TStateType)) => {
-  const [value, setValue] = useState<TStateType | undefined | null>(initialValue);
+const useDefault = (defaultValue, initialValue): [any, (nextValue?: any) => void] => {
+  const [value, setValue] = useState(initialValue);
 
   if (value === undefined || value === null) {
-    return [defaultValue, setValue] as const;
+    return [defaultValue, setValue];
   }
 
-  return [value, setValue] as const;
+  return [value, setValue];
 };
 
 export default useDefault;

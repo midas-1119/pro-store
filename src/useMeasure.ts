@@ -1,50 +1,40 @@
-import { useState, useMemo } from 'react';
-import useIsomorphicLayoutEffect from './useIsomorphicLayoutEffect';
+import { useCallback, useState } from 'react';
+import ResizeObserver from 'resize-observer-polyfill';
 
-export type UseMeasureRect = Pick<
-  DOMRectReadOnly,
-  'x' | 'y' | 'top' | 'left' | 'right' | 'bottom' | 'height' | 'width'
->;
-export type UseMeasureRef = (element: HTMLElement) => void;
-export type UseMeasureResult = [UseMeasureRef, UseMeasureRect];
+export type ContentRect = Pick<DOMRectReadOnly, 'x' | 'y' | 'top' | 'left' | 'right' | 'bottom' | 'height' | 'width'>;
 
-const defaultState: UseMeasureRect = {
-  x: -1,
-  y: -1,
-  width: -1,
-  height: -1,
-  top: -1,
-  left: -1,
-  bottom: -1,
-  right: -1,
-};
+const useMeasure = <T>(): [(instance: T) => void, ContentRect] => {
+  const [rect, set] = useState<ContentRect>({
+    x: 0,
+    y: 0,
+    width: 0,
+    height: 0,
+    top: 0,
+    left: 0,
+    bottom: 0,
+    right: 0,
+  });
 
-const useMeasure = (): UseMeasureResult => {
-  const [element, ref] = useState<HTMLElement | null>(null);
-  const [rect, setRect] = useState<UseMeasureRect>(defaultState);
-
-  const observer = useMemo(
+  const [observer] = useState(
     () =>
-      new (window as any).ResizeObserver(entries => {
-        if (entries[0]) {
-          const { x, y, width, height, top, left, bottom, right } = entries[0].contentRect;
-          setRect({ x, y, width, height, top, left, bottom, right });
+      new ResizeObserver(entries => {
+        const entry = entries[0];
+        if (entry) {
+          set(entry.contentRect);
         }
-      }),
-    []
+      })
   );
 
-  useIsomorphicLayoutEffect(() => {
-    if (!element) return;
-    observer.observe(element);
-    return () => {
+  const ref = useCallback(
+    node => {
       observer.disconnect();
-    };
-  }, [element]);
-
+      if (node) {
+        observer.observe(node);
+      }
+    },
+    [observer]
+  );
   return [ref, rect];
 };
 
-const useMeasureMock = () => [() => {}, defaultState];
-
-export default !!(window as any).ResizeObserver ? useMeasure : useMeasureMock;
+export default useMeasure;
