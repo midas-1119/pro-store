@@ -2,13 +2,9 @@ import { DependencyList, EffectCallback, useEffect, useRef } from 'react';
 
 const isPrimitive = (val: any) => val !== Object(val);
 
-type DepsEqualFnType<TDeps extends DependencyList> = (prevDeps: TDeps, nextDeps: TDeps) => boolean;
+type DepsEqualFnType = (prevDeps: DependencyList, nextDeps: DependencyList) => boolean;
 
-const useCustomCompareEffect = <TDeps extends DependencyList>(
-  effect: EffectCallback,
-  deps: TDeps,
-  depsEqual: DepsEqualFnType<TDeps>
-) => {
+const useCustomCompareEffect = (effect: EffectCallback, deps: DependencyList, depsEqual: DepsEqualFnType) => {
   if (process.env.NODE_ENV !== 'production') {
     if (!(deps instanceof Array) || !deps.length) {
       console.warn('`useCustomCompareEffect` should not be used with no dependencies. Use React.useEffect instead.');
@@ -25,7 +21,7 @@ const useCustomCompareEffect = <TDeps extends DependencyList>(
     }
   }
 
-  const ref = useRef<TDeps | undefined>(undefined);
+  const ref = useRef<DependencyList | undefined>(undefined);
 
   if (!ref.current || !depsEqual(deps, ref.current)) {
     ref.current = deps;
