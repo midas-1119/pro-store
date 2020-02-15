@@ -1,3 +1,37 @@
+# [13.26.0](https://github.com/streamich/react-use/compare/v13.25.1...v13.26.0) (2020-02-15)
+
+
+### Bug Fixes
+
+* add initialState to deps ([b394f3d](https://github.com/streamich/react-use/commit/b394f3d72356d331dbce48acd3686bbb64d331b5))
+
+
+### Features
+
+* add useMethods state hook ([7554b9a](https://github.com/streamich/react-use/commit/7554b9a61eb9b4744b9feb113775ff538b16beaf))
+
+## [13.25.1](https://github.com/streamich/react-use/compare/v13.25.0...v13.25.1) (2020-02-15)
+
+
+### Bug Fixes
+
+* 🐛 support default event in useClickAway() ([24281cd](https://github.com/streamich/react-use/commit/24281cdf042da5f83068c6108c67a36fe0cfc74d))
+* generic type on event arg in onClickAway callback on useClickAway ([4ffe454](https://github.com/streamich/react-use/commit/4ffe4542aec840bd6150223489d2c38821954336))
+
+# [13.25.0](https://github.com/streamich/react-use/compare/v13.24.1...v13.25.0) (2020-02-15)
+
+
+### Features
+
+* **useBeforeUnload:** allow passing a dirty function ([#842](https://github.com/streamich/react-use/issues/842)) ([c4a14a4](https://github.com/streamich/react-use/commit/c4a14a4fb370c7628e4cc5861e31cc64a66b64b0))
+
+## [13.24.1](https://github.com/streamich/react-use/compare/v13.24.0...v13.24.1) (2020-02-15)
+
+
+### Performance Improvements
+
+* use fast-deep-equal for deep comparisons ([b9a8aad](https://github.com/streamich/react-use/commit/b9a8aad053a40028f119192ddecedb5c7ec05247))
+
 # [13.24.0](https://github.com/streamich/react-use/compare/v13.23.0...v13.24.0) (2020-02-04)
 
 
