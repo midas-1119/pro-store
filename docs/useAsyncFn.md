@@ -32,5 +32,5 @@ const Demo = ({url}) => {
 ## Reference
 
 ```ts
-useAsyncFn<Result, Args>(fn, deps?: any[], initialState?: AsyncState<Result>);
+useAsyncFn(fn, deps?: any[]);
 ```
