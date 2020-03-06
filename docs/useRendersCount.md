@@ -1,6 +1,6 @@
 # `useRendersCount`
 
-Tracks component's renders count including the first render.
+Tracks compontent's renders count including the first render.
 
 ## Usage
 

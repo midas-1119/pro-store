@@ -34,7 +34,7 @@ it('should return initialValue if localStorage empty and set that to localStorag
   expect(localStorage.__STORE__[key]).toBe(`"${value}"`);
 });
 
-it('should return the value from localStorage if exists even if initialValue provided', () => {
+it('should return the value from localStorage if exists even if initialValue provied', () => {
   const key = 'some_key';
   localStorage.setItem(key, STRINGIFIED_VALUE);
 
