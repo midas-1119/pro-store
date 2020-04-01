@@ -1,35 +1,26 @@
 # `useRafLoop`
 
-This hook call given function within the RAF loop without re-rendering parent component.
-Loop stops automatically on component unmount.
-
-Additionally hook provides methods to start/stop loop and check current state.
+React hook that calls given function inside the RAF loop without re-rendering parent component if not needed. Loop stops automatically on component unmount.  
+Provides controls to stop and start loop manually.
 
 ## Usage
 
 ```jsx
 import * as React from 'react';
-import { useRafLoop, useUpdate } from 'react-use';
+import { useRafLoop } from 'react-use';
 
 const Demo = () => {
   const [ticks, setTicks] = React.useState(0);
-  const [lastCall, setLastCall] = React.useState(0);
-  const update = useUpdate();
 
-  const [loopStop, loopStart, isActive] = useRafLoop((time) => {
-    setTicks(ticks => ticks + 1);
-    setLastCall(time);
-  });
+  const [loopStop, isActive, loopStart] = useRafLoop(() => {
+    setTicks(ticks + 1);
+  }, [ticks]);
 
   return (
     <div>
       <div>RAF triggered: {ticks} (times)</div>
-      <div>Last high res timestamp: {lastCall}</div>
       <br />
-      <button onClick={() => {
-        isActive() ? loopStop() : loopStart();
-        update();
-      }}>{isActive() ? 'STOP' : 'START'}</button>
+      <button onClick={isActive ? loopStop : loopStart}>{isActive ? 'STOP' : 'START'}</button>
     </div>
   );
 };
@@ -38,13 +29,7 @@ const Demo = () => {
 ## Reference
 
 ```ts
-const [stopLoop, startLoop, isActive] = useRafLoop(callback: FrameRequestCallback, initiallyActive = true);
+const [stopLoop, isActive, startLoop] = useRafLoop(callback: CallableFunction, deps?: DependencyList);
 ```
-* **`callback`**_: `(time: number)=>void`_ &mdash; function to call each RAF tick.
-    * **`time`**_: `number`_ &mdash; DOMHighResTimeStamp, which indicates the current time (based on the number of milliseconds since time origin).
-* **`initiallyActive`**_: `boolean`_ &mdash; whether loop should be started at initial render.
-* Return
-    * **`stopLoop`**_: `()=>void`_ &mdash; stop loop if it is active.
-    * **`startLoop`**_: `()=>void`_ &mdash; start loop if it was inactive.
-    * **`isActive`**_: `()=>boolean`_ &mdash; _true_ if loop is active.
+* `callback` &mdash; function to call each RAF tick
 
