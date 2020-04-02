@@ -197,19 +197,11 @@ const createHTMLMediaHook = (tag: 'audio' | 'video') => {
 
       if (!el) {
         if (process.env.NODE_ENV !== 'production') {
-          if (tag === 'audio') {
-            console.error(
-              'useAudio() ref to <audio> element is empty at mount. ' +
-                'It seem you have not rendered the audio element, which it ' +
-                'returns as the first argument const [audio] = useAudio(...).'
-            );
-          } else if (tag === 'video') {
-            console.error(
-              'useVideo() ref to <video> element is empty at mount. ' +
-                'It seem you have not rendered the video element, which it ' +
-                'returns as the first argument const [video] = useVideo(...).'
-            );
-          }
+          console.error(
+            'useAudio() ref to <audio> element is empty at mount. ' +
+              'It seem you have not rendered the audio element, which is ' +
+              'returns as the first argument const [audio] = useAudio(...).'
+          );
         }
         return;
       }
