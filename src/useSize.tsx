@@ -1,3 +1,4 @@
+/* eslint-disable */
 import * as React from 'react';
 import { isClient } from './util';
 
@@ -20,7 +21,6 @@ const useSize = (
     return [typeof element === 'function' ? element({ width, height }) : element, { width, height }];
   }
 
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   const [state, setState] = useState<State>({ width, height });
 
   if (typeof element === 'function') {
@@ -28,7 +28,6 @@ const useSize = (
   }
 
   const style = element.props.style || {};
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   const ref = useRef<HTMLIFrameElement | null>(null);
   let window: Window | null = null;
   const setSize = () => {
@@ -47,7 +46,6 @@ const useSize = (
     DRAF(setSize);
   };
 
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
     const iframe: HTMLIFrameElement | null = ref.current;
 

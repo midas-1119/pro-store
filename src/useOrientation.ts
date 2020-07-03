@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { useEffect, useState } from 'react';
 import { off, on } from './util';
 
@@ -12,7 +13,6 @@ const defaultState: OrientationState = {
 };
 
 const useOrientation = (initialState: OrientationState = defaultState) => {
-  const screen = window.screen;
   const [state, setState] = useState(initialState);
 
   useEffect(() => {

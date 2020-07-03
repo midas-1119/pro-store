@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { useEffect, useState } from 'react';
 
 export interface GeoLocationSensorState {
@@ -44,7 +45,7 @@ const useGeolocation = (options?: PositionOptions): GeoLocationSensorState => {
     }
   };
   const onEventError = (error: PositionError) =>
-    mounted && setState((oldState) => ({ ...oldState, loading: false, error }));
+    mounted && setState(oldState => ({ ...oldState, loading: false, error }));
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(onEvent, onEventError, options);

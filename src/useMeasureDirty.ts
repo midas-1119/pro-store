@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { useState, useEffect, useRef, RefObject } from 'react';
 import ResizeObserver from 'resize-observer-polyfill';
 
@@ -23,7 +24,7 @@ const useMeasureDirty = (ref: RefObject<HTMLElement>): ContentRect => {
 
   const [observer] = useState(
     () =>
-      new ResizeObserver((entries) => {
+      new ResizeObserver(entries => {
         const entry = entries[0];
 
         if (entry) {

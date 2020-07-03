@@ -1,4 +1,7 @@
-import { useState, useMemo, useCallback, useEffect } from 'react';
+/* eslint-disable */
+import * as React from 'react';
+
+const { useState, useMemo, useCallback, useEffect } = React;
 
 export interface DropAreaState {
   over: boolean;
@@ -47,12 +50,12 @@ const useDrop = (options: DropAreaOptions = {}, args = []): DropAreaState => {
   const process = useMemo(() => createProcess(options), [onFiles, onText, onUri]);
 
   useEffect(() => {
-    const onDragOver = (event) => {
+    const onDragOver = event => {
       event.preventDefault();
       setOver(true);
     };
 
-    const onDragEnter = (event) => {
+    const onDragEnter = event => {
       event.preventDefault();
       setOver(true);
     };
@@ -65,13 +68,13 @@ const useDrop = (options: DropAreaOptions = {}, args = []): DropAreaState => {
       setOver(false);
     };
 
-    const onDrop = (event) => {
+    const onDrop = event => {
       event.preventDefault();
       setOver(false);
       process(event.dataTransfer, event);
     };
 
-    const onPaste = (event) => {
+    const onPaste = event => {
       process(event.clipboardData, event);
     };
 

@@ -1,11 +1,11 @@
+/* eslint-disable */
 import { useEffect, useState } from 'react';
 import { isClient, off, on } from './util';
 
-const patchHistoryMethod = (method) => {
-  const history = window.history;
+const patchHistoryMethod = method => {
   const original = history[method];
 
-  history[method] = function (state) {
+  history[method] = function(state) {
     const result = original.apply(this, arguments);
     const event = new Event(method.toLowerCase());
 
@@ -43,9 +43,9 @@ const useLocationServer = (): LocationSensorState => ({
 });
 
 const buildState = (trigger: string) => {
-  const { state, length } = window.history;
+  const { state, length } = history;
 
-  const { hash, host, hostname, href, origin, pathname, port, protocol, search } = window.location;
+  const { hash, host, hostname, href, origin, pathname, port, protocol, search } = location;
 
   return {
     trigger,

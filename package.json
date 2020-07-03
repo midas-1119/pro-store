@@ -19,7 +19,6 @@
     "lint": "eslint {src,tests}/**/*.{ts,tsx}",
     "lint:fix": "yarn lint --fix",
     "lint:types": "tsc --noEmit",
-    "lint:prettier":"yarn prettier --write src/**/**/*.{ts,tsx}",
     "build:cjs": "tsc",
     "build:es": "tsc -m esNext --outDir esm",
     "build": "yarn build:cjs && yarn build:es",
@@ -91,7 +90,7 @@
     "babel-eslint": "10.1.0",
     "babel-loader": "8.1.0",
     "babel-plugin-dynamic-import-node": "2.3.3",
-    "eslint": "7.3.1",
+    "eslint": "7.4.0",
     "eslint-config-react-app": "5.2.1",
     "eslint-plugin-flowtype": "5.2.0",
     "eslint-plugin-import": "2.22.0",
@@ -149,9 +148,8 @@
     ]
   },
   "lint-staged": {
-    "src/**/**/*.{ts,tsx}": [
+    "src/**/*.{ts,tsx}": [
       "eslint --fix",
-      "yarn prettier --write",
       "git add"
     ]
   },

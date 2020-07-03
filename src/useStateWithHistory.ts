@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { Dispatch, useCallback, useMemo, useRef, useState } from 'react';
 import { useFirstMountState } from './useFirstMountState';
 import { InitialHookState, ResolvableHookState, resolveHookState } from './util/resolveHookState';
@@ -56,7 +57,7 @@ export function useStateWithHistory<S, I extends S>(
 
   const setState = useCallback(
     (newState: ResolvableHookState<S>): void => {
-      innerSetState((currentState) => {
+      innerSetState(currentState => {
         newState = resolveHookState(newState);
 
         // is state has changed

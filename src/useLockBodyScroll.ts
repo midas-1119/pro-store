@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { RefObject, useEffect, useRef } from 'react';
 
 export function getClosestBody(el: Element | HTMLElement | HTMLIFrameElement | null): HTMLElement | null {
@@ -45,10 +46,9 @@ let documentListenerAdded = false;
 export default !doc
   ? function useLockBodyMock(_locked: boolean = true, _elementRef?: RefObject<HTMLElement>) {}
   : function useLockBody(locked: boolean = true, elementRef?: RefObject<HTMLElement>) {
-      const bodyRef = useRef(doc!.body);
-      elementRef = elementRef || bodyRef;
+      elementRef = elementRef || useRef(doc!.body);
 
-      const lock = (body) => {
+      const lock = body => {
         const bodyInfo = bodies.get(body);
         if (!bodyInfo) {
           bodies.set(body, { counter: 1, initialOverflow: body.style.overflow });
@@ -66,7 +66,7 @@ export default !doc
         }
       };
 
-      const unlock = (body) => {
+      const unlock = body => {
         const bodyInfo = bodies.get(body);
         if (bodyInfo) {
           if (bodyInfo.counter === 1) {
