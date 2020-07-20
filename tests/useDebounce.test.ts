@@ -20,7 +20,7 @@ describe('useDebounce', () => {
     expect(useDebounce).toBeDefined();
   });
 
-  it('should return two functions', () => {
+  it('should return three functions', () => {
     const hook = renderHook(() => useDebounce(() => {}, 5));
 
     expect(hook.result.current.length).toBe(2);
