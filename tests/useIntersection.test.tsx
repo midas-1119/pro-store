@@ -81,7 +81,7 @@ describe('useIntersection', () => {
   it('should return null if IntersectionObserver is not supported', () => {
     targetRef = createRef();
     targetRef.current = document.createElement('div');
-    delete (window as any).IntersectionObserver;
+    delete window.IntersectionObserver;
 
     expect(() => renderHook(() => useIntersection(targetRef, {}))).not.toThrow();
   });
