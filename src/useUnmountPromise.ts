@@ -1,11 +1,10 @@
-import { useMemo, useRef } from 'react';
-import useEffectOnce from './useEffectOnce';
+import { useMemo, useRef, useEffect } from 'react';
 
 export type Race = <P extends Promise<any>, E = any>(promise: P, onError?: (error: E) => void) => P;
 
 const useUnmountPromise = (): Race => {
   const refUnmounted = useRef(false);
-  useEffectOnce(() => () => {
+  useEffect(() => () => {
     refUnmounted.current = true;
   });
 
