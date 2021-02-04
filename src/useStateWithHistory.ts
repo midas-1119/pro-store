@@ -57,7 +57,7 @@ export function useStateWithHistory<S, I extends S>(
   const setState = useCallback(
     (newState: IHookStateSetAction<S>): void => {
       innerSetState((currentState) => {
-        newState = resolveHookState(newState, currentState);
+        newState = resolveHookState(newState);
 
         // is state has changed
         if (newState !== currentState) {

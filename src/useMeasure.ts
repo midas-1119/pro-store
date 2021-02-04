@@ -6,8 +6,11 @@ export type UseMeasureRect = Pick<
   DOMRectReadOnly,
   'x' | 'y' | 'top' | 'left' | 'right' | 'bottom' | 'height' | 'width'
 >;
-export type UseMeasureRef<E extends Element = Element> = (element: E) => void;
-export type UseMeasureResult<E extends Element = Element> = [UseMeasureRef<E>, UseMeasureRect];
+export type UseMeasureRef<E extends HTMLElement = HTMLElement> = (element: E) => void;
+export type UseMeasureResult<E extends HTMLElement = HTMLElement> = [
+  UseMeasureRef<E>,
+  UseMeasureRect
+];
 
 const defaultState: UseMeasureRect = {
   x: 0,
@@ -20,7 +23,7 @@ const defaultState: UseMeasureRect = {
   right: 0,
 };
 
-function useMeasure<E extends Element = Element>(): UseMeasureResult<E> {
+function useMeasure<E extends HTMLElement = HTMLElement>(): UseMeasureResult<E> {
   const [element, ref] = useState<E | null>(null);
   const [rect, setRect] = useState<UseMeasureRect>(defaultState);
 
