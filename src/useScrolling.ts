@@ -1,5 +1,5 @@
+/* eslint-disable */
 import { RefObject, useEffect, useState } from 'react';
-import { off, on } from './misc/util';
 
 const useScrolling = (ref: RefObject<HTMLElement>): boolean => {
   const [scrolling, setScrolling] = useState<boolean>(false);
@@ -18,10 +18,10 @@ const useScrolling = (ref: RefObject<HTMLElement>): boolean => {
         scrollingTimeout = setTimeout(() => handleScrollEnd(), 150);
       };
 
-      on(ref.current, 'scroll', handleScroll, false);
+      ref.current.addEventListener('scroll', handleScroll, false);
       return () => {
         if (ref.current) {
-          off(ref.current, 'scroll', handleScroll, false);
+          ref.current.removeEventListener('scroll', handleScroll, false);
         }
       };
     }

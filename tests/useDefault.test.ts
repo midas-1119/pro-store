@@ -1,8 +1,7 @@
 import { act, renderHook } from '@testing-library/react-hooks';
 import useDefault from '../src/useDefault';
 
-const setUp = (defaultValue: any, initialValue: any) =>
-  renderHook(() => useDefault(defaultValue, initialValue));
+const setUp = (defaultValue: any, initialValue: any) => renderHook(() => useDefault(defaultValue, initialValue));
 
 describe.each`
   valueType    | defaultValue | initialValue            | anotherValue

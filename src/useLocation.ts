@@ -1,11 +1,11 @@
+/* eslint-disable */
 import { useEffect, useState } from 'react';
-import { isBrowser, off, on } from './misc/util';
+import { isClient, off, on } from './util';
 
-const patchHistoryMethod = (method) => {
-  const history = window.history;
+const patchHistoryMethod = method => {
   const original = history[method];
 
-  history[method] = function (state) {
+  history[method] = function(state) {
     const result = original.apply(this, arguments);
     const event = new Event(method.toLowerCase());
 
@@ -17,7 +17,7 @@ const patchHistoryMethod = (method) => {
   };
 };
 
-if (isBrowser) {
+if (isClient) {
   patchHistoryMethod('pushState');
   patchHistoryMethod('replaceState');
 }
@@ -43,9 +43,9 @@ const useLocationServer = (): LocationSensorState => ({
 });
 
 const buildState = (trigger: string) => {
-  const { state, length } = window.history;
+  const { state, length } = history;
 
-  const { hash, host, hostname, href, origin, pathname, port, protocol, search } = window.location;
+  const { hash, host, hostname, href, origin, pathname, port, protocol, search } = location;
 
   return {
     trigger,
@@ -87,4 +87,4 @@ const useLocationBrowser = (): LocationSensorState => {
 
 const hasEventConstructor = typeof Event === 'function';
 
-export default isBrowser && hasEventConstructor ? useLocationBrowser : useLocationServer;
+export default isClient && hasEventConstructor ? useLocationBrowser : useLocationServer;

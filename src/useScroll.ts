@@ -1,7 +1,7 @@
+/* eslint-disable */
 import { RefObject, useEffect } from 'react';
 
 import useRafState from './useRafState';
-import { off, on } from './misc/util';
 
 export interface State {
   x: number;
@@ -31,7 +31,7 @@ const useScroll = (ref: RefObject<HTMLElement>): State => {
     };
 
     if (ref.current) {
-      on(ref.current, 'scroll', handler, {
+      ref.current.addEventListener('scroll', handler, {
         capture: false,
         passive: true,
       });
@@ -39,7 +39,7 @@ const useScroll = (ref: RefObject<HTMLElement>): State => {
 
     return () => {
       if (ref.current) {
-        off(ref.current, 'scroll', handler);
+        ref.current.removeEventListener('scroll', handler);
       }
     };
   }, [ref]);

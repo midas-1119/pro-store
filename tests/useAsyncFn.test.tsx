@@ -23,12 +23,9 @@ describe('useAsyncFn', () => {
 
     beforeEach(() => {
       // NOTE: renderHook isn't good at inferring array types
-      hook = renderHook<{ fn: AdderFn }, [AsyncState<number>, AdderFn]>(
-        ({ fn }) => useAsyncFn(fn),
-        {
-          initialProps: { fn: adder },
-        }
-      );
+      hook = renderHook<{ fn: AdderFn }, [AsyncState<number>, AdderFn]>(({ fn }) => useAsyncFn(fn), {
+        initialProps: { fn: adder },
+      });
     });
 
     it('awaits the result', async () => {
@@ -60,14 +57,11 @@ describe('useAsyncFn', () => {
 
     beforeEach(() => {
       // NOTE: renderHook isn't good at inferring array types
-      hook = renderHook<{ fn: AdderFn }, [AsyncState<number>, AdderFn]>(
-        ({ fn }) => useAsyncFn(fn),
-        {
-          initialProps: {
-            fn: adder,
-          },
-        }
-      );
+      hook = renderHook<{ fn: AdderFn }, [AsyncState<number>, AdderFn]>(({ fn }) => useAsyncFn(fn), {
+        initialProps: {
+          fn: adder,
+        },
+      });
     });
 
     it('initially does not have a value', () => {
@@ -104,22 +98,18 @@ describe('useAsyncFn', () => {
   it('should only consider last call and discard previous ones', async () => {
     const queuedPromises: { id: number; resolve: () => void }[] = [];
     const delayedFunction1 = () => {
-      return new Promise<number>((resolve) =>
-        queuedPromises.push({ id: 1, resolve: () => resolve(1) })
-      );
+      return new Promise<number>(resolve => queuedPromises.push({ id: 1, resolve: () => resolve(1) }));
     };
     const delayedFunction2 = () => {
-      return new Promise<number>((resolve) =>
-        queuedPromises.push({ id: 2, resolve: () => resolve(2) })
-      );
+      return new Promise<number>(resolve => queuedPromises.push({ id: 2, resolve: () => resolve(2) }));
     };
 
-    const hook = renderHook<
-      { fn: () => Promise<number> },
-      [AsyncState<number>, () => Promise<number>]
-    >(({ fn }) => useAsyncFn(fn, [fn]), {
-      initialProps: { fn: delayedFunction1 },
-    });
+    const hook = renderHook<{ fn: () => Promise<number> }, [AsyncState<number>, () => Promise<number>]>(
+      ({ fn }) => useAsyncFn(fn, [fn]),
+      {
+        initialProps: { fn: delayedFunction1 },
+      }
+    );
     act(() => {
       hook.result.current[1](); // invoke 1st callback
     });
@@ -141,12 +131,12 @@ describe('useAsyncFn', () => {
     const fetch = async () => 'new state';
     const initialState = { loading: false, value: 'init state' };
 
-    const hook = renderHook<
-      { fn: () => Promise<string> },
-      [AsyncState<string>, () => Promise<string>]
-    >(({ fn }) => useAsyncFn(fn, [fn], initialState), {
-      initialProps: { fn: fetch },
-    });
+    const hook = renderHook<{ fn: () => Promise<string> }, [AsyncState<string>, () => Promise<string>]>(
+      ({ fn }) => useAsyncFn(fn, [fn], initialState),
+      {
+        initialProps: { fn: fetch },
+      }
+    );
 
     const [state, callback] = hook.result.current;
     expect(state.loading).toBe(false);

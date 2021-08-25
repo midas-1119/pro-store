@@ -49,9 +49,7 @@ describe('when invalid easing name is provided', () => {
     expect(result.current).toBe(0);
     expect(console.error).toHaveBeenCalledTimes(1);
     expect(console.error).toHaveBeenCalledWith(
-      expect.stringContaining(
-        'useTween() expected "easingName" property to be a valid easing function name'
-      )
+      expect.stringContaining('useTween() expected "easingName" property to be a valid easing function name')
     );
     expect(console.trace).toHaveBeenCalledTimes(1);
   });

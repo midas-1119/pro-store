@@ -1,4 +1,4 @@
-import { resolveHookState } from '../../src/misc/hookState';
+import { resolveHookState } from '../src/util/resolveHookState';
 
 describe('resolveHookState', () => {
   it('should defined', () => {
@@ -17,18 +17,10 @@ describe('resolveHookState', () => {
     expect(spy).toHaveBeenCalled();
   });
 
-  it('should pass 2nd parameter to function if it awaited', () => {
-    const spy = jest.fn((n: number) => n);
+  it('should pass 2nd parameter to function', () => {
+    const spy = jest.fn();
     resolveHookState(spy, 123);
     expect(spy).toHaveBeenCalled();
     expect(spy.mock.calls[0][0]).toBe(123);
-  });
-
-  it('should not pass 2nd parameter to function if it not awaited', () => {
-    const spy = jest.fn(() => {});
-    /* @ts-expect-error */
-    resolveHookState(spy, 123);
-    expect(spy).toHaveBeenCalled();
-    expect(spy.mock.calls[0].length).toBe(0);
   });
 });

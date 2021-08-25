@@ -1,5 +1,7 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
-import { noop, off, on } from './misc/util';
+/* eslint-disable */
+import * as React from 'react';
+
+const { useState, useMemo, useCallback, useEffect } = React;
 
 export interface DropAreaState {
   over: boolean;
@@ -18,6 +20,8 @@ export interface DropAreaOptions {
   onText?: (text: string, event?) => void;
   onUri?: (url: string, event?) => void;
 }
+
+const noop = () => {};
 
 const createProcess = (options: DropAreaOptions) => (dataTransfer: DataTransfer, event) => {
   const uri = dataTransfer.getData('text/uri-list');
@@ -46,12 +50,12 @@ const useDrop = (options: DropAreaOptions = {}, args = []): DropAreaState => {
   const process = useMemo(() => createProcess(options), [onFiles, onText, onUri]);
 
   useEffect(() => {
-    const onDragOver = (event) => {
+    const onDragOver = event => {
       event.preventDefault();
       setOver(true);
     };
 
-    const onDragEnter = (event) => {
+    const onDragEnter = event => {
       event.preventDefault();
       setOver(true);
     };
@@ -64,32 +68,32 @@ const useDrop = (options: DropAreaOptions = {}, args = []): DropAreaState => {
       setOver(false);
     };
 
-    const onDrop = (event) => {
+    const onDrop = event => {
       event.preventDefault();
       setOver(false);
       process(event.dataTransfer, event);
     };
 
-    const onPaste = (event) => {
+    const onPaste = event => {
       process(event.clipboardData, event);
     };
 
-    on(document, 'dragover', onDragOver);
-    on(document, 'dragenter', onDragEnter);
-    on(document, 'dragleave', onDragLeave);
-    on(document, 'dragexit', onDragExit);
-    on(document, 'drop', onDrop);
+    document.addEventListener('dragover', onDragOver);
+    document.addEventListener('dragenter', onDragEnter);
+    document.addEventListener('dragleave', onDragLeave);
+    document.addEventListener('dragexit', onDragExit);
+    document.addEventListener('drop', onDrop);
     if (onText) {
-      on(document, 'paste', onPaste);
+      document.addEventListener('paste', onPaste);
     }
 
     return () => {
-      off(document, 'dragover', onDragOver);
-      off(document, 'dragenter', onDragEnter);
-      off(document, 'dragleave', onDragLeave);
-      off(document, 'dragexit', onDragExit);
-      off(document, 'drop', onDrop);
-      off(document, 'paste', onPaste);
+      document.removeEventListener('dragover', onDragOver);
+      document.removeEventListener('dragenter', onDragEnter);
+      document.removeEventListener('dragleave', onDragLeave);
+      document.removeEventListener('dragexit', onDragExit);
+      document.removeEventListener('drop', onDrop);
+      document.removeEventListener('paste', onPaste);
     };
   }, [process, ...args]);
 

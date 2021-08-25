@@ -1,18 +1,16 @@
 import {
   forwardRef,
-  ForwardRefExoticComponent,
+  useRef,
+  useEffect,
   MutableRefObject,
-  PropsWithChildren,
+  ForwardRefExoticComponent,
   PropsWithoutRef,
   RefAttributes,
   RefForwardingComponent,
-  useEffect,
-  useRef,
+  PropsWithChildren,
 } from 'react';
 
-export default function useEnsuredForwardedRef<T>(
-  forwardedRef: MutableRefObject<T>
-): MutableRefObject<T> {
+export default function useEnsuredForwardedRef<T>(forwardedRef: MutableRefObject<T>): MutableRefObject<T> {
   const ensuredRef = useRef(forwardedRef && forwardedRef.current);
 
   useEffect(() => {

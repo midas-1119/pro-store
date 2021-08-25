@@ -1,16 +1,17 @@
+/* eslint-disable */
 import { useEffect } from 'react';
 
 import useRafState from './useRafState';
-import { isBrowser, off, on } from './misc/util';
+import { isClient } from './util';
 
 const useWindowSize = (initialWidth = Infinity, initialHeight = Infinity) => {
   const [state, setState] = useRafState<{ width: number; height: number }>({
-    width: isBrowser ? window.innerWidth : initialWidth,
-    height: isBrowser ? window.innerHeight : initialHeight,
+    width: isClient ? window.innerWidth : initialWidth,
+    height: isClient ? window.innerHeight : initialHeight,
   });
 
   useEffect((): (() => void) | void => {
-    if (isBrowser) {
+    if (isClient) {
       const handler = () => {
         setState({
           width: window.innerWidth,
@@ -18,10 +19,10 @@ const useWindowSize = (initialWidth = Infinity, initialHeight = Infinity) => {
         });
       };
 
-      on(window, 'resize', handler);
+      window.addEventListener('resize', handler);
 
       return () => {
-        off(window, 'resize', handler);
+        window.removeEventListener('resize', handler);
       };
     }
   }, []);

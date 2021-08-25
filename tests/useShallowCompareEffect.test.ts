@@ -10,9 +10,7 @@ const mockEffectCleanup = jest.fn();
 const mockEffectCallback = jest.fn().mockReturnValue(mockEffectCleanup);
 
 it('should shallow compare dependencies', () => {
-  const { rerender: rerenderNormal } = renderHook(() =>
-    useEffect(mockEffectNormal, [options1, options2])
-  );
+  const { rerender: rerenderNormal } = renderHook(() => useEffect(mockEffectNormal, [options1, options2]));
   const { rerender: rerenderShallow } = renderHook(() =>
     useShallowCompareEffect(mockEffectShallow, [options1, options2])
   );
@@ -36,9 +34,7 @@ it('should shallow compare dependencies', () => {
 });
 
 it('should run clean-up provided on unmount', () => {
-  const { unmount } = renderHook(() =>
-    useShallowCompareEffect(mockEffectCallback, [options1, options2])
-  );
+  const { unmount } = renderHook(() => useShallowCompareEffect(mockEffectCallback, [options1, options2]));
   expect(mockEffectCleanup).not.toHaveBeenCalled();
 
   unmount();

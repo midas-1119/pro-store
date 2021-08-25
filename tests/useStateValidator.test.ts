@@ -1,9 +1,6 @@
 import { act, renderHook, RenderHookResult } from '@testing-library/react-hooks';
 import { useState } from 'react';
-import useStateValidator, {
-  StateValidator,
-  UseStateValidatorReturn,
-} from '../src/useStateValidator';
+import useStateValidator, { StateValidator, UseStateValidatorReturn } from '../src/useStateValidator';
 
 interface Mock extends jest.Mock {}
 
@@ -64,7 +61,7 @@ describe('useStateValidator', () => {
     expect(spy).toHaveBeenCalledTimes(1);
     act(() => setState(4));
     expect(spy).toHaveBeenCalledTimes(2);
-    act(() => setState((prevState) => prevState + 1));
+    act(() => setState(prevState => prevState + 1));
     expect(spy).toHaveBeenCalledTimes(3);
   });
 
@@ -95,7 +92,7 @@ describe('useStateValidator', () => {
     expect(typeof (spy as Mock).mock.calls[0][1]).toBe('function');
 
     expect(isValid).toBe(false);
-    act(() => setState((prevState) => prevState + 1));
+    act(() => setState(prevState => prevState + 1));
 
     [setState, [[isValid]]] = hook.result.current;
     expect(isValid).toBe(true);

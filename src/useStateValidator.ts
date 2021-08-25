@@ -1,6 +1,7 @@
+/* eslint-disable */
 import { Dispatch, SetStateAction, useCallback, useEffect, useRef, useState } from 'react';
 
-export type ValidityState = [boolean | undefined, ...any[]] | [undefined];
+export type ValidityState = [boolean | undefined, ...any[]];
 
 export interface StateValidator<V, S> {
   (state: S): V;
@@ -10,10 +11,10 @@ export interface StateValidator<V, S> {
 
 export type UseStateValidatorReturn<V> = [V, () => void];
 
-export default function useStateValidator<V extends ValidityState, S>(
+export default function useStateValidator<V extends ValidityState, S, I extends V>(
   state: S,
   validator: StateValidator<V, S>,
-  initialState: V = [undefined] as V
+  initialState: I = [undefined] as I
 ): UseStateValidatorReturn<V> {
   const validatorInner = useRef(validator);
   const stateInner = useRef(state);

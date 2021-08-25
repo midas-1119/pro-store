@@ -32,12 +32,7 @@ describe('useTimeoutFn', () => {
     ms: number = 5,
     fn: Function = jest.fn()
   ): [Function, RenderHookResult<{ delay: number; cb: Function }, UseTimeoutFnReturn>] {
-    return [
-      fn,
-      renderHook(({ delay = 5, cb }) => useTimeoutFn(cb, delay), {
-        initialProps: { delay: ms, cb: fn },
-      }),
-    ];
+    return [fn, renderHook(({ delay = 5, cb }) => useTimeoutFn(cb, delay), { initialProps: { delay: ms, cb: fn } })];
   }
 
   it('should call passed function after given amount of time', () => {

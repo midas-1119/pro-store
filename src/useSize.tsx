@@ -1,5 +1,6 @@
+/* eslint-disable */
 import * as React from 'react';
-import { isBrowser, off, on } from './misc/util';
+import { isClient } from './util';
 
 const { useState, useEffect, useRef } = React;
 
@@ -16,14 +17,10 @@ const useSize = (
   element: Element,
   { width = Infinity, height = Infinity }: Partial<State> = {}
 ): [React.ReactElement<any>, State] => {
-  if (!isBrowser) {
-    return [
-      typeof element === 'function' ? element({ width, height }) : element,
-      { width, height },
-    ];
+  if (!isClient) {
+    return [typeof element === 'function' ? element({ width, height }) : element, { width, height }];
   }
 
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   const [state, setState] = useState<State>({ width, height });
 
   if (typeof element === 'function') {
@@ -31,7 +28,6 @@ const useSize = (
   }
 
   const style = element.props.style || {};
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   const ref = useRef<HTMLIFrameElement | null>(null);
   let window: Window | null = null;
   const setSize = () => {
@@ -46,11 +42,10 @@ const useSize = (
     setState(size);
   };
   const onWindow = (windowToListenOn: Window) => {
-    on(windowToListenOn, 'resize', setSize);
+    windowToListenOn.addEventListener('resize', setSize);
     DRAF(setSize);
   };
 
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
     const iframe: HTMLIFrameElement | null = ref.current;
 
@@ -64,17 +59,17 @@ const useSize = (
       onWindow(window);
     } else {
       const onLoad = () => {
-        on(iframe, 'load', onLoad);
+        iframe.removeEventListener('load', onLoad);
         window = iframe.contentWindow!;
         onWindow(window);
       };
 
-      off(iframe, 'load', onLoad);
+      iframe.addEventListener('load', onLoad);
     }
 
     return () => {
       if (window && window.removeEventListener) {
-        off(window, 'resize', setSize);
+        window.removeEventListener('resize', setSize);
       }
     };
   }, []);

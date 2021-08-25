@@ -2,8 +2,9 @@ import { useReducer } from 'react';
 
 const updateReducer = (num: number): number => (num + 1) % 1_000_000;
 
-export default function useUpdate(): () => void {
+const useUpdate = () => {
   const [, update] = useReducer(updateReducer, 0);
+  return update as () => void;
+};
 
-  return update;
-}
+export default useUpdate;

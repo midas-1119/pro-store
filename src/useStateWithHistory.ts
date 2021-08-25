@@ -1,6 +1,7 @@
+/* eslint-disable */
 import { Dispatch, useCallback, useMemo, useRef, useState } from 'react';
 import { useFirstMountState } from './useFirstMountState';
-import { IHookStateInitAction, IHookStateSetAction, resolveHookState } from './misc/hookState';
+import { InitialHookState, ResolvableHookState, resolveHookState } from './util/resolveHookState';
 
 interface HistoryState<S> {
   history: S[];
@@ -11,17 +12,17 @@ interface HistoryState<S> {
   go: (position: number) => void;
 }
 
-export type UseStateHistoryReturn<S> = [S, Dispatch<IHookStateSetAction<S>>, HistoryState<S>];
+export type UseStateHistoryReturn<S> = [S, Dispatch<ResolvableHookState<S>>, HistoryState<S>];
 
 export function useStateWithHistory<S, I extends S>(
-  initialState: IHookStateInitAction<S>,
+  initialState: InitialHookState<S>,
   capacity?: number,
   initialHistory?: I[]
 ): UseStateHistoryReturn<S>;
 export function useStateWithHistory<S = undefined>(): UseStateHistoryReturn<S | undefined>;
 
 export function useStateWithHistory<S, I extends S>(
-  initialState?: IHookStateInitAction<S>,
+  initialState?: InitialHookState<S>,
   capacity: number = 10,
   initialHistory?: I[]
 ): UseStateHistoryReturn<S> {
@@ -55,9 +56,9 @@ export function useStateWithHistory<S, I extends S>(
   }
 
   const setState = useCallback(
-    (newState: IHookStateSetAction<S>): void => {
-      innerSetState((currentState) => {
-        newState = resolveHookState(newState, currentState);
+    (newState: ResolvableHookState<S>): void => {
+      innerSetState(currentState => {
+        newState = resolveHookState(newState);
 
         // is state has changed
         if (newState !== currentState) {
@@ -78,7 +79,7 @@ export function useStateWithHistory<S, I extends S>(
       });
     },
     [state, capacity]
-  ) as Dispatch<IHookStateSetAction<S>>;
+  ) as Dispatch<ResolvableHookState<S>>;
 
   const historyState = useMemo(
     () => ({
@@ -104,10 +105,7 @@ export function useStateWithHistory<S, I extends S>(
         }
 
         innerSetState(() => {
-          historyPosition.current = Math.min(
-            historyPosition.current + amount,
-            history.current.length - 1
-          );
+          historyPosition.current = Math.min(historyPosition.current + amount, history.current.length - 1);
 
           return history.current[historyPosition.current];
         });

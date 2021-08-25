@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { useCallback } from 'react';
 import useMountedState from './useMountedState';
 
@@ -8,10 +9,10 @@ const usePromise: UsePromise = () => {
   return useCallback(
     (promise: Promise<any>) =>
       new Promise<any>((resolve, reject) => {
-        const onValue = (value) => {
+        const onValue = value => {
           isMounted() && resolve(value);
         };
-        const onError = (error) => {
+        const onError = error => {
           isMounted() && reject(error);
         };
         promise.then(onValue, onError);

@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { clearHarmonicInterval, setHarmonicInterval } from 'set-harmonic-interval';
+import { setHarmonicInterval, clearHarmonicInterval } from 'set-harmonic-interval';
 
 const useHarmonicIntervalFn = (fn: Function, delay: number | null = 0) => {
   const latestCallback = useRef<Function>(() => {});

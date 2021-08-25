@@ -13,7 +13,7 @@ const Demo = () => {
   const onClick = () => {
     setTimeout(() => {
       setState({cnt: get().cnt + 1})
-    }, 1000);
+    }, 1_000);
   };
 
   return (

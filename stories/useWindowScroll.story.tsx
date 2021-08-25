@@ -11,13 +11,15 @@ const Demo = () => {
       style={{
         width: '200vw',
         height: '200vh',
-      }}>
+      }}
+    >
       <div
         style={{
           position: 'fixed',
           left: 0,
           right: 0,
-        }}>
+        }}
+      >
         <div>x: {x}</div>
         <div>y: {y}</div>
       </div>

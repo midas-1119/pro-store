@@ -32,7 +32,8 @@ const Demo = () => {
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
-        }}>
+        }}
+      >
         <video
           ref={videoRef}
           style={{ width: '70%' }}
@@ -50,6 +51,6 @@ const Demo = () => {
   );
 };
 
-storiesOf('UI/useFullscreen', module)
+storiesOf('UI|useFullscreen', module)
   .add('Docs', () => <ShowDocs md={require('../docs/useFullscreen.md')} />)
   .add('Demo', () => <Demo />);

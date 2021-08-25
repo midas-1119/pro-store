@@ -1,7 +1,7 @@
 import { act, renderHook, RenderHookResult } from '@testing-library/react-hooks';
 import { useRef } from 'react';
 import { UseStateHistoryReturn, useStateWithHistory } from '../src/useStateWithHistory';
-import { IHookStateSetAction } from '../src/misc/hookState';
+import { InitialHookState } from '../src/util/resolveHookState';
 
 describe('useStateWithHistory', () => {
   it('should be defined', () => {
@@ -9,13 +9,10 @@ describe('useStateWithHistory', () => {
   });
 
   function getHook<S, I extends S>(
-    initialState?: IHookStateSetAction<S>,
+    initialState?: InitialHookState<S>,
     initialCapacity?: number,
     initialHistory?: I[]
-  ): RenderHookResult<
-    { state?: S; history?: I[]; capacity?: number },
-    [UseStateHistoryReturn<S | undefined>, number]
-  > {
+  ): RenderHookResult<{ state?: S; history?: I[]; capacity?: number }, [UseStateHistoryReturn<S | undefined>, number]> {
     return renderHook(
       ({ state, history, capacity }) => {
         const renders = useRef(0);
@@ -55,9 +52,9 @@ describe('useStateWithHistory', () => {
     });
     expect(hook.result.current[0][0]).toBe(321);
     act(() => {
-      hook.result.current[0][1]((current) => (current ?? 0) + 111);
+      hook.result.current[0][1](() => 111);
     });
-    expect(hook.result.current[0][0]).toBe(432);
+    expect(hook.result.current[0][0]).toBe(111);
   });
 
   it('should receive initial history', () => {

@@ -1,4 +1,4 @@
-export default function parseTimeRanges(ranges) {
+const parseTimeRanges = ranges => {
   const result: { start: number; end: number }[] = [];
 
   for (let i = 0; i < ranges.length; i++) {
@@ -9,4 +9,6 @@ export default function parseTimeRanges(ranges) {
   }
 
   return result;
-}
+};
+
+export default parseTimeRanges;

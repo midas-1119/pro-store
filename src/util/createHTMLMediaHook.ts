@@ -1,11 +1,10 @@
+/* eslint-disable */
 import * as React from 'react';
 import { useEffect, useRef } from 'react';
 import useSetState from '../useSetState';
-import parseTimeRanges from '../misc/parseTimeRanges';
+import parseTimeRanges from './parseTimeRanges';
 
-export interface HTMLMediaProps
-  extends React.AudioHTMLAttributes<any>,
-    React.VideoHTMLAttributes<any> {
+export interface HTMLMediaProps extends React.AudioHTMLAttributes<any>, React.VideoHTMLAttributes<any> {
   src: string;
 }
 
@@ -27,20 +26,18 @@ export interface HTMLMediaControls {
   seek: (time: number) => void;
 }
 
-type MediaPropsWithRef<T> = HTMLMediaProps & { ref?: React.MutableRefObject<T | null> };
-
-export default function createHTMLMediaHook<T extends HTMLAudioElement | HTMLVideoElement>(
-  tag: 'audio' | 'video'
-) {
-  return (elOrProps: HTMLMediaProps | React.ReactElement<HTMLMediaProps>) => {
-    let element: React.ReactElement<MediaPropsWithRef<T>> | undefined;
-    let props: MediaPropsWithRef<T>;
+const createHTMLMediaHook = (tag: 'audio' | 'video') => {
+  const hook = (
+    elOrProps: HTMLMediaProps | React.ReactElement<HTMLMediaProps>
+  ): [React.ReactElement<HTMLMediaProps>, HTMLMediaState, HTMLMediaControls, { current: HTMLAudioElement | null }] => {
+    let element: React.ReactElement<any> | undefined;
+    let props: HTMLMediaProps;
 
     if (React.isValidElement(elOrProps)) {
       element = elOrProps;
       props = element.props;
     } else {
-      props = elOrProps;
+      props = elOrProps as HTMLMediaProps;
     }
 
     const [state, setState] = useSetState<HTMLMediaState>({
@@ -51,10 +48,10 @@ export default function createHTMLMediaHook<T extends HTMLAudioElement | HTMLVid
       muted: false,
       volume: 1,
     });
-    const ref = useRef<T | null>(null);
+    const ref = useRef<HTMLAudioElement | null>(null);
 
     const wrapEvent = (userEvent, proxyEvent?) => {
-      return (event) => {
+      return event => {
         try {
           proxyEvent && proxyEvent(event);
         } finally {
@@ -229,6 +226,10 @@ export default function createHTMLMediaHook<T extends HTMLAudioElement | HTMLVid
       }
     }, [props.src]);
 
-    return [element, state, controls, ref] as const;
+    return [element, state, controls, ref];
   };
-}
+
+  return hook;
+};
+
+export default createHTMLMediaHook;

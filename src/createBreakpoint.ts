@@ -1,25 +1,24 @@
-import { useEffect, useMemo, useState } from 'react';
-import { isBrowser, off, on } from '../misc/util';
+/* eslint-disable */
+import { useEffect, useState, useMemo } from 'react';
 
 const createBreakpoint = (
   breakpoints: { [name: string]: number } = { laptopL: 1440, laptop: 1024, tablet: 768 }
 ) => () => {
-  const [screen, setScreen] = useState(isBrowser ? window.innerWidth : 0);
+  const [screen, setScreen] = useState(0);
 
   useEffect(() => {
     const setSideScreen = (): void => {
       setScreen(window.innerWidth);
     };
     setSideScreen();
-    on(window, 'resize', setSideScreen);
+    window.addEventListener('resize', setSideScreen);
     return () => {
-      off(window, 'resize', setSideScreen);
+      window.removeEventListener('resize', setSideScreen);
     };
   });
-  const sortedBreakpoints = useMemo(
-    () => Object.entries(breakpoints).sort((a, b) => (a[1] >= b[1] ? 1 : -1)),
-    [breakpoints]
-  );
+  const sortedBreakpoints = useMemo(() => Object.entries(breakpoints).sort((a, b) => (a[1] >= b[1] ? 1 : -1)), [
+    breakpoints,
+  ]);
   const result = sortedBreakpoints.reduce((acc, [name, width]) => {
     if (screen >= width) {
       return name;

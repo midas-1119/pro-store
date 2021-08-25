@@ -19,7 +19,8 @@ const Demo: React.FC<any> = () => {
           width: '400px',
           height: '400px',
           backgroundColor: 'whitesmoke',
-        }}>
+        }}
+      >
         <span
           style={{
             position: 'absolute',
@@ -27,7 +28,8 @@ const Demo: React.FC<any> = () => {
             top: `${state.elY}px`,
             pointerEvents: 'none',
             transform: 'scale(4)',
-          }}>
+          }}
+        >
           🐭
         </span>
       </div>
@@ -35,6 +37,6 @@ const Demo: React.FC<any> = () => {
   );
 };
 
-storiesOf('Sensors/useMouse', module)
+storiesOf('Sensors|useMouse', module)
   .add('Docs', () => <ShowDocs md={require('../docs/useMouse.md')} />)
   .add('Demo', () => <Demo />);

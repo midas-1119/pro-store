@@ -1,5 +1,4 @@
 import { useCallback, useEffect } from 'react';
-import { off, on } from './misc/util';
 
 const useBeforeUnload = (enabled: boolean | (() => boolean) = true, message?: string) => {
   const handler = useCallback(
@@ -26,9 +25,9 @@ const useBeforeUnload = (enabled: boolean | (() => boolean) = true, message?: st
       return;
     }
 
-    on(window, 'beforeunload', handler);
+    window.addEventListener('beforeunload', handler);
 
-    return () => off(window, 'beforeunload', handler);
+    return () => window.removeEventListener('beforeunload', handler);
   }, [enabled, handler]);
 };
 

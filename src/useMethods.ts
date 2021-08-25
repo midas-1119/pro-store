@@ -1,4 +1,4 @@
-import { Reducer, useMemo, useReducer } from 'react';
+import { useMemo, useReducer, Reducer } from 'react';
 
 type Action = {
   type: string;
@@ -15,10 +15,7 @@ type WrappedMethods<M> = {
   [P in keyof M]: (...payload: any) => void;
 };
 
-const useMethods = <M, T>(
-  createMethods: CreateMethods<M, T>,
-  initialState: T
-): [T, WrappedMethods<M>] => {
+const useMethods = <M, T>(createMethods: CreateMethods<M, T>, initialState: T): [T, WrappedMethods<M>] => {
   const reducer = useMemo<Reducer<T, Action>>(
     () => (reducerState: T, action: Action) => {
       return createMethods(reducerState)[action.type](...action.payload);

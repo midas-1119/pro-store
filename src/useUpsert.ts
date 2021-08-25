@@ -1,5 +1,5 @@
 import useList, { ListActions } from './useList';
-import { IHookStateInitAction } from './misc/hookState';
+import { InitialHookState } from './util/resolveHookState';
 
 export interface UpsertListActions<T> extends Omit<ListActions<T>, 'upsert'> {
   upsert: (newItem: T) => void;
@@ -10,7 +10,7 @@ export interface UpsertListActions<T> extends Omit<ListActions<T>, 'upsert'> {
  */
 export default function useUpsert<T>(
   predicate: (a: T, b: T) => boolean,
-  initialList: IHookStateInitAction<T[]> = []
+  initialList: InitialHookState<T[]> = []
 ): [T[], UpsertListActions<T>] {
   const [list, listActions] = useList(initialList);
 

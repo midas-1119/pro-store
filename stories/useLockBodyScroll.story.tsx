@@ -44,9 +44,7 @@ const IframeComponent = () => {
           <button onClick={() => toggleMainLocked()} style={{ position: 'fixed', left: 0, top: 0 }}>
             {mainLocked ? 'Unlock' : 'Lock'} main window scroll
           </button>
-          <button
-            onClick={() => toggleIframeLocked()}
-            style={{ position: 'fixed', left: 0, top: 64 }}>
+          <button onClick={() => toggleIframeLocked()} style={{ position: 'fixed', left: 0, top: 64 }}>
             {iframeLocked ? 'Unlock' : 'Lock'} iframe window scroll
           </button>
         </div>
@@ -55,7 +53,7 @@ const IframeComponent = () => {
   );
 };
 
-storiesOf('Side effects/useLockBodyScroll', module)
+storiesOf('Side effects|useLockBodyScroll', module)
   .add('Docs', () => <ShowDocs md={require('../docs/useLockBodyScroll.md')} />)
   .add('Demo', () => <Demo />)
   .add('Two hooks on page', () => (

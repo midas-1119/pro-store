@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 const useError = (): ((err: Error) => void) => {
   const [error, setError] = useState<Error | null>(null);

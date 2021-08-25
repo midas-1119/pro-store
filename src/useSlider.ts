@@ -1,5 +1,7 @@
-import { CSSProperties, RefObject, useEffect, useRef } from 'react';
-import { isBrowser, noop, off, on } from './misc/util';
+/* eslint-disable */
+import { useEffect, useRef, RefObject, CSSProperties } from 'react';
+
+import { isClient, off, on } from './util';
 import useMountedState from './useMountedState';
 import useSetState from './useSetState';
 
@@ -17,6 +19,8 @@ export interface Options {
   vertical?: boolean;
 }
 
+const noop = () => {};
+
 const useSlider = (ref: RefObject<HTMLElement>, options: Partial<Options> = {}): State => {
   const isMounted = useMountedState();
   const isSliding = useRef(false);
@@ -30,7 +34,7 @@ const useSlider = (ref: RefObject<HTMLElement>, options: Partial<Options> = {}):
   valueRef.current = state.value;
 
   useEffect(() => {
-    if (isBrowser) {
+    if (isClient) {
       const styles = options.styles === undefined ? true : options.styles;
       const reverse = options.reverse === undefined ? false : options.reverse;
 

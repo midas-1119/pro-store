@@ -1,25 +1,22 @@
+/* eslint-disable */
 import { RefObject, useState } from 'react';
 import screenfull from 'screenfull';
 import useIsomorphicLayoutEffect from './useIsomorphicLayoutEffect';
-import { noop, off, on } from './misc/util';
 
 export interface FullScreenOptions {
-  video?: RefObject<
-    HTMLVideoElement & { webkitEnterFullscreen?: () => void; webkitExitFullscreen?: () => void }
-  >;
+  video?: RefObject<HTMLVideoElement & { webkitEnterFullscreen?: () => void; webkitExitFullscreen?: () => void; }>;
   onClose?: (error?: Error) => void;
 }
 
-const useFullscreen = (
-  ref: RefObject<Element>,
-  enabled: boolean,
-  options: FullScreenOptions = {}
-): boolean => {
+const noop = () => {
+};
+
+const useFullscreen = (ref: RefObject<Element>, on: boolean, options: FullScreenOptions = {}): boolean => {
   const { video, onClose = noop } = options;
-  const [isFullscreen, setIsFullscreen] = useState(enabled);
+  const [isFullscreen, setIsFullscreen] = useState(on);
 
   useIsomorphicLayoutEffect(() => {
-    if (!enabled) {
+    if (!on) {
       return;
     }
     if (!ref.current) {
@@ -27,9 +24,7 @@ const useFullscreen = (
     }
 
     const onWebkitEndFullscreen = () => {
-      if (video?.current) {
-        off(video.current, 'webkitendfullscreen', onWebkitEndFullscreen);
-      }
+      video!.current!.removeEventListener('webkitendfullscreen', onWebkitEndFullscreen);
       onClose();
     };
 
@@ -54,7 +49,7 @@ const useFullscreen = (
       screenfull.on('change', onChange);
     } else if (video && video.current && video.current.webkitEnterFullscreen) {
       video.current.webkitEnterFullscreen();
-      on(video.current, 'webkitendfullscreen', onWebkitEndFullscreen);
+      video.current.addEventListener('webkitendfullscreen', onWebkitEndFullscreen);
       setIsFullscreen(true);
     } else {
       onClose();
@@ -67,13 +62,14 @@ const useFullscreen = (
         try {
           screenfull.off('change', onChange);
           screenfull.exit();
-        } catch {}
+        } catch {
+        }
       } else if (video && video.current && video.current.webkitExitFullscreen) {
-        off(video.current, 'webkitendfullscreen', onWebkitEndFullscreen);
+        video.current.removeEventListener('webkitendfullscreen', onWebkitEndFullscreen);
         video.current.webkitExitFullscreen();
       }
     };
-  }, [enabled, video, ref]);
+  }, [on, video, ref]);
 
   return isFullscreen;
 };

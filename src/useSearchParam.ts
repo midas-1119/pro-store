@@ -1,12 +1,11 @@
-import { useEffect, useState } from 'react';
-import { isBrowser, off, on } from './misc/util';
+/* eslint-disable */
+import { useState, useEffect } from 'react';
 
 const getValue = (search: string, param: string) => new URLSearchParams(search).get(param);
 
 export type UseQueryParam = (param: string) => string | null;
 
-const useSearchParam: UseQueryParam = (param) => {
-  const location = window.location;
+const useSearchParam: UseQueryParam = param => {
   const [value, setValue] = useState<string | null>(() => getValue(location.search, param));
 
   useEffect(() => {
@@ -14,14 +13,14 @@ const useSearchParam: UseQueryParam = (param) => {
       setValue(getValue(location.search, param));
     };
 
-    on(window, 'popstate', onChange);
-    on(window, 'pushstate', onChange);
-    on(window, 'replacestate', onChange);
+    window.addEventListener('popstate', onChange);
+    window.addEventListener('pushstate', onChange);
+    window.addEventListener('replacestate', onChange);
 
     return () => {
-      off(window, 'popstate', onChange);
-      off(window, 'pushstate', onChange);
-      off(window, 'replacestate', onChange);
+      window.removeEventListener('popstate', onChange);
+      window.removeEventListener('pushstate', onChange);
+      window.removeEventListener('replacestate', onChange);
     };
   }, []);
 
@@ -30,4 +29,4 @@ const useSearchParam: UseQueryParam = (param) => {
 
 const useSearchParamServer = () => null;
 
-export default isBrowser ? useSearchParam : useSearchParamServer;
+export default typeof window === 'object' ? useSearchParam : useSearchParamServer;

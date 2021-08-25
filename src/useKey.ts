@@ -1,17 +1,18 @@
+/* eslint-disable */
 import { DependencyList, useMemo } from 'react';
-import useEvent, { UseEventOptions, UseEventTarget } from './useEvent';
-import { noop } from './misc/util';
+import useEvent, { UseEventTarget } from './useEvent';
 
 export type KeyPredicate = (event: KeyboardEvent) => boolean;
 export type KeyFilter = null | undefined | string | ((event: KeyboardEvent) => boolean);
 export type Handler = (event: KeyboardEvent) => void;
 
-export interface UseKeyOptions<T extends UseEventTarget> {
+export interface UseKeyOptions {
   event?: 'keydown' | 'keypress' | 'keyup';
-  target?: T | null;
-  options?: UseEventOptions<T>;
+  target?: UseEventTarget;
+  options?: any;
 }
 
+const noop = () => {};
 const createKeyPredicate = (keyFilter: KeyFilter): KeyPredicate =>
   typeof keyFilter === 'function'
     ? keyFilter
@@ -21,16 +22,11 @@ const createKeyPredicate = (keyFilter: KeyFilter): KeyPredicate =>
     ? () => true
     : () => false;
 
-const useKey = <T extends UseEventTarget>(
-  key: KeyFilter,
-  fn: Handler = noop,
-  opts: UseKeyOptions<T> = {},
-  deps: DependencyList = [key]
-) => {
+const useKey = (key: KeyFilter, fn: Handler = noop, opts: UseKeyOptions = {}, deps: DependencyList = [key]) => {
   const { event = 'keydown', target, options } = opts;
   const useMemoHandler = useMemo(() => {
     const predicate: KeyPredicate = createKeyPredicate(key);
-    const handler: Handler = (handlerEvent) => {
+    const handler: Handler = handlerEvent => {
       if (predicate(handlerEvent)) {
         return fn(handlerEvent);
       }
