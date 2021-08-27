@@ -1,10 +1,11 @@
-/* eslint-disable */
 import * as React from 'react';
 import { useEffect, useRef } from 'react';
 import useSetState from '../useSetState';
-import parseTimeRanges from './parseTimeRanges';
+import parseTimeRanges from '../misc/parseTimeRanges';
 
-export interface HTMLMediaProps extends React.AudioHTMLAttributes<any>, React.VideoHTMLAttributes<any> {
+export interface HTMLMediaProps
+  extends React.AudioHTMLAttributes<any>,
+    React.VideoHTMLAttributes<any> {
   src: string;
 }
 
@@ -15,6 +16,7 @@ export interface HTMLMediaState {
   muted: boolean;
   time: number;
   volume: number;
+  playing: boolean;
 }
 
 export interface HTMLMediaControls {
@@ -26,18 +28,20 @@ export interface HTMLMediaControls {
   seek: (time: number) => void;
 }
 
-const createHTMLMediaHook = (tag: 'audio' | 'video') => {
-  const hook = (
-    elOrProps: HTMLMediaProps | React.ReactElement<HTMLMediaProps>
-  ): [React.ReactElement<HTMLMediaProps>, HTMLMediaState, HTMLMediaControls, { current: HTMLAudioElement | null }] => {
-    let element: React.ReactElement<any> | undefined;
-    let props: HTMLMediaProps;
+type MediaPropsWithRef<T> = HTMLMediaProps & { ref?: React.MutableRefObject<T | null> };
+
+export default function createHTMLMediaHook<T extends HTMLAudioElement | HTMLVideoElement>(
+  tag: 'audio' | 'video'
+) {
+  return (elOrProps: HTMLMediaProps | React.ReactElement<HTMLMediaProps>) => {
+    let element: React.ReactElement<MediaPropsWithRef<T>> | undefined;
+    let props: MediaPropsWithRef<T>;
 
     if (React.isValidElement(elOrProps)) {
       element = elOrProps;
       props = element.props;
     } else {
-      props = elOrProps as HTMLMediaProps;
+      props = elOrProps;
     }
 
     const [state, setState] = useSetState<HTMLMediaState>({
@@ -47,11 +51,12 @@ const createHTMLMediaHook = (tag: 'audio' | 'video') => {
       paused: true,
       muted: false,
       volume: 1,
+      playing: false
     });
-    const ref = useRef<HTMLAudioElement | null>(null);
+    const ref = useRef<T | null>(null);
 
     const wrapEvent = (userEvent, proxyEvent?) => {
-      return event => {
+      return (event) => {
         try {
           proxyEvent && proxyEvent(event);
         } finally {
@@ -61,7 +66,9 @@ const createHTMLMediaHook = (tag: 'audio' | 'video') => {
     };
 
     const onPlay = () => setState({ paused: false });
-    const onPause = () => setState({ paused: true });
+    const onPlaying = () => setState({ playing: true });
+    const onWaiting = () => setState({ playing: false });
+    const onPause = () => setState({ paused: true, playing: false });
     const onVolumeChange = () => {
       const el = ref.current;
       if (!el) {
@@ -104,6 +111,8 @@ const createHTMLMediaHook = (tag: 'audio' | 'video') => {
         ...props,
         ref,
         onPlay: wrapEvent(props.onPlay, onPlay),
+        onPlaying: wrapEvent(props.onPlaying, onPlaying),
+        onWaiting: wrapEvent(props.onWaiting, onWaiting),
         onPause: wrapEvent(props.onPause, onPause),
         onVolumeChange: wrapEvent(props.onVolumeChange, onVolumeChange),
         onDurationChange: wrapEvent(props.onDurationChange, onDurationChange),
@@ -116,6 +125,8 @@ const createHTMLMediaHook = (tag: 'audio' | 'video') => {
         ...props,
         ref,
         onPlay: wrapEvent(props.onPlay, onPlay),
+        onPlaying: wrapEvent(props.onPlaying, onPlaying),
+        onWaiting: wrapEvent(props.onWaiting, onWaiting),
         onPause: wrapEvent(props.onPause, onPause),
         onVolumeChange: wrapEvent(props.onVolumeChange, onVolumeChange),
         onDurationChange: wrapEvent(props.onDurationChange, onDurationChange),
@@ -226,10 +237,6 @@ const createHTMLMediaHook = (tag: 'audio' | 'video') => {
       }
     }, [props.src]);
 
-    return [element, state, controls, ref];
+    return [element, state, controls, ref] as const;
   };
-
-  return hook;
-};
-
-export default createHTMLMediaHook;
+}
