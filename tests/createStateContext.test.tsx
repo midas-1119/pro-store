@@ -18,9 +18,7 @@ describe('when using created hook', () => {
 
   const setUp = () => {
     const [useSharedText, SharedTextProvider] = createStateContext('init');
-    const wrapper = ({ children }: { children?: React.ReactNode }) => (
-      <SharedTextProvider>{children}</SharedTextProvider>
-    );
+    const wrapper: React.FC = ({ children }) => <SharedTextProvider>{children}</SharedTextProvider>;
     return renderHook(() => useSharedText(), { wrapper });
   };
 

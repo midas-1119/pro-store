@@ -4,7 +4,7 @@ import * as React from 'react';
 import { useMouseHovered } from '../src';
 import ShowDocs from './util/ShowDocs';
 
-const Demo = ({ whenHovered, bound }: any) => {
+const Demo: React.FC<any> = ({ whenHovered, bound }) => {
   const ref = React.useRef(null);
   const state = useMouseHovered(ref, { whenHovered, bound });
 
