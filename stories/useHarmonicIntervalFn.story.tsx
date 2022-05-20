@@ -3,12 +3,7 @@ import * as React from 'react';
 import { useHarmonicIntervalFn, useInterval, useTimeoutFn } from '../src';
 import ShowDocs from './util/ShowDocs';
 
-const Clock = ({
-  useInt,
-}: {
-  children?: React.ReactNode;
-  useInt: typeof useHarmonicIntervalFn;
-}) => {
+const Clock: React.FC<{ useInt: typeof useHarmonicIntervalFn }> = ({ useInt }) => {
   const [count, setCount] = React.useState(0);
   useInt(() => {
     setCount((cnt) => cnt + 1);
@@ -30,7 +25,7 @@ const Clock = ({
   return <div style={style}>{m + ':' + s}</div>;
 };
 
-const Demo = ({ useInt }: { children?: React.ReactNode; useInt: typeof useHarmonicIntervalFn }) => {
+const Demo: React.FC<{ useInt: typeof useHarmonicIntervalFn }> = ({ useInt }) => {
   const [showSecondClock, setShowSecondClock] = React.useState(false);
   useTimeoutFn(() => {
     setShowSecondClock(true);

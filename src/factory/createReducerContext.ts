@@ -10,12 +10,9 @@ const createReducerContext = <R extends React.Reducer<any, any>>(
     );
   const providerFactory = (props, children) => createElement(context.Provider, props, children);
 
-  const ReducerProvider = ({
+  const ReducerProvider: React.FC<{ initialState?: React.ReducerState<R> }> = ({
     children,
     initialState,
-  }: {
-    children?: React.ReactNode;
-    initialState?: React.ReducerState<R>;
   }) => {
     const state = useReducer<R>(
       reducer,
